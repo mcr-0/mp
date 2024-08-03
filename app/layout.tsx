@@ -77,8 +77,8 @@ export default function RootLayout({
             priority
           ></Image>
         </div>
-        <div className="fixed bottom-0 left-0 right-0 z-10 h-20 w-full bg-gradient-to-t from-black to-black/0"></div>
-        <header className="mx-auto bg-gradient-to-b from-black to-black/0 py-1 text-center sm:px-6 lg:px-8">
+        <div className="fixed bottom-0 left-0 right-0 z-10 h-20 w-full"></div>
+        <header className="mx-auto py-1 text-center sm:px-6 lg:px-8">
           <Link href="/" className="mx-auto block w-16 shadow-xl">
             <Image
               src="/logo.jpg"
