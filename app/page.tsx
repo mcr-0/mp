@@ -1,23 +1,13 @@
 "use client";
 import React, { useState, ChangeEvent, MouseEvent } from "react";
-
 import Image from "next/image";
+import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { ChevronRight, MoveRight } from "lucide-react";
 import { Label } from "@/components/ui/label";
-import Link from "next/link";
+import { ChevronRight, MoveRight } from "lucide-react";
 
 export default function LandingPage() {
-  const saEvent = (eventName: string) => {
-    if (typeof window !== "undefined" && window.sa_event) {
-      window.sa_event(eventName);
-      console.log(eventName);
-    } else {
-      console.log("error");
-    }
-  };
-
   const [inputValue, setInputValue] = useState("");
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
@@ -25,15 +15,6 @@ export default function LandingPage() {
     const value = event.target.value;
     setInputValue(value);
     setIsButtonDisabled(value.length < 4);
-  };
-
-  const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
-    if (isButtonDisabled) {
-      event.preventDefault();
-    } else {
-      gtag_report_conversion();
-      saEvent("registered");
-    }
   };
 
   return (
@@ -127,11 +108,7 @@ export default function LandingPage() {
             className="border-1 h-14 w-full rounded-lg border-neutral-300 bg-white text-center text-lg font-bold text-neutral-800 shadow"
           />
         </div>
-        <Link
-          href={isButtonDisabled ? "#" : "get-started"}
-          onClick={handleClick}
-          className="w-full"
-        >
+        <Link href={isButtonDisabled ? "#" : "get-started"} className="w-full">
           <Button
             className="h-16 w-full rounded-full bg-blue-600 text-lg font-bold"
             variant="default"
