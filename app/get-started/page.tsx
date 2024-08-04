@@ -28,19 +28,35 @@ type Offer = {
   ctype: string;
   cvr: string;
 };
+const saEvent = (eventName: string) => {
+  if (typeof window !== "undefined") {
+    if (window.sa_event) {
+      window.sa_event(eventName);
+    } else {
+      console.log("error: window.sa_event is not defined");
+    }
+  } else {
+    console.log("error: window is not defined");
+  }
+};
 
 const OffersPage = () => {
-  const saEvent = (eventName: string) => {
-    if (typeof window !== "undefined" && window.sa_event) {
-      window.sa_event(eventName);
-
-      console.log(eventName);
-    } else {
-      console.log("error");
-    }
-  };
   useEffect(() => {
-    saEvent("registered");
+    const checkSaEvent = () => {
+      if (
+        typeof window !== "undefined" &&
+        typeof window.sa_event === "function"
+      ) {
+        saEvent("registered");
+        console.log("registered");
+      } else {
+        console.log(
+          "error: window.sa_event is not defined or is not a function",
+        );
+      }
+    };
+    const timeoutId = setTimeout(checkSaEvent, 1000);
+    return () => clearTimeout(timeoutId);
   }, []);
 
   const [value, setValue] = React.useState("");
@@ -237,14 +253,7 @@ const OffersPage = () => {
           Continue
         </Link> */}
 
-        {/* <Link href="tiktok" className="w-full">
-          <Button
-            className="h-16 w-full rounded-xl text-lg font-semibold"
-            variant="destructive"
-          >
-            Continue
-          </Button>
-        </Link> */}
+        {/* gi */}
       </div>
       {/* <div className="bg-green-100 px-8  mt-6 w-full">
         <h1 className="text-2xl  pt-4 text-center font-bold mt-6">How to get it?</h1>
