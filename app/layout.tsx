@@ -360,6 +360,7 @@ export default function RootLayout({
           </div>
         </footer>
       </body>
+      <Script src="https://scripts.simpleanalyticscdn.com/latest.js" />
     </html>
   );
 }
