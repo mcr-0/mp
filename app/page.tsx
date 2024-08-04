@@ -59,7 +59,7 @@ export default function LandingPage() {
           </span>
         </div>
         <p className="pt-2 text-center text-xl font-bold text-red-700">
-          Play Games & Receive! Test
+          Play Games & Level Up!
         </p>
       </div>
       <div
