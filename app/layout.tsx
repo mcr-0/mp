@@ -17,53 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <Script
-          strategy="afterInteractive"
-          src="https://www.googletagmanager.com/gtag/js?id=AW-11255487453"
-        />
-        <Script
-          id="gtag-init"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'AW-11255487453');
-            `,
-          }}
-        />
-        <Script
-          id="gtag-report-conversion"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              function gtag_report_conversion(url) {
-                var callback = function () {
-                  if (typeof(url) != 'undefined') {
-                    window.location = url;
-                  }
-                };
-                gtag('event', 'conversion', {
-                    'send_to': 'AW-11255487453/QIz6CJWVvccZEN23hPcp',
-                    'event_callback': callback
-                });
-                return false;
-              }
-            `,
-          }}
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-                window.sa_event = function(eventName) {
-                  console.log('Event:', eventName);
-                };
-              `,
-          }}
-        />
-      </head>
+      <head></head>
       <body className={`${inter.className} `}>
         <div className="relative isolate min-h-screen overflow-hidden bg-black px-4">
           <Image
@@ -406,7 +360,6 @@ export default function RootLayout({
           </div>
         </footer>
       </body>
-      <Script src="https://scripts.simpleanalyticscdn.com/latest.js" />
     </html>
   );
 }
