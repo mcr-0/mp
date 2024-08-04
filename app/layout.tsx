@@ -336,7 +336,7 @@ export default function RootLayout({
                   Step 1: Enter your username
                 </h2>
                 <p className="mt-2 text-gray-600">
-                  After that you'll get full instruction how to get access to
+                  After that you will get full instruction how to get access to
                   MazedPromos
                 </p>
               </div>
@@ -366,7 +366,7 @@ export default function RootLayout({
                   Step 3: Review and Finish
                 </h2>
                 <p className="mt-2 text-gray-600">
-                  You'll be redirected automatically and receive access to
+                  You will be redirected automatically and receive access to
                   MazedPromos.
                 </p>
               </div>
