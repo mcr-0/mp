@@ -31,7 +31,7 @@ export default function LandingPage() {
     if (isButtonDisabled) {
       event.preventDefault();
     } else {
-      gtag_report_conversion("get-started");
+      gtag_report_conversion();
       saEvent("registered");
     }
   };
