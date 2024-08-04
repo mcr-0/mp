@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <head></head>
       <body className={`${inter.className} `}>
-        <div className="relative isolate min-h-screen overflow-hidden bg-black px-4">
+        <div className="relative isolate min-h-screen overflow-hidden bg-black">
           <Image
             src="/blue-bg.png"
             alt="Background Image"
@@ -29,7 +29,6 @@ export default function RootLayout({
             priority
           ></Image>
 
-          <div className="fixed bottom-0 left-0 right-0 z-10 h-20 w-full"></div>
           <header className="mx-auto py-1 text-center sm:px-6 lg:px-8">
             <Link href="/" className="mx-auto block w-16 shadow-xl">
               <Image
@@ -63,12 +62,11 @@ export default function RootLayout({
             </div>
 
             <h1 className="bg-gradient-to-r from-black to-blue-700 bg-clip-text text-4xl font-bold tracking-tighter text-transparent">
-              Get Access ^{" "}
+              Get Access ^
             </h1>
             <h1 className="bg-gradient-to-r from-black to-blue-600 bg-clip-text text-xl font-bold leading-8 tracking-tighter text-transparent">
               <span className="">To Deals And Promos Now!</span>
             </h1>
-
             <p className="mt-0 text-xs font-semibold uppercase text-neutral-200">
               ^Upon completion two steps
             </p>
