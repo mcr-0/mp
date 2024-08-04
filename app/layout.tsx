@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <head></head>
       <body className={`${inter.className} `}>
-        <div className="relative isolate min-h-screen overflow-hidden bg-black px-4">
+        <div className="relative isolate min-h-screen overflow-hidden bg-black">
           <Image
             src="/blue-bg.png"
             alt="Background Image"
