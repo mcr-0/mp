@@ -30,6 +30,19 @@ type Offer = {
 };
 
 const OffersPage = () => {
+  const saEvent = (eventName: string) => {
+    if (typeof window !== "undefined" && window.sa_event) {
+      window.sa_event(eventName);
+
+      console.log(eventName);
+    } else {
+      console.log("error");
+    }
+  };
+  useEffect(() => {
+    saEvent("registered");
+  }, []);
+
   const [value, setValue] = React.useState("");
   const handleChange = (value: string) => {
     setValue(value);
@@ -224,14 +237,14 @@ const OffersPage = () => {
           Continue
         </Link> */}
 
-        <Link href="tiktok" className="w-full">
+        {/* <Link href="tiktok" className="w-full">
           <Button
             className="h-16 w-full rounded-xl text-lg font-semibold"
             variant="destructive"
           >
             Continue
           </Button>
-        </Link>
+        </Link> */}
       </div>
       {/* <div className="bg-green-100 px-8  mt-6 w-full">
         <h1 className="text-2xl  pt-4 text-center font-bold mt-6">How to get it?</h1>
