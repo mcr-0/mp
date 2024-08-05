@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model user {
+  xata_id        String   @unique(map: "_pgroll_new_user_xata_id_key") @default(dbgenerated("('rec_'::text || (xata_private.xid())::text)"))
+  xata_version   Int      @default(0)
+  xata_createdat DateTime @default(now()) @db.Timestamptz(6)
+  xata_updatedat DateTime @default(now()) @db.Timestamptz(6)
+}
+
+
+model Postback {
+  id               Int      @id @default(autoincrement())
+  offer_id         String
+  offer_name       String?
+  affiliate_id     String?
+  source           String?
+  session_ip       String
+  payout           Float
+  date             DateTime
+  time             String
+  datetime         DateTime
+  session_timestamp Int
+  aff_sub          String?
+  aff_sub2         String?
+  aff_sub3         String?
+  aff_sub4         String?
+  aff_sub5         String?
+  ran              String?
+}
