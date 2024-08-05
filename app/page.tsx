@@ -18,7 +18,7 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="rounded-2xl bg-gradient-to-b from-slate-100/70 to-white/40 p-3">
+    <div className="rounded-2xl bg-gradient-to-b from-white to-blue-100/100 p-2">
       <div id="top-info">
         <div className="absolute -top-3 left-1/2 -translate-x-1/2 transform">
           <span className="relative flex">
@@ -39,15 +39,18 @@ export default function LandingPage() {
             </span>
           </span>
         </div>
-        <p className="pt-2 text-center text-xl font-bold text-red-700">
+        {/* <p className="py-4 text-center text-xl font-bold tracking-tight text-red-700">
+          Complete Four Steps To Receive Exclusive Rewards Access
+        </p> */}
+        <p className="pt-4 text-center text-xl font-bold tracking-tight text-red-700">
           Play Games & Level Up!
         </p>
       </div>
       <div
         id="hero"
-        className="bg-blue relative -top-2 z-0 mx-auto h-56 w-full -rotate-2 scale-75"
+        className="bg-blue relative z-0 mx-auto h-48 w-full scale-75 text-center"
       >
-        <div className="bg-blue absolute -left-1 -top-0 mx-auto h-56 w-full -rotate-3 overflow-hidden rounded-xl bg-cyan-500 shadow-lg ring-1 backdrop-blur-sm"></div>
+        {/* <div className="bg-blue absolute -left-1 -top-0 mx-auto h-56 w-full -rotate-3 overflow-hidden rounded-xl bg-cyan-500 shadow-lg ring-1 backdrop-blur-sm"></div>
         <div className="bg-blue absolute mx-auto h-56 w-full overflow-hidden rounded-xl bg-cyan-600 shadow ring-1 backdrop-blur-sm">
           <Image
             src="/coins.avif"
@@ -57,8 +60,8 @@ export default function LandingPage() {
             height={900}
             priority
           ></Image>
-        </div>
-        <div className="bg-blue absolute mx-auto h-56 w-full rotate-3 overflow-hidden rounded-xl bg-cyan-600 shadow ring-1 backdrop-blur-sm">
+        </div> */}
+        <div className="bg-blue absolute -left-1 -top-1 mx-auto h-56 w-full overflow-hidden rounded-xl bg-cyan-600 ring-1 backdrop-blur-sm">
           <Image
             src="/coins.avif"
             className="absolute bottom-0 right-0 top-0 -ml-48 max-w-lg brightness-110"
@@ -67,20 +70,38 @@ export default function LandingPage() {
             height={900}
             priority
           ></Image>
-          <h3 className="absolute right-2 top-4 z-20 text-right text-4xl font-black tracking-tighter text-cyan-700">
+          <h3 className="absolute right-2 top-4 z-20 bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-right text-4xl font-black tracking-tighter text-transparent">
+            62,500 V
+            <br />
+            Bucks*
+          </h3>
+          <h3 className="text-md absolute bottom-2 right-2 z-20 text-right font-semibold tracking-tighter text-cyan-100">
+            Worth Up To $500
+          </h3>
+        </div>
+        <div className="bg-blue absolute left-1 top-1 mx-auto h-56 w-full overflow-hidden rounded-xl bg-cyan-600 ring-1 backdrop-blur-sm">
+          <Image
+            src="/coins.avif"
+            className="absolute bottom-0 right-0 top-0 -ml-48 max-w-lg brightness-110"
+            alt="reward"
+            width={1800}
+            height={900}
+            priority
+          ></Image>
+          <h3 className="absolute right-2 top-4 z-20 bg-gradient-to-r from-cyan-700 to-cyan-600 bg-clip-text text-right text-4xl font-black tracking-tighter text-transparent">
             62,500 V-
             <br />
             Bucks*
           </h3>
-          <h3 className="text-md absolute bottom-2 right-2 z-20 text-right tracking-tighter text-cyan-100">
+          <h3 className="text-md absolute bottom-2 right-2 z-20 text-right font-semibold tracking-tighter text-cyan-100">
             Worth Up To $500
           </h3>
         </div>
-      </div>
-      <div>
-        <p className="-mt-6 mb-4 text-center text-xs tracking-tight text-neutral-600">
+        {/* <p className="absolute -bottom-14 block w-full rounded text-xs text-neutral-500">
           Offer not sponsored-endorsed by this brand.
-        </p>
+        </p> */}
+      </div>
+      <div className="">
         {/* <Image
           src="/fortnite_v2.png"
           width={400}
@@ -89,20 +110,23 @@ export default function LandingPage() {
           className="mx-auto px-8 py-2"
           priority
         ></Image> */}
-        <h1 className="px-2 text-center text-2xl font-bold leading-tight tracking-tight text-neutral-800">
+        {/* <h1 className="px-2 text-center text-2xl font-bold leading-tight tracking-tight text-neutral-800">
           Complete Two{" "}
           <span className="bg-gradient-to-b from-gray-500 via-indigo-700 to-gray-800 bg-clip-text text-transparent">
             Quick And Easy Steps
           </span>{" "}
           To Receive Reward Access
-        </h1>
+        </h1> */}
       </div>
       <div className="flex w-full flex-col gap-4 p-4 md:flex-nowrap">
+        <h1 className="mt-2 px-2 text-center text-2xl font-bold leading-tight tracking-tight text-neutral-800">
+          Enter Epic Username
+        </h1>
         <div className="grid w-full max-w-sm items-center gap-1.5">
           <Input
             type="text"
             id="email"
-            placeholder="Enter Epic Username..."
+            placeholder="joshdoe"
             value={inputValue}
             onChange={handleInputChange}
             className="border-1 h-14 w-full rounded-lg border-neutral-300 bg-white text-center text-lg font-bold text-neutral-800 shadow"
@@ -110,19 +134,13 @@ export default function LandingPage() {
         </div>
         <Link href={isButtonDisabled ? "#" : "get-started"} className="w-full">
           <Button
-            className="h-16 w-full rounded-full bg-blue-600 text-lg font-bold"
+            className="h-16 w-full rounded-full bg-black text-lg font-bold"
             variant="default"
             disabled={isButtonDisabled}
           >
             Get Started <MoveRight className="ml-2 h-5 w-5" />
           </Button>
         </Link>
-        <p className="-mb-4 w-full text-center text-xs leading-tight tracking-tight text-neutral-600">
-          <strong>We never ask for your password. </strong>
-          <br />
-          <br />
-          ^Upon completion 2 steps
-        </p>
       </div>
     </div>
   );

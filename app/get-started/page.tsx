@@ -115,23 +115,30 @@ const OffersPage = () => {
   //   }
 
   return (
-    <div className="mx-auto w-full">
-      <div className="container mx-auto my-4">
+    <div className="mx-auto flex w-full flex-col gap-2">
+      {/* <div className="container rounded-2xl bg-white p-4">
+        <h3 className="text-center font-semibold">
+          Username: joshdoe (Change)
+          <br />
+          Your progress has been saved.
+        </h3>
+      </div> */}
+      <div className="container rounded-2xl bg-white p-4">
         {/* <Image src="/tiktok.avif" alt="TikTok" width={128} height={128} className="rounded-xl mx-auto my-4 w-16 h-16"></Image> */}
 
-        <div className="w-full text-center sm:p-8 dark:border-gray-700 dark:bg-gray-800">
-          <Image
+        <div className="w-full text-center dark:border-gray-700 dark:bg-gray-800 sm:p-8">
+          {/* <Image
             src="/tiktok.avif"
             alt="TikTok"
             width={128}
             height={128}
-            className="mx-auto my-4 -mt-12 h-24 w-24 rounded-xl border-4 border-white bg-white"
-          ></Image>
+            className="mx-auto my-4 h-24 w-24 rounded-xl border-4 border-white bg-white"
+          ></Image> */}
 
           <h5 className="mb-2 text-2xl font-bold text-gray-900 dark:text-white">
-            Create A TikTok Account & Follow Us!
+            Step 1. Follow us on TikTok
           </h5>
-          <p className="text-base leading-relaxed text-gray-800 sm:text-lg dark:text-gray-400">
+          <p className="text-base leading-relaxed text-gray-800 dark:text-gray-400 sm:text-lg">
             1) Create A New Account
             <br />
             2) Follow{" "}
@@ -158,7 +165,7 @@ const OffersPage = () => {
               //href={offer.link}
               href="https://www.tiktok.com/@mazerewards"
               target="_blank"
-              className="inline-flex w-full items-center justify-center rounded-lg bg-black px-4 py-2.5 text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-300 sm:w-auto dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700"
+              className="inline-flex w-full items-center justify-center rounded-lg bg-black px-4 py-2.5 text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 sm:w-auto"
             >
               <svg
                 className="me-3 h-7 w-7"
@@ -210,7 +217,7 @@ const OffersPage = () => {
           </div>
         </div>
       </div>
-      <div className="rounded-2xl bg-gradient-to-br from-amber-100 to-yellow-300 p-4">
+      <div className="container rounded-2xl bg-gradient-to-br from-amber-100 to-yellow-300 p-4">
         <h5 className="mb-2 mt-6 text-center text-2xl font-bold text-gray-900 dark:text-white">
           Enter Your Code
         </h5>
