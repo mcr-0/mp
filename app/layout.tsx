@@ -72,7 +72,7 @@ export default function RootLayout({
                   <path
                     d="M5 10L8.5 13.5L14.5 6.5"
                     stroke="#1E1E1E"
-                    stroke-width="1.5"
+                    strokeWidth="1.5"
                   />
                 </svg>
               </div>
