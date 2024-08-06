@@ -1,0 +1,18 @@
+{
+  "done": true,
+  "migration": {
+    "name": "sql_dde848d25a46bb",
+    "operations": [
+      {
+        "sql": {
+          "up": "CREATE TABLE \"user\" (xata_id text NOT NULL DEFAULT 'rec_'::text || xata_private.xid()::text, xata_version int NOT NULL DEFAULT 0, xata_createdat timestamptz(6) NOT NULL DEFAULT current_timestamp, xata_updatedat timestamptz(6) NOT NULL DEFAULT current_timestamp); CREATE UNIQUE INDEX _pgroll_new_user_xata_id_key ON \"user\" USING btree (xata_id)"
+        }
+      }
+    ]
+  },
+  "migrationType": "inferred",
+  "name": "sql_dde848d25a46bb",
+  "parent": "sql_ba9598abf73faa",
+  "schema": "public",
+  "startedAt": "2024-08-05T12:43:26.550829Z"
+}

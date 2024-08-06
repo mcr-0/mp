@@ -38,6 +38,23 @@ const OffersPage = () => {
   const [boostedOffers, setBoostedOffers] = useState<Offer[]>([]);
   const [clickedOffers, setClickedOffers] = useState<Set<number>>(new Set());
 
+  const baseUrl = "https://rewards.coinmaster.com/rewards/rewards.html?c=";
+  const params = [
+    "pe_RICHvkvSkl_20240722",
+    "pe_RICHHwvdJo_20240722",
+    "pe_FCBEMvoCd_20240801",
+    "pe_FCBrFtTzg_20240801",
+    "pe_INSrFfVkB_20240801",
+    "pe_LINEvdMfcM_20240729",
+    "pe_CHATBXwVMbK_20240801",
+    "pe_FCBVOzXer_20240731",
+    "pe_EMAILSCiYyJ_20240726",
+    "pe_FCBVabUUU_20240725",
+    "pe_LINEenccmV_20240731",
+    "pe_TWIfusaFG_20240731",
+    "pe_FCBeidlww_20240731",
+  ];
+
   const [completedOffers, setCompletedOffers] = useState<Set<number>>(
     new Set(),
   );
@@ -60,8 +77,11 @@ const OffersPage = () => {
         if (data.error) {
           setError(data.error);
         } else {
+          // const filteredBoostedOffers = data.offers.filter(
+          //   (offer: Offer) => offer.boosted,
+          // );
           const filteredBoostedOffers = data.offers.filter(
-            (offer: Offer) => offer.boosted,
+            (offer: Offer) => offer.offerid === 57813,
           );
           setBoostedOffers(filteredBoostedOffers);
         }
@@ -141,7 +161,7 @@ const OffersPage = () => {
     <div className="mx-auto flex w-full flex-col gap-2">
       {session ? (
         <div className="flex flex-col gap-2">
-          <div className="container rounded-2xl bg-gradient-to-b from-white to-green-100 p-4">
+          <div className="container rounded-2xl bg-neutral-900 p-4">
             <div id="top-info">
               <div className="absolute -top-3 left-1/2 -translate-x-1/2 transform">
                 <span className="relative flex">
@@ -162,30 +182,14 @@ const OffersPage = () => {
                   </span>
                 </span>
               </div>
-              <p className="pt-4 text-center text-2xl font-bold leading-tight tracking-tight text-green-700">
-                Hi <span className="">{session.user.username}</span> <br />{" "}
-                <svg
-                  width="24"
-                  height="24"
-                  className="inline"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle cx="10" cy="10" r="10" fill="#8FFF00" />
-                  <path
-                    d="M5 10L8.5 13.5L14.5 6.5"
-                    stroke="#1E1E1E"
-                    stroke-width="1.5"
-                  />
-                </svg>{" "}
-                You are eligible!
+              <p className="pt-4 text-center text-xl font-bold tracking-tight text-green-700">
+                Hi {session.user.username}, you are eligible!
               </p>
             </div>
             <div className="text-center">
               <Button
                 variant="link"
-                className="text-neutral-800 underline"
+                className="text-neutral-300 underline"
                 onClick={handleSignOut}
               >
                 Change account / Log Out
@@ -195,9 +199,11 @@ const OffersPage = () => {
           <div className="container rounded-2xl bg-neutral-100 p-4">
             <div className="w-full text-center dark:border-gray-700 dark:bg-gray-800 sm:p-8">
               <h5 className="mb-4 text-2xl font-bold text-gray-900 dark:text-white">
-                Complete tasks below
+                Final Step (Step 2)
               </h5>
-
+              <h3 className="mb-4 mt-4 text-left text-2xl font-semibold text-zinc-900">
+                Play Coin Master & Complete Village Level 3!
+              </h3>
               <div className="items-center justify-center space-y-4 sm:flex sm:space-x-4 sm:space-y-0 rtl:space-x-reverse">
                 <ul>
                   {boostedOffers.map((offer) => (
@@ -231,7 +237,7 @@ const OffersPage = () => {
                             </p>
                           </div>
                           <div>
-                            <div className="block w-20 rounded-3xl bg-neutral-800 p-1 text-center text-xs font-bold leading-6 text-white">
+                            <div className="block w-20 rounded-3xl bg-blue-700 p-1 text-center text-xs font-semibold leading-5 text-white">
                               Get
                             </div>
                           </div>
@@ -257,10 +263,36 @@ const OffersPage = () => {
                     </li>
                   ))}
                 </ul>
-                <p className="completed-instruction mb-2 text-xs text-neutral-800">
-                  95% of users complete this in less than 5 minutes
-                </p>
                 <div className="completed-apps relative my-3 rounded-xl bg-slate-200 p-4 text-left shadow">
+                  <div className="flex">
+                    <h1 className="mb-2 text-left text-2xl font-bold text-gray-700">
+                      Would you like to speed up the process?
+                    </h1>
+                  </div>
+                  <p>
+                    Come back any time to use Extra Free Spins. Click links
+                    below to receive 15, 25 or even 50 extra spins.
+                  </p>
+                  <div className="free-spins flex items-center justify-center">
+                    <div className="grid w-full grid-cols-2 gap-2 p-4">
+                      {params.map((param, index) => (
+                        <a
+                          key={index}
+                          href={`${baseUrl}${param}`}
+                          className="rounded bg-white py-2 text-center text-blue-600 hover:text-zinc-900"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Free Spins #{index + 1}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <p className="completed-instruction mb-2 text-xs text-neutral-800">
+                  80% of users complete this in less than 2 hours
+                </p>
+                {/* <div className="completed-apps relative my-3 rounded-xl bg-slate-200 p-4 text-left shadow">
                   <div className="flex">
                     <h1 className="text-left text-2xl font-bold text-gray-700">
                       Completed: {completedTasks}/2
@@ -273,7 +305,7 @@ const OffersPage = () => {
                         (countdown) => countdown.current > 0,
                       ) && (
                         <div className="">
-                          <p className="pt-4 text-center text-xl font-bold text-green-700">
+                          <p className="pt-4 text-center text-xl font-bold text-green-500">
                             Checking completion...
                           </p>
                         </div>
@@ -315,7 +347,7 @@ const OffersPage = () => {
                       )}
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

@@ -1,0 +1,6 @@
+{
+  "databaseURL": "https://mcr-0-s-workspace-h59ct5.us-east-1.xata.sh/db/database2",
+  "codegen": {
+    "output": "src/xata.ts"
+  }
+}

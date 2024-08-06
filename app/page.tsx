@@ -1,20 +1,60 @@
 "use client";
 import React, { useState, ChangeEvent, MouseEvent } from "react";
+import { useRouter } from "next/navigation";
+
 import Image from "next/image";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { ChevronRight, MoveRight } from "lucide-react";
+import { ChevronRight, MoveRight, Loader2 } from "lucide-react";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function LandingPage() {
-  const [inputValue, setInputValue] = useState("");
+  const { data: session } = useSession();
+  const [message, setMessage] = useState("");
+
+  const router = useRouter();
+  const [username, setUsername] = useState("");
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleAuth = async (event: React.FormEvent) => {
+    event.preventDefault();
+    setIsLoading(true);
+
+    try {
+      const res = await fetch("/api/auth/register-login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        // Po udanej rejestracji lub logowaniu, zaloguj użytkownika za pomocą NextAuth
+        await signIn("credentials", {
+          redirect: false,
+          username: username,
+        });
+        setMessage("User authenticated successfully!");
+        router.push("/get-started"); // Replace '/success' with your desired route
+        setIsLoading(false);
+      } else {
+        setMessage(`Error: ${data.error}`);
+      }
+    } catch (error) {
+      setMessage(`Unexpected error:`);
+    }
+  };
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setInputValue(value);
-    setIsButtonDisabled(value.length < 4);
+    const username = event.target.value;
+    setUsername(username);
+    setIsButtonDisabled(username.length < 4);
   };
 
   return (
@@ -42,8 +82,9 @@ export default function LandingPage() {
         {/* <p className="py-4 text-center text-xl font-bold tracking-tight text-red-700">
           Complete Four Steps To Receive Exclusive Rewards Access
         </p> */}
-        <p className="pt-4 text-center text-xl font-bold tracking-tight text-red-700">
-          Play Games & Level Up!
+        <p className="px-6 pt-4 text-center text-2xl font-bold leading-tight tracking-tight text-red-600">
+          Follow us <MoveRight className="inline h-5 w-5" /> Play Free Games{" "}
+          <MoveRight className="inline h-5 w-5" /> Level Up!
         </p>
       </div>
       <div
@@ -61,7 +102,7 @@ export default function LandingPage() {
             priority
           ></Image>
         </div> */}
-        <div className="bg-blue absolute -left-1 -top-1 mx-auto h-56 w-full overflow-hidden rounded-xl bg-cyan-600 ring-1 backdrop-blur-sm">
+        <div className="bg-blue absolute -left-1 -top-1 mx-auto h-56 w-full animate-pulse overflow-hidden rounded-xl bg-cyan-600 ring-1 backdrop-blur-sm">
           <Image
             src="/coins.avif"
             className="absolute bottom-0 right-0 top-0 -ml-48 max-w-lg brightness-110"
@@ -73,7 +114,7 @@ export default function LandingPage() {
           <h3 className="absolute right-2 top-4 z-20 bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-right text-4xl font-black tracking-tighter text-transparent">
             62,500 V
             <br />
-            Bucks*
+            Bucks^
           </h3>
           <h3 className="text-md absolute bottom-2 right-2 z-20 text-right font-semibold tracking-tighter text-cyan-100">
             Worth Up To $500
@@ -88,13 +129,14 @@ export default function LandingPage() {
             height={900}
             priority
           ></Image>
-          <h3 className="absolute right-2 top-4 z-20 bg-gradient-to-r from-cyan-700 to-cyan-600 bg-clip-text text-right text-4xl font-black tracking-tighter text-transparent">
+          <h3 className="absolute right-2 top-4 z-20 bg-gradient-to-r from-cyan-950 to-cyan-600 bg-clip-text text-right text-4xl font-black tracking-tighter text-transparent">
             62,500 V-
             <br />
-            Bucks*
+            Bucks^
           </h3>
-          <h3 className="text-md absolute bottom-2 right-2 z-20 text-right font-semibold tracking-tighter text-cyan-100">
-            Worth Up To $500
+          <h3 className="absolute bottom-2 right-2 z-20 rounded bg-white/40 text-right text-xs font-semibold tracking-tighter text-cyan-950">
+            ^Worth Up To $500 <br /> Offer not sponsored or endorsed by this
+            brand.
           </h3>
         </div>
         {/* <p className="absolute -bottom-14 block w-full rounded text-xs text-neutral-500">
@@ -119,28 +161,72 @@ export default function LandingPage() {
         </h1> */}
       </div>
       <div className="flex w-full flex-col gap-4 p-4 md:flex-nowrap">
-        <h1 className="mt-2 px-2 text-center text-2xl font-bold leading-tight tracking-tight text-neutral-800">
-          Enter Epic Username
-        </h1>
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Input
-            type="text"
-            id="email"
-            placeholder="joshdoe"
-            value={inputValue}
-            onChange={handleInputChange}
-            className="border-1 h-14 w-full rounded-lg border-neutral-300 bg-white text-center text-lg font-bold text-neutral-800 shadow"
-          />
-        </div>
-        <Link href={isButtonDisabled ? "#" : "get-started"} className="w-full">
-          <Button
-            className="h-16 w-full rounded-full bg-black text-lg font-bold"
-            variant="default"
-            disabled={isButtonDisabled}
-          >
-            Get Started <MoveRight className="ml-2 h-5 w-5" />
-          </Button>
-        </Link>
+        {session ? (
+          <div className="text-center">
+            <h1 className="my-2 px-2 text-center text-2xl font-bold leading-tight tracking-tight text-neutral-800">
+              Check your progress
+            </h1>
+            <p>
+              Signed in as{" "}
+              <span className="font-semibold text-blue-700">
+                {session.user.username}
+              </span>
+            </p>
+            <Link href="/get-started">
+              <Button
+                className="my-4 h-16 w-full rounded-full bg-black text-lg font-bold"
+                variant="default"
+              >
+                Continue
+              </Button>
+            </Link>
+            <div className="text-center">
+              <Button variant="link" onClick={() => signOut()}>
+                Sign out
+              </Button>
+            </div>
+          </div>
+        ) : (
+          <div>
+            {" "}
+            <h1 className="my-2 px-2 text-center text-2xl font-bold leading-tight tracking-tight text-neutral-800">
+              Receive Access Now
+            </h1>
+            <form onSubmit={handleAuth} className="flex flex-col gap-4">
+              <Input
+                name="username"
+                value={username}
+                onChange={handleInputChange}
+                required
+                type="text"
+                id="email"
+                placeholder="Enter your epic username..."
+                className="border-1 h-14 w-full rounded-lg border-neutral-300 bg-white text-center text-lg font-bold text-neutral-800 shadow"
+              ></Input>
+              {isLoading ? (
+                <>
+                  <Button
+                    className="h-16 w-full rounded-full bg-black text-lg font-bold"
+                    variant="default"
+                    disabled
+                  >
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Veryfing...
+                  </Button>
+                </>
+              ) : (
+                <Button
+                  className="h-16 w-full rounded-full bg-black text-lg font-bold"
+                  variant="default"
+                  disabled={isButtonDisabled}
+                >
+                  Get Started <MoveRight className="ml-2 h-5 w-5" />
+                </Button>
+              )}
+            </form>
+          </div>
+        )}
+        {/* {message && <p className="text-green-700">{message}</p>} */}
       </div>
     </div>
   );
