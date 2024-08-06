@@ -57,8 +57,8 @@ export default async function handler(
   const username = session?.user?.username || "defaultUsername"; // Fallback to a default value if username is not available
 
   const data = {
-    ip: "23.83.132.153",
-    // ip: ip.toString(), // Dynamic IP address
+    // ip: "23.83.132.153",
+    ip: ip.toString(), // Dynamic IP address
     user_agent: userAgent,
     // Enter other optional vars here (ctype, max, etc)
     aff_sub5: username,
