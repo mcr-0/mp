@@ -4,3 +4,11 @@ declare global {
 }
 
 export {};
+
+import { NextApiRequest } from "next";
+
+declare module "next" {
+  interface NextApiRequest {
+    clientIp?: string;
+  }
+}

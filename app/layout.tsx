@@ -12,11 +12,14 @@ export const metadata: Metadata = {
   description: "Play Games And Get Access to Over 30+ Deals And Promos",
 };
 import { CSPostHogProvider } from "./providers";
+import SessionProviderWrapper from "./SessionProviderWrapper"; // Zakładając, że jest w tym samym katalogu
 
 export default function RootLayout({
   children,
+  session,
 }: Readonly<{
   children: React.ReactNode;
+  session: any;
 }>) {
   return (
     <html lang="en">
@@ -26,21 +29,8 @@ export default function RootLayout({
           <div className="relative isolate min-h-screen overflow-hidden bg-black">
             <div className="absolute left-0 right-0 top-0 -z-10 h-full w-full bg-gradient-to-b from-gray-900/100 to-gray-800/100"></div>
 
-            <header className="z-50 mx-auto max-w-lg p-4 text-center sm:px-6 lg:px-8">
+            <header className="z-50 mx-auto max-w-lg pt-2 text-center sm:px-6 lg:px-8">
               <div className="flex justify-center">
-                <Link
-                  href="/"
-                  className="block w-16 justify-center text-left shadow-xl"
-                >
-                  <Image
-                    src="/logo.jpg"
-                    height={400}
-                    width={600}
-                    alt="logo"
-                    className="h-full w-full rounded-md object-cover"
-                    priority
-                  ></Image>
-                </Link>
                 {/* <Button
                   variant="link"
                   className="tracking-tight text-white underline"
@@ -51,7 +41,20 @@ export default function RootLayout({
                   Get Access
                 </Button> */}
               </div>
-              <div className="flex items-center justify-center space-x-2 text-center text-xl text-white">
+              <div className="mb-2 flex items-center justify-center space-x-2 text-center text-xl text-white">
+                <Link
+                  href="/"
+                  className="block w-12 justify-center text-left shadow-xl"
+                >
+                  <Image
+                    src="/logo.jpg"
+                    height={400}
+                    width={600}
+                    alt="logo"
+                    className="h-full w-full rounded-md object-cover"
+                    priority
+                  ></Image>
+                </Link>
                 <div className="">
                   <span className="animate-pulse">Status: </span>
                   <span className="animate-pulse text-green-300">
@@ -74,26 +77,24 @@ export default function RootLayout({
                 </svg>
               </div>
 
-              <h1 className="text-5xl font-bold tracking-tighter text-white">
-                Get Access^
+              <h1 className="text-3xl font-black tracking-tighter text-neutral-100">
+                Complete Two Steps <br />& Gain Access
               </h1>
-              <h1 className="bg-gradient-to-r from-white to-blue-800 bg-clip-text text-lg font-bold leading-8 tracking-tighter text-transparent">
-                <span className="">To Deals And Promos Now!</span>
+              <h1 className="text-lg leading-8 tracking-tighter text-neutral-400">
+                <span className="">To Deals And Promos* Now!</span>
               </h1>
-              <p className="mt-0 text-xs uppercase text-neutral-200">
-                ^Upon completion two steps
-              </p>
             </header>
             <div className="relative m-4">
               <div className="isolate mx-auto w-full max-w-md items-center justify-center rounded-3xl bg-black p-2 shadow-lg ring-1 ring-black/5 backdrop-blur-md">
-                {children}
+                <SessionProviderWrapper session={session}>
+                  {children}
+                </SessionProviderWrapper>{" "}
               </div>
             </div>
 
             <p className="mx-auto max-w-sm px-4 pb-20 text-center text-xs text-neutral-200">
-              We are not affiliated with any of the games or companies shown on
-              this website. Use of any logos or trademarks are for reference
-              purposes only. By using the website, you agree to our{" "}
+              Use of any logos or trademarks are for reference purposes only. By
+              using the website, you agree to our{" "}
               <Link
                 href="/terms"
                 target="_blank"
