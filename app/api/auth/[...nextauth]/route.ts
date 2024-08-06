@@ -45,7 +45,9 @@ const authOptions: AuthOptions = {
     async session({ session, token }: { session: Session; token: JWT }) {
       if (session.user) {
         session.user.id = token.id as string;
-        session.user.username = token.username; // Dodanie nazwy użytkownika do sesji
+        if (typeof token.username === "string") {
+          session.user.username = token.username; // TUTAJ NAPRAWIAMY BŁĄD
+        }
       }
       return session;
     },
