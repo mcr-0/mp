@@ -19,9 +19,19 @@ export default function LandingPage() {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
+  const saEvent = (eventName: string) => {
+    if (typeof window !== "undefined" && window.sa_event) {
+      window.sa_event(eventName);
+      console.log(eventName);
+    } else {
+      console.log("error");
+    }
+  };
+
   const handleAuth = async (event: React.FormEvent) => {
     event.preventDefault();
     setIsLoading(true);
+    saEvent("registered");
 
     try {
       const res = await fetch("/api/auth/register-login", {
