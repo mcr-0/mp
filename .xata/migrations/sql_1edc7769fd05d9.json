@@ -1,0 +1,18 @@
+{
+  "done": true,
+  "migration": {
+    "name": "sql_1edc7769fd05d9",
+    "operations": [
+      {
+        "sql": {
+          "up": "CREATE SCHEMA bb_dfv027jbq51nl47o0h9tu66e8o_h59ct5"
+        }
+      }
+    ]
+  },
+  "migrationType": "inferred",
+  "name": "sql_1edc7769fd05d9",
+  "parent": "sql_af413c4714ab91",
+  "schema": "public",
+  "startedAt": "2024-08-05T12:43:14.776627Z"
+}

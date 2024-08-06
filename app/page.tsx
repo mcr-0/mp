@@ -1,20 +1,53 @@
 "use client";
 import React, { useState, ChangeEvent, MouseEvent } from "react";
+import { useRouter } from "next/navigation";
+
 import Image from "next/image";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { ChevronRight, MoveRight } from "lucide-react";
+import { ChevronRight, MoveRight, Loader2 } from "lucide-react";
 
 export default function LandingPage() {
-  const [inputValue, setInputValue] = useState("");
+  const router = useRouter();
+
+  const [username, setUsername] = useState("");
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setInputValue(value);
-    setIsButtonDisabled(value.length < 4);
+    const username = event.target.value;
+    setUsername(username);
+    setIsButtonDisabled(username.length < 4);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    try {
+      const response = await fetch("/api/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        router.push("/get-started"); // Replace '/success' with your desired route
+      } else {
+        const errorData = await response.json();
+        console.error(errorData);
+      }
+    } catch (error) {
+      console.error("An unexpected error occurred", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -122,25 +155,43 @@ export default function LandingPage() {
         <h1 className="mt-2 px-2 text-center text-2xl font-bold leading-tight tracking-tight text-neutral-800">
           Enter Epic Username
         </h1>
-        <div className="grid w-full max-w-sm items-center gap-1.5">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <Input
             type="text"
             id="email"
             placeholder="joshdoe"
-            value={inputValue}
+            value={username}
             onChange={handleInputChange}
             className="border-1 h-14 w-full rounded-lg border-neutral-300 bg-white text-center text-lg font-bold text-neutral-800 shadow"
-          />
-        </div>
-        <Link href={isButtonDisabled ? "#" : "get-started"} className="w-full">
-          <Button
-            className="h-16 w-full rounded-full bg-black text-lg font-bold"
-            variant="default"
-            disabled={isButtonDisabled}
+          ></Input>
+          {isLoading ? (
+            <>
+              <Button
+                className="h-16 w-full rounded-full bg-black text-lg font-bold"
+                variant="default"
+                disabled
+              >
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Please wait
+              </Button>
+            </>
+          ) : (
+            <Button
+              className="h-16 w-full rounded-full bg-black text-lg font-bold"
+              variant="default"
+              disabled={isButtonDisabled}
+            >
+              Get Started <MoveRight className="ml-2 h-5 w-5" />
+            </Button>
+          )}
+
+          {/* 
+          <Link
+            href={isButtonDisabled ? "#" : "get-started"}
+            className="w-full"
           >
-            Get Started <MoveRight className="ml-2 h-5 w-5" />
-          </Button>
-        </Link>
+          </Link> */}
+        </form>
       </div>
     </div>
   );

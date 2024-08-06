@@ -12,6 +12,7 @@
     "@prisma/client": "^5.17.0",
     "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-slot": "^1.1.0",
+    "@xata.io/client": "^0.0.0-next.v64f10283eb9a098c575590d3ea17600e350321c9",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "input-otp": "^1.2.4",

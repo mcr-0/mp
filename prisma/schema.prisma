@@ -13,6 +13,7 @@ model user {
   xata_version   Int      @default(0)
   xata_createdat DateTime @default(now()) @db.Timestamptz(6)
   xata_updatedat DateTime @default(now()) @db.Timestamptz(6)
+  username String @unique
 }
 
 
