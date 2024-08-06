@@ -8,7 +8,7 @@ import { Session, User } from "next-auth";
 
 const prisma = new PrismaClient();
 
-export const authOptions: NextAuthOptions = {
+const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -71,20 +71,6 @@ export const authOptions: NextAuthOptions = {
   },
 };
 
-export async function GET(req: NextRequest) {
-  try {
-    return NextAuth(authOptions)(req);
-  } catch (error) {
-    console.error("GET request error:", error);
-    return new NextResponse("Internal Server Error", { status: 500 });
-  }
-}
+const handler = NextAuth(authOptions);
 
-export async function POST(req: NextRequest) {
-  try {
-    return NextAuth(authOptions)(req);
-  } catch (error) {
-    console.error("POST request error:", error);
-    return new NextResponse("Internal Server Error", { status: 500 });
-  }
-}
+export { handler as GET, handler as POST };
