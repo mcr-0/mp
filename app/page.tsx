@@ -32,6 +32,11 @@ export default function LandingPage() {
     event.preventDefault();
     setIsLoading(true);
     saEvent("registered");
+    if (typeof window.gtag_report_conversion === "function") {
+      window.gtag_report_conversion(); // Wywołanie bez przekazywania adresu URL
+    } else {
+      console.error("gtag_report_conversion function is not available.");
+    }
 
     try {
       const res = await fetch("/api/auth/register-login", {
