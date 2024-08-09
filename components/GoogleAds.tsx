@@ -8,6 +8,7 @@ const GoogleAds = () => {
     <>
       <Script
         strategy="lazyOnload"
+        id=""
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_MEASUREMENT_ID}`}
       />
 
@@ -20,6 +21,24 @@ const GoogleAds = () => {
               page_path: window.location.pathname,
               });
           `}
+      </Script>
+      <Script id="" strategy="lazyOnload">
+        {`
+          function gtag_report_conversion(url) {
+            var callback = function () {
+              if (typeof(url) != 'undefined') {
+                window.location = url;
+              }
+            };
+            gtag('event', 'conversion', {
+              'send_to': '${process.env.NEXT_PUBLIC_MEASUREMENT_ID}/YbCyCJappMkZEN23hPcp',
+              'value': 1.0,
+              'currency': 'PLN',
+              'event_callback': callback
+            });
+            return false;
+          }
+        `}
       </Script>
     </>
   );
