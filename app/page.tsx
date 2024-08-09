@@ -230,7 +230,7 @@ export default function LandingPage() {
                   variant="default"
                   disabled={isButtonDisabled}
                 >
-                  Get Started <MoveRight className="ml-2 h-5 w-5" />
+                  Get test Started <MoveRight className="ml-2 h-5 w-5" />
                 </Button>
               )}
             </form>
