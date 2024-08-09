@@ -8,6 +8,7 @@ const GoogleAds = () => {
     <>
       <Script
         strategy="lazyOnload"
+        id=""
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_MEASUREMENT_ID}`}
       />
 
@@ -21,7 +22,7 @@ const GoogleAds = () => {
               });
           `}
       </Script>
-      <Script strategy="lazyOnload">
+      <Script id="" strategy="lazyOnload">
         {`
           function gtag_report_conversion(url) {
             var callback = function () {
