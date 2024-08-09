@@ -13,6 +13,7 @@ export const metadata: Metadata = {
 };
 import { CSPostHogProvider } from "./providers";
 import SessionProviderWrapper from "./SessionProviderWrapper"; // Zakładając, że jest w tym samym katalogu
+import GoogleAds from "@/components/GoogleAds";
 
 export default function RootLayout({
   children,
@@ -23,7 +24,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head></head>
+      <head>
+        <GoogleAds />
+      </head>
       <CSPostHogProvider>
         <body className={`${inter.className} bg-black`}>
           <div className="relative isolate min-h-screen overflow-hidden bg-black">
