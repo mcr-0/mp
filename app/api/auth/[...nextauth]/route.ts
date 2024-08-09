@@ -1,5 +1,5 @@
 import NextAuth from "next-auth";
-import { authOptions } from "../authConfig/route"; // Import z pliku authConfig.ts
+import { authOptions } from "../authConfig"; // Import z pliku authConfig.ts
 
 const handler = NextAuth(authOptions);
 
