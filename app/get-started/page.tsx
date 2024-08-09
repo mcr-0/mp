@@ -116,6 +116,11 @@ const OffersPage = () => {
   const handleOfferClick = (offerid: number, event: React.MouseEvent) => {
     if (!clickedOffers.has(offerid)) {
       setClickedOffers(new Set(clickedOffers.add(offerid)));
+      const clickedOffer = boostedOffers.find(
+        (offer) => offer.offerid === offerid,
+      );
+      console.log("Clicked offer:", clickedOffer);
+
       let countdownTime = 60;
       if (offerid === 48204) {
         countdownTime = 15;
