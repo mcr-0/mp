@@ -1,10 +1,14 @@
-import type { NextApiRequest, NextApiResponse } from "next";
+import { NextRequest, NextResponse } from "next/server";
 import fetch from "node-fetch";
-import getIp from "../../middlewares/ip";
-import { getSession } from "next-auth/react";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/api/auth/authConfig"; // Upewnij się, że ścieżka jest poprawna
 
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
+const apiKey = process.env.API_KEY; // Ensure you set this in your environment variables
+const endpoint = process.env.ENDPOINT; // Ensure you set this in your environment variables
 type Offer = {
-  offerid: number;
+  offerid: string;
   name: string;
   name_short: string;
   description: string;
@@ -19,49 +23,36 @@ type Offer = {
   ctype: string;
   cvr: string;
 };
-
 type ApiResponse = {
   success: boolean;
   offers?: Offer[];
   error?: string;
 };
-
 type Data = {
   offers?: Offer[];
   error?: string;
 };
 
-const apiKey = process.env.API_KEY; // Ensure you set this in your environment variables
-const endpoint = process.env.ENDPOINT; // Ensure you set this in your environment variables
+export async function GET(request: NextRequest) {
+  const session = await getServerSession(authOptions);
+  const userId = session?.user?.id || "defaultUsername"; // Fallback to a default value if username is not available
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>,
-) {
-  await new Promise((resolve) => getIp(req, res, resolve)); // Apply the middleware
+  console.log("Session:", session);
 
-  const userAgent = req.headers["user-agent"];
-  const ip = req.clientIp;
-
+  const userAgent = request.headers.get("user-agent");
+  const ip = "23.83.132.153";
   if (!userAgent) {
-    res.status(400).json({ error: "Missing User Agent" });
-    return;
+    return NextResponse.json({ error: "Missing User Agent" }, { status: 400 });
   }
-
   if (!ip) {
-    res.status(400).json({ error: "Missing IP Address" });
-    return;
+    return NextResponse.json({ error: "Missing IP Address" }, { status: 400 });
   }
-
-  const session = await getSession({ req });
-  const username = session?.user?.username || "defaultUsername"; // Fallback to a default value if username is not available
 
   const data = {
-    // ip: "23.83.132.153",
     ip: ip.toString(), // Dynamic IP address
     user_agent: userAgent,
-    // Enter other optional vars here (ctype, max, etc)
-    aff_sub5: username,
+    aff_sub5: userId,
+    max: 5,
   };
 
   const url = `${endpoint}?${new URLSearchParams(data as any).toString()}`;
@@ -84,13 +75,16 @@ export default async function handler(
     console.log("Response Content:", content);
 
     if (content.success) {
-      res.status(200).json({ offers: content.offers });
+      return NextResponse.json({ offers: content.offers }, { status: 200 });
     } else {
       console.error("API Error:", content.error);
-      res.status(500).json({ error: content.error });
+      return NextResponse.json({ error: content.error }, { status: 500 });
     }
   } catch (error) {
     console.error("Fetch Error:", (error as Error).message);
-    res.status(500).json({ error: (error as Error).message });
+    return NextResponse.json(
+      { error: (error as Error).message },
+      { status: 500 },
+    );
   }
 }

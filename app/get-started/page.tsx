@@ -113,9 +113,37 @@ const OffersPage = () => {
     router.push("/");
   };
 
-  const handleOfferClick = (offerid: number, event: React.MouseEvent) => {
+  const handleOfferClick = async (
+    offerid: number,
+    href: string,
+    event: React.MouseEvent,
+  ) => {
+    if (!session || !session.user?.username) {
+      console.error("User is not authenticated or session is missing");
+      return;
+    }
     if (!clickedOffers.has(offerid)) {
       setClickedOffers(new Set(clickedOffers.add(offerid)));
+
+      try {
+        const response = await fetch("/api/saveActivity", {
+          method: "POST", // Metoda POST
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            offerid,
+            username: session.user.username,
+          }),
+        });
+
+        if (!response.ok) {
+          console.error("Failed to save activity");
+        }
+      } catch (error) {
+        console.error("Error sending activity:", error);
+      }
+
       let countdownTime = 60;
       if (offerid === 48204) {
         countdownTime = 15;
@@ -207,7 +235,7 @@ const OffersPage = () => {
                         className="offer flex rounded pb-4"
                         target="_blank"
                         onClick={(event) =>
-                          handleOfferClick(offer.offerid, event)
+                          handleOfferClick(offer.offerid, offer.link, event)
                         }
                       >
                         <img
