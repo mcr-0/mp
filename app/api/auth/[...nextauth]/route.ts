@@ -6,7 +6,7 @@ import { JWT } from "next-auth/jwt";
 
 const prisma = new PrismaClient();
 
-const authOptions: AuthOptions = {
+export const authOptions: AuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Username",

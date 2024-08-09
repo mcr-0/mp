@@ -1,18 +1,24 @@
-/*
-  Warnings:
+-- CreateTable
+CREATE TABLE "conversions" (
+    "id" SERIAL NOT NULL,
+    "createdat" TIMESTAMPTZ(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "offer_id" TEXT,
+    "offer_name" TEXT,
+    "affiliate_id" TEXT,
+    "source" TEXT,
+    "session_ip" TEXT,
+    "payout" DOUBLE PRECISION,
+    "aff_sub" TEXT,
+    "aff_sub2" TEXT,
+    "aff_sub3" TEXT,
+    "aff_sub4" TEXT,
+    "aff_sub5" TEXT,
 
-  - You are about to drop the `user` table. If the table is not empty, all the data it contains will be lost.
-
-*/
--- DropTable
-DROP TABLE "user";
+    CONSTRAINT "conversions_pkey" PRIMARY KEY ("id")
+);
 
 -- CreateTable
 CREATE TABLE "User" (
-    "xata_id" TEXT NOT NULL DEFAULT ('rec_'::text || (xata_private.xid())::text),
-    "xata_version" INTEGER NOT NULL DEFAULT 0,
-    "xata_createdat" TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "xata_updatedat" TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "username" TEXT NOT NULL,
     "id" TEXT NOT NULL,
 
@@ -53,9 +59,6 @@ CREATE TABLE "VerificationToken" (
     "token" TEXT NOT NULL,
     "expires" TIMESTAMP(3) NOT NULL
 );
-
--- CreateIndex
-CREATE UNIQUE INDEX "_pgroll_new_user_xata_id_key" ON "User"("xata_id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_username_key" ON "User"("username");
