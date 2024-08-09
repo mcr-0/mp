@@ -8,7 +8,7 @@ const prisma = new PrismaClient();
 const apiKey = process.env.API_KEY; // Ensure you set this in your environment variables
 const endpoint = process.env.ENDPOINT; // Ensure you set this in your environment variables
 type Offer = {
-  offerid: number;
+  offerid: string;
   name: string;
   name_short: string;
   description: string;
