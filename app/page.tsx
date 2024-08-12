@@ -18,6 +18,10 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function LandingPage() {
   const { data: session } = useSession();
+  const handleSignOut = async () => {
+    await signOut({ redirect: false });
+    router.push("https://mazedpromos.com");
+  };
   const [message, setMessage] = useState("");
   const router = useRouter();
   const [username, setUsername] = useState("");
@@ -173,7 +177,7 @@ export default function LandingPage() {
                 </Button>
               </Link>
               <div className="text-center">
-                <Button variant="link" onClick={() => signOut()}>
+                <Button variant="link" onClick={handleSignOut}>
                   Sign out
                 </Button>
               </div>
