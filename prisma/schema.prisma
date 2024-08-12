@@ -37,7 +37,7 @@ model User {
 model Activity {
   id         String   @id @default(cuid())
   action     String?
-  offer_id   Int?
+  offer_id   String?
   payout     Float?   
   converted Int?
   timestamp  DateTime @default(now())
