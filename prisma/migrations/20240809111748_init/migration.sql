@@ -1,3 +1,0 @@
--- AlterTable
-ALTER TABLE "Activity" ADD COLUMN     "payout" DOUBLE PRECISION,
-ALTER COLUMN "offer_id" SET DATA TYPE TEXT;

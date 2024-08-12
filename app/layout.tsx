@@ -28,8 +28,8 @@ export default function RootLayout({
         <GoogleAds />
       </head>
       <CSPostHogProvider>
-        <body className={`${inter.className} bg-black`}>
-          <div className="relative isolate min-h-screen overflow-hidden bg-black">
+        <body className={`${inter.className} bg-white`}>
+          <div className="relative isolate min-h-screen overflow-hidden bg-white">
             <div className="absolute left-0 right-0 top-0 -z-10 h-full w-full bg-gradient-to-b from-blue-600/100 to-blue-700/100"></div>
 
             <header className="z-50 mx-auto max-w-lg pt-2 text-center sm:px-6 lg:px-8">
@@ -88,7 +88,7 @@ export default function RootLayout({
               </h1>
             </header>
             <div className="relative m-4">
-              <div className="isolate mx-auto w-full max-w-md items-center justify-center rounded-3xl bg-black p-2 shadow-lg ring-1 ring-black/5 backdrop-blur-md">
+              <div className="isolate mx-auto w-full max-w-md items-center justify-center rounded-3xl bg-white p-2 shadow-lg ring-1 ring-black/5 backdrop-blur-md">
                 <SessionProviderWrapper session={session}>
                   {children}
                 </SessionProviderWrapper>{" "}
