@@ -1,20 +1,13 @@
 "use client";
-import React, { useState, useEffect, ChangeEvent, MouseEvent } from "react";
+import React, { useState, ChangeEvent, MouseEvent } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
 import { ChevronRight, MoveRight, Loader2 } from "lucide-react";
 import { useSession, signIn, signOut } from "next-auth/react";
-import { motion, AnimatePresence } from "framer-motion";
 
 export default function LandingPage() {
   const { data: session } = useSession();
@@ -22,9 +15,7 @@ export default function LandingPage() {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const [isInputDisabled, setIsInputDisabled] = useState(true);
-  const [isLoading, setIsLoading] = useState(true);
-
+  const [isLoading, setIsLoading] = useState(false);
   const saEvent = (eventName: string) => {
     if (typeof window !== "undefined" && window.sa_event) {
       window.sa_event(eventName);
@@ -33,27 +24,17 @@ export default function LandingPage() {
       console.log("error");
     }
   };
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const username = event.target.value;
     setUsername(username);
-    setIsButtonDisabled(username.length < 4);
+    // setIsButtonDisabled(username.length < 4);
   };
-  useEffect(() => {
-    setIsLoading(false);
-    setIsButtonDisabled(false);
-    setIsInputDisabled(false);
-  }, []); // Ten efekt uruchomi się tylko raz, po załadowaniu komponentu
 
   const handleAuth = async (event: React.FormEvent) => {
-    event.preventDefault();
-    setIsLoading(true);
-    saEvent("registered");
-    window.gtag_report_conversion();
-    const form = event.target as HTMLFormElement; // Asercja typu
-
-    const formData = new FormData(form); // Teraz TypeScript wie, że `form` to `HTMLFormElement`
-    const username = formData.get("username") as string; // Możesz bezpiecznie uzyskać wartość
+    // event.preventDefault();
+    // setIsLoading(true);
+    // saEvent("registered");
+    // window.gtag_report_conversion();
 
     try {
       const res = await fetch("/api/auth/register-login", {
@@ -113,22 +94,50 @@ export default function LandingPage() {
           <MoveRight className="inline h-5 w-5" /> Level Up!
         </p>
       </div>
-
-      <div id="hero" className="bg-blue z-0 mx-auto w-full text-center">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ ease: "easeOut", duration: 2 }}
-        >
+      <div
+        id="hero"
+        className="bg-blue relative z-0 mx-auto h-48 w-full scale-75 text-center"
+      >
+        <div className="bg-blue absolute -left-1 -top-1 mx-auto h-56 w-full animate-pulse overflow-hidden rounded-xl bg-cyan-600 ring-1 backdrop-blur-sm">
           <Image
-            src="/fortnite_v2.png"
-            className="brightness-110"
+            src="/coins.avif"
+            className="absolute bottom-0 right-0 top-0 -ml-48 max-w-lg brightness-110"
             alt="reward"
             width={1800}
             height={900}
             priority
           ></Image>
-        </motion.div>
+          <h3 className="absolute right-2 top-4 z-20 bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-right text-4xl font-black tracking-tighter text-transparent">
+            62,500 V
+            <br />
+            Bucks^
+          </h3>
+          <h3 className="text-md absolute bottom-2 right-2 z-20 text-right font-semibold tracking-tighter text-cyan-100">
+            Worth Up To $500
+          </h3>
+        </div>
+        <div className="bg-blue absolute left-1 top-1 mx-auto h-56 w-full overflow-hidden rounded-xl bg-cyan-600 ring-1 backdrop-blur-sm">
+          <Image
+            src="/coins.avif"
+            className="absolute bottom-0 right-0 top-0 -ml-48 max-w-lg brightness-110"
+            alt="reward"
+            width={1800}
+            height={900}
+            priority
+          ></Image>
+          <h3 className="absolute right-2 top-4 z-20 bg-gradient-to-r from-cyan-950 to-cyan-600 bg-clip-text text-right text-4xl font-black tracking-tighter text-transparent">
+            62,500 V-
+            <br />
+            Bucks^
+          </h3>
+          <h3 className="absolute bottom-2 right-2 z-20 rounded bg-white/40 text-right text-xs font-semibold tracking-tighter text-cyan-950">
+            ^Worth Up To $500 <br /> Offer not sponsored or endorsed by this
+            brand.
+          </h3>
+        </div>
+        {/* <p className="absolute -bottom-14 block w-full rounded text-xs text-neutral-500">
+          Offer not sponsored-endorsed by this brand.
+        </p> */}
       </div>
       <div className="">
         {/* <Image
@@ -150,80 +159,54 @@ export default function LandingPage() {
       <div className="flex w-full flex-col gap-4 p-4 md:flex-nowrap">
         {session ? (
           <div className="text-center">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2, ease: "easeOut", duration: 2 }}
-            >
-              <h1 className="my-2 px-2 text-center text-2xl font-bold leading-tight tracking-tight text-neutral-800">
-                Check your progress
-              </h1>
-              <p>
-                Signed in as{" "}
-                <span className="font-semibold text-blue-700">
-                  {session.user.username}
-                </span>
-              </p>
-              <Link href="/get-started">
-                <Button
-                  className="my-4 h-16 w-full rounded-full bg-black text-lg font-bold"
-                  variant="default"
-                >
-                  Continue
-                </Button>
-              </Link>
-              <div className="text-center">
-                <Button variant="link" onClick={() => signOut()}>
-                  Sign out
-                </Button>
-              </div>
-            </motion.div>
+            <h1 className="my-2 px-2 text-center text-2xl font-bold leading-tight tracking-tight text-neutral-800">
+              Check your progress
+            </h1>
+            <p>
+              Signed in as{" "}
+              <span className="font-semibold text-blue-700">
+                {session.user.username}
+              </span>
+            </p>
+            <Link href="/get-started">
+              <Button
+                className="my-4 h-16 w-full rounded-full bg-black text-lg font-bold"
+                variant="default"
+              >
+                Continue
+              </Button>
+            </Link>
+            <div className="text-center">
+              <Button variant="link" onClick={() => signOut()}>
+                Sign out
+              </Button>
+            </div>
           </div>
         ) : (
           <div>
             {" "}
-            <h1 className="my-2 pb-4 text-center text-2xl font-bold leading-tight tracking-tight text-neutral-800">
-              Complete Two Free Steps To Unlock 62,500 V-Bucks Worth Of Reward
-              Access
+            <h1 className="my-2 px-2 text-center text-2xl font-bold leading-tight tracking-tight text-neutral-800">
+              Receive Access Now
             </h1>
             <form onSubmit={handleAuth} className="flex flex-col gap-4">
-              <Select disabled={isButtonDisabled}>
-                <SelectTrigger className="border-1 h-14 w-full justify-center rounded-full border-neutral-300 px-4 text-lg font-bold text-neutral-900 placeholder-neutral-800 shadow">
-                  <SelectValue
-                    placeholder="Choose your device"
-                    className="text-center"
-                  />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="mo">Mobile</SelectItem>
-                  <SelectItem value="pc">PC/Mac</SelectItem>
-                  <SelectItem value="ps">Playstation</SelectItem>
-                  <SelectItem value="ns">Nintendo Switch</SelectItem>
-                  <SelectItem value="xb">Xbox</SelectItem>
-                </SelectContent>
-              </Select>
               <Input
                 name="username"
-                required
                 onChange={handleInputChange}
                 value={username}
+                required
                 type="text"
-                disabled={isInputDisabled}
-                id="username"
-                placeholder="Enter your username..."
-                className="border-1 h-14 w-full rounded-full border-neutral-300 bg-white text-center text-lg font-bold text-neutral-900 placeholder-gray-100 placeholder-opacity-100 shadow"
+                id="email"
+                placeholder="Enter your epic username..."
+                className="border-1 h-14 w-full rounded-lg border-neutral-300 bg-white text-center text-lg font-bold text-neutral-800 shadow"
               ></Input>
-
               {isLoading ? (
                 <>
                   <Button
                     className="h-16 w-full rounded-full bg-black text-lg font-bold"
                     variant="default"
-                    type="submit"
-                    disabled={isButtonDisabled}
                   >
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Please wait...
+                    Veryfing...
                   </Button>
                 </>
               ) : (

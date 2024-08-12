@@ -12,3 +12,7 @@ declare module "next" {
     clientIp?: string;
   }
 }
+
+declare const plugin: { handler: () => void };
+
+export = plugin;

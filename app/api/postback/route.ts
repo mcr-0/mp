@@ -31,7 +31,7 @@ export async function GET(req: NextRequest) {
   try {
     const conversions = await prisma.conversions.create({
       data: {
-        offer_id: offer_id as string | undefined,
+        offer_id: parseInt(offer_id as string, 10) || undefined, // Konwersja na integer
         offer_name: offer_name as string | undefined,
         affiliate_id: affiliate_id as string | undefined,
         source: source as string | undefined,
