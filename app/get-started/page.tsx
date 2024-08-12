@@ -169,57 +169,6 @@ const OffersPage = () => {
     <div className="mx-auto flex w-full flex-col gap-2">
       {session ? (
         <div className="flex flex-col gap-2">
-          <div className="container rounded-2xl bg-gradient-to-b from-white to-green-100 p-4">
-            <div id="top-info">
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 transform">
-                <span className="relative flex">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75"></span>
-                  <span className="relative inline-flex h-7 w-7 items-center justify-center rounded-full bg-green-500">
-                    <svg
-                      width="9"
-                      height="15"
-                      viewBox="0 0 9 15"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M8.47663 5.14451C8.43564 5.0565 8.34737 5.00002 8.25013 5.00002H5.28762L8.21137 0.383761C8.26012 0.306768 8.26311 0.209268 8.21913 0.129522C8.17513 0.0495118 8.09111 0 8.00011 0H4.00011C3.90536 0 3.81885 0.0534962 3.77637 0.138252L0.0263616 7.63827C-0.0123982 7.71552 -0.00815015 7.80752 0.037348 7.88126C0.0831098 7.955 0.163354 8 0.250102 8H2.82085L0.019594 14.653C-0.02816 14.7668 0.0143499 14.8988 0.119584 14.9633C0.160073 14.988 0.205073 15 0.249839 15C0.321587 15 0.392339 14.9692 0.441353 14.9113L8.44138 5.41123C8.50411 5.33676 8.51761 5.23275 8.47663 5.14451Z"
-                        fill="white"
-                      />
-                    </svg>
-                  </span>
-                </span>
-              </div>
-              <p className="pt-4 text-center text-2xl font-bold leading-tight tracking-tight text-green-700">
-                Hi <span className="">{session.user.username}</span> <br />{" "}
-                <svg
-                  width="24"
-                  height="24"
-                  className="inline"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle cx="10" cy="10" r="10" fill="#8FFF00" />
-                  <path
-                    d="M5 10L8.5 13.5L14.5 6.5"
-                    stroke="#1E1E1E"
-                    strokeWidth="1.5"
-                  />
-                </svg>{" "}
-                You are eligible!
-              </p>
-            </div>
-            <div className="text-center">
-              <Button
-                variant="link"
-                className="text-neutral-800 underline"
-                onClick={handleSignOut}
-              >
-                Change account / Log Out
-              </Button>
-            </div>
-          </div>
           <div className="container rounded-2xl bg-neutral-100 p-4">
             <div className="w-full text-center dark:border-gray-700 dark:bg-gray-800 sm:p-8">
               <h5 className="mb-4 text-2xl font-bold text-gray-900 dark:text-white">
@@ -345,6 +294,56 @@ const OffersPage = () => {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+          <div className="container rounded-2xl bg-gradient-to-b from-white to-green-100 p-4">
+            <div id="top-info">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 transform">
+                <span className="relative flex">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75"></span>
+                  <span className="relative inline-flex h-7 w-7 items-center justify-center rounded-full bg-green-500">
+                    <svg
+                      width="9"
+                      height="15"
+                      viewBox="0 0 9 15"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M8.47663 5.14451C8.43564 5.0565 8.34737 5.00002 8.25013 5.00002H5.28762L8.21137 0.383761C8.26012 0.306768 8.26311 0.209268 8.21913 0.129522C8.17513 0.0495118 8.09111 0 8.00011 0H4.00011C3.90536 0 3.81885 0.0534962 3.77637 0.138252L0.0263616 7.63827C-0.0123982 7.71552 -0.00815015 7.80752 0.037348 7.88126C0.0831098 7.955 0.163354 8 0.250102 8H2.82085L0.019594 14.653C-0.02816 14.7668 0.0143499 14.8988 0.119584 14.9633C0.160073 14.988 0.205073 15 0.249839 15C0.321587 15 0.392339 14.9692 0.441353 14.9113L8.44138 5.41123C8.50411 5.33676 8.51761 5.23275 8.47663 5.14451Z"
+                        fill="white"
+                      />
+                    </svg>
+                  </span>
+                </span>
+              </div>
+              <p className="text-md font-sem pt-2 text-center leading-tight tracking-tight text-neutral-700">
+                <svg
+                  width="16"
+                  height="16"
+                  className="inline"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle cx="10" cy="10" r="10" fill="#8FFF00" />
+                  <path
+                    d="M5 10L8.5 13.5L14.5 6.5"
+                    stroke="#1E1E1E"
+                    strokeWidth="1.5"
+                  />
+                </svg>{" "}
+                <span className="">{session.user.username} </span>
+              </p>
+            </div>
+            <div className="text-center">
+              <Button
+                variant="link"
+                className="text-xs text-neutral-800 underline"
+                onClick={handleSignOut}
+              >
+                Change account / Log Out
+              </Button>
             </div>
           </div>
         </div>

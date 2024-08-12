@@ -30,7 +30,7 @@ export default function RootLayout({
       <CSPostHogProvider>
         <body className={`${inter.className} bg-white`}>
           <div className="relative isolate min-h-screen overflow-hidden bg-white">
-            <div className="absolute left-0 right-0 top-0 -z-10 h-full w-full bg-gradient-to-b from-blue-600/100 to-blue-700/100"></div>
+            <div className="absolute left-0 right-0 top-0 -z-10 h-full w-full bg-gradient-to-b from-neutral-950/100 to-neutral-900/100"></div>
 
             <header className="z-50 mx-auto max-w-lg pt-2 text-center sm:px-6 lg:px-8">
               <div className="flex justify-center">
