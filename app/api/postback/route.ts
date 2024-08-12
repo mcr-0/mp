@@ -45,38 +45,6 @@ export async function GET(req: NextRequest) {
       },
     });
 
-    // 2. Sprawdzenie, czy istnieje rekord w Activity z odpowiednim userId i offer_id
-    const existingActivity = await prisma.activity.findFirst({
-      where: {
-        userId: aff_sub5 ?? "",
-      },
-    });
-
-    if (existingActivity) {
-      // 3. Jeśli istnieje, zaktualizuj rekord dodając nową wartość payout
-      await prisma.activity.update({
-        where: {
-          id: existingActivity.id,
-        },
-        data: {
-          payout: {
-            increment: conversions.payout ?? 0,
-          },
-        },
-      });
-    } else {
-      // 4. Jeśli rekord nie istnieje, utwórz nowy
-      await prisma.activity.create({
-        data: {
-          action: "conversion",
-
-          converted: 1,
-          timestamp: new Date(),
-          userId: aff_sub5 ?? "",
-          payout: conversions.payout ?? 0,
-        },
-      });
-    }
     return NextResponse.json(conversions);
   } catch (error) {
     console.error(error);
