@@ -5,6 +5,28 @@ import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import { v4 as uuidv4 } from "uuid";
+import Image from "next/image";
+import { ChevronRight, MoveRight, Loader2 } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSeparator,
+  InputOTPSlot,
+} from "@/components/ui/input-otp";
+
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
 
 type Offer = {
   offerid: number;
@@ -29,6 +51,7 @@ type Countdown = {
 };
 
 const OffersPage = () => {
+  const cid = uuidv4();
   const router = useRouter();
   const { data: session } = useSession();
   const [value, setValue] = useState("");
@@ -37,21 +60,6 @@ const OffersPage = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [boostedOffers, setBoostedOffers] = useState<Offer[]>([]);
   const [clickedOffers, setClickedOffers] = useState<Set<number>>(new Set());
-
-  const baseUrl = "https://rewards.coinmaster.com/rewards/rewards.html?c=";
-  const params = [
-    "pe_RICHvkvSkl_20240722",
-    "pe_RICHHwvdJo_20240722",
-    "pe_RICHoeyXYA_20240722",
-    "pe_RICHdENJnN_20240722",
-    "pe_RICHFQhHQo_20240722",
-    "pe_FCBXPYKWc_20240812",
-    "pe_LINEacJUTW_20240812",
-    "pe_INSNhYAXS_20240812",
-    "pe_EMAILjsHlBl_20240807",
-    "pe_FCBDkySdf_20240812",
-    "pe_CHATBorJMRh_20240812",
-  ];
 
   const [completedOffers, setCompletedOffers] = useState<Set<number>>(
     new Set(),
@@ -67,6 +75,15 @@ const OffersPage = () => {
     {},
   );
 
+  const [OTPvalue, setOTPValue] = useState("");
+
+  const handleOTPChange = (OTPvalue: string) => {
+    setOTPValue(OTPvalue);
+    if (OTPvalue === "2137") {
+      window.location.href = "/level-up"; // Zastąp '/newpage' adresem URL, na który chcesz przekierować użytkownika
+    }
+  };
+
   useEffect(() => {
     const fetchOffers = async () => {
       try {
@@ -75,11 +92,8 @@ const OffersPage = () => {
         if (data.error) {
           setError(data.error);
         } else {
-          // const filteredBoostedOffers = data.offers.filter(
-          //   (offer: Offer) => offer.boosted,
-          // );
           const filteredBoostedOffers = data.offers.filter(
-            (offer: Offer) => offer.offerid === 57813,
+            (offer: Offer) => offer.boosted,
           );
           setBoostedOffers(filteredBoostedOffers);
         }
@@ -131,24 +145,54 @@ const OffersPage = () => {
     router.push("/");
   };
 
-  const handleOfferClick = (offerid: number, event: React.MouseEvent) => {
-    if (!clickedOffers.has(offerid)) {
-      setClickedOffers(new Set(clickedOffers.add(offerid)));
-      let countdownTime = 60;
-      if (offerid === 48204) {
-        countdownTime = 15;
-      } else if (offerid === 10002) {
-        countdownTime = 60;
-      }
-      setCountdowns((prev) => ({
-        ...prev,
-        [offerid]: { current: countdownTime, initial: countdownTime },
-      }));
+  const handleOfferClick = async (
+    offerid: number,
+    cid: string,
+    href: string,
+    event: React.MouseEvent,
+  ) => {
+    if (!session || !session.user?.username) {
+      console.error("User is not authenticated or session is missing");
+      return;
     }
+    // setClickedOffers(new Set(clickedOffers.add(offerid)));
+    // if (!clickedOffers.has(offerid)) {
+    try {
+      const response = await fetch("/api/saveActivity", {
+        method: "POST", // Metoda POST
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          offerid,
+          cid,
+          username: session.user.username,
+        }),
+      });
+
+      if (!response.ok) {
+        console.error("Failed to save activity");
+      }
+    } catch (error) {
+      console.error("Error sending activity:", error);
+    }
+    // let countdownTime = 60;
+    // if (offerid === 48204) {
+    //   countdownTime = 15;
+    // } else if (offerid === 10002) {
+    //   countdownTime = 60;
+    // }
+    // setCountdowns((prev) => ({
+    //   ...prev,
+    //   [offerid]: { current: countdownTime, initial: countdownTime },
+    // }));
+    // }
   };
 
   if (loading) {
-    return <div className="p-8 text-center text-xl text-white">Loading...</div>;
+    return (
+      <div className="p-8 text-center text-xl text-neutral-800">Loading...</div>
+    );
   }
 
   if (error) {
@@ -159,8 +203,8 @@ const OffersPage = () => {
     <div className="mx-auto flex w-full flex-col gap-2">
       {session ? (
         <div className="flex flex-col gap-2">
-          <div className="container hidden rounded-2xl bg-neutral-900 p-4">
-            <div id="top-info">
+          <div className="container flex justify-center rounded-2xl">
+            <div id="top-info" className="w-full">
               <div className="absolute -top-3 left-1/2 -translate-x-1/2 transform">
                 <span className="relative flex">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75"></span>
@@ -180,117 +224,121 @@ const OffersPage = () => {
                   </span>
                 </span>
               </div>
-              <p className="pt-4 text-center text-xl font-bold tracking-tight text-green-700">
-                Hi {session.user.username}, you are eligible!
+              <p className="text-md font-sem flex gap-2 pt-2 text-center leading-tight tracking-tight text-neutral-700">
+                <svg
+                  className="feather feather-user"
+                  fill="none"
+                  height="24"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+                <span className="text-sm font-semibold leading-relaxed">
+                  {session.user.username}{" "}
+                </span>
               </p>
             </div>
-            <div className="text-center">
+            <div className="justify-end text-right">
               <Button
                 variant="link"
-                className="text-neutral-300 underline"
+                className="text-xs text-neutral-800 underline"
                 onClick={handleSignOut}
               >
-                Change account / Log Out
+                Log Out
               </Button>
             </div>
           </div>
           <div className="container rounded-2xl bg-neutral-100 p-4">
             <div className="w-full text-center dark:border-gray-700 dark:bg-gray-800 sm:p-8">
-              <h5 className="mb-4 text-2xl font-bold text-gray-900 dark:text-white">
-                Final Step (Step 2)
+              <Badge className="absolute left-1/2 top-11 -translate-x-1/2 transform">
+                Step 1
+              </Badge>
+              <h5 className="mb-4 mt-2 text-2xl font-bold text-gray-900 dark:text-white">
+                Follow & Message <br />
+                us on TikTok!
               </h5>
-              <h3 className="mb-4 mt-4 text-left text-2xl font-semibold text-zinc-900">
-                Play Coin Master & Complete Village Level 3!
-              </h3>
-              <div className="items-center justify-center space-y-4 sm:flex sm:space-x-4 sm:space-y-0 rtl:space-x-reverse">
-                <ul>
-                  {boostedOffers.map((offer) => (
-                    <li key={offer.offerid} className="mb-2">
-                      <a
-                        href={offer.link}
-                        className="offer flex rounded pb-4"
-                        target="_blank"
-                        onClick={(event) =>
-                          handleOfferClick(offer.offerid, event)
-                        }
-                      >
-                        <img
-                          src={offer.picture}
-                          alt="offer"
-                          height={64}
-                          width={64}
-                          className="h-14 w-14 rounded-lg"
-                        />
-                        <div className="-mb-2 ml-2 flex w-full items-center gap-2 border-b-[1px] border-gray-300 pb-2">
-                          <div className="w-full text-left">
-                            <h3 className="text-[14px] font-medium leading-tight">
-                              {offer.name_short}
-                            </h3>
-                            <p className="block max-h-10 overflow-hidden text-[12px] text-gray-900">
-                              {offer.offerid === 48204
-                                ? "Follow us @mazerewards"
-                                : offer.adcopy && offer.offerid === 43096
-                                  ? "Download, Install and play for 30 seconds."
-                                  : offer.adcopy}
-                            </p>
-                          </div>
-                          <div>
-                            <div className="block w-20 rounded-3xl bg-blue-700 p-1 text-center text-xs font-semibold leading-5 text-white">
-                              Get
-                            </div>
-                          </div>
-                        </div>
-                      </a>
-                      {countdowns[offer.offerid] &&
-                        ((countdowns[offer.offerid].initial -
-                          countdowns[offer.offerid].current) /
-                          countdowns[offer.offerid].initial) *
-                          100 <
-                          100 && (
-                          <div className="">
-                            <Progress
-                              value={
-                                ((countdowns[offer.offerid].initial -
-                                  countdowns[offer.offerid].current) /
-                                  countdowns[offer.offerid].initial) *
-                                100
-                              }
-                            />
-                          </div>
-                        )}
-                    </li>
-                  ))}
-                </ul>
-                <div className="completed-apps relative my-3 rounded-xl bg-slate-200 p-4 text-left shadow">
-                  <div className="flex">
-                    <h1 className="mb-2 text-left text-2xl font-bold text-gray-700">
-                      Would you like to speed up the process?
-                    </h1>
+              <Drawer>
+                <DrawerTrigger>
+                  <div className="mb-2 flex flex-col gap-2">
+                    <Image
+                      src="/Artboard.png"
+                      width={2000}
+                      height={2000}
+                      className="mx-auto w-24 rounded-full"
+                      alt="avatar"
+                    ></Image>
+                    <h2 className="text-xl">@mazerewards</h2>
+                    <Button className="mx-auto h-12 w-full bg-[#ff3b5c]">
+                      Follow
+                    </Button>
                   </div>
-                  <p>
-                    Come back any time to use Extra Free Spins. Click links
-                    below to receive 15, 25 or even 50 extra spins.
-                  </p>
-                  <div className="free-spins flex items-center justify-center">
-                    <div className="grid w-full grid-cols-2 gap-2 p-4">
-                      {params.map((param, index) => (
-                        <a
-                          key={index}
-                          href={`${baseUrl}${param}`}
-                          className="rounded bg-white py-2 text-center text-blue-600 hover:text-zinc-900"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          Free Spins #{index + 1}
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                </div>
+                </DrawerTrigger>
+                <DrawerContent>
+                  <DrawerHeader>
+                    <DrawerTitle>Are you on TikTok?</DrawerTitle>
+                    <DrawerDescription>
+                      Follow & Message Us To Get Access Code
+                    </DrawerDescription>
+                  </DrawerHeader>
+                  <DrawerFooter>
+                    {boostedOffers.map((offer) => (
+                      <ul className="w-full">
+                        <li key={offer.offerid}>
+                          <a
+                            href={`${offer.link}&aff_sub4=${cid}`}
+                            className=""
+                            target="_blank"
+                            onClick={(event) =>
+                              handleOfferClick(
+                                offer.offerid,
+                                cid,
+                                offer.link,
+                                event,
+                              )
+                            }
+                          >
+                            <Button className="h-16 w-full bg-[#ff3b5c] text-neutral-100">
+                              {" "}
+                              Sign up for TikTok
+                            </Button>
+                          </a>
+                        </li>
+                      </ul>
+                    ))}
+
+                    <a
+                      href="https://tiktok.com/@mazerewards?t=8opvSUtA3oc&_r=1"
+                      target="_blank"
+                      className="w-full"
+                    >
+                      <Button className="h-16 w-full bg-neutral-200 text-neutral-800 hover:bg-white">
+                        I already have an account
+                      </Button>
+                    </a>
+                    <DrawerClose>
+                      <Button variant="link" className="w-full">
+                        Not now
+                      </Button>
+                    </DrawerClose>
+                  </DrawerFooter>
+                </DrawerContent>
+              </Drawer>
+
+              {/* <div className="mt-2 text-xs">
+                <p>We post free v-bucks codes on our TikTok!</p>
+              </div> */}
+              {/* <div className="items-center justify-center space-y-4 sm:flex sm:space-x-4 sm:space-y-0 rtl:space-x-reverse">
                 <p className="completed-instruction mb-2 text-xs text-neutral-800">
-                  80% of users complete this in less than 2 hours
+                  95% of users complete this in less than 5 minutes
                 </p>
-                {/* <div className="completed-apps relative my-3 rounded-xl bg-slate-200 p-4 text-left shadow">
+                <div className="completed-apps relative my-3 rounded-xl bg-slate-200 p-4 text-left shadow">
                   <div className="flex">
                     <h1 className="text-left text-2xl font-bold text-gray-700">
                       Completed: {completedTasks}/2
@@ -303,7 +351,7 @@ const OffersPage = () => {
                         (countdown) => countdown.current > 0,
                       ) && (
                         <div className="">
-                          <p className="pt-4 text-center text-xl font-bold text-green-500">
+                          <p className="pt-4 text-center text-xl font-bold text-green-700">
                             Checking completion...
                           </p>
                         </div>
@@ -345,8 +393,49 @@ const OffersPage = () => {
                       )}
                     </div>
                   </div>
-                </div> */}
+                </div>
+              </div> */}
+            </div>
+          </div>
+          <div className="container rounded-2xl bg-neutral-100 p-4">
+            <div className="w-full text-center dark:border-gray-700 dark:bg-gray-800 sm:p-8">
+              <h5 className="mb-4 text-2xl font-bold text-gray-900 dark:text-white">
+                Enter your code:
+              </h5>
+              <p className="mb-4 text-sm">Message Us To Receive The Code</p>
+              <div className="mx-auto mb-4 w-fit space-y-2">
+                <InputOTP
+                  maxLength={4}
+                  value={OTPvalue}
+                  onChange={handleOTPChange}
+                >
+                  <InputOTPGroup className="">
+                    <InputOTPSlot
+                      className="h-12 w-12 border-neutral-400"
+                      index={0}
+                    />
+                    <InputOTPSlot
+                      className="h-12 w-12 border-neutral-400"
+                      index={1}
+                    />
+                    <InputOTPSlot
+                      className="h-12 w-12 border-neutral-400"
+                      index={2}
+                    />
+                    <InputOTPSlot
+                      className="h-12 w-12 border-neutral-400"
+                      index={3}
+                    />
+                  </InputOTPGroup>
+                </InputOTP>
+                <p className="text-neutral-600">Your code</p>
               </div>
+              <Button
+                className="h-16 w-full rounded-full bg-black text-lg font-bold"
+                variant="default"
+              >
+                Go to Step 2 <MoveRight className="ml-2 h-5 w-5" />
+              </Button>
             </div>
           </div>
         </div>
