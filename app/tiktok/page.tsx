@@ -156,6 +156,31 @@ const OffersPage = () => {
     }
   };
 
+  const handleTiktokClick = async (cid: string, event: React.MouseEvent) => {
+    if (!session || !session.user?.username) {
+      console.error("User is not authenticated or session is missing");
+      return;
+    }
+    try {
+      const response = await fetch("/api/saveActivity", {
+        method: "POST", // Metoda POST
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          cid,
+          username: session.user.username,
+        }),
+      });
+
+      if (!response.ok) {
+        console.error("Failed to save activity");
+      }
+    } catch (error) {
+      console.error("Error sending activity:", error);
+    }
+  };
+
   if (loading) {
     return (
       <div className="p-8 text-center text-xl text-neutral-800">Loading...</div>
@@ -283,6 +308,7 @@ const OffersPage = () => {
                     <a
                       href="https://tiktok.com/@mazerewards?t=8opvSUtA3oc&_r=1"
                       target="_blank"
+                      onClick={(event) => handleTiktokClick(cid, event)}
                       className="w-full"
                     >
                       <Button className="h-16 w-full bg-neutral-200 text-neutral-800 hover:bg-white">
