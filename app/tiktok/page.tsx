@@ -257,7 +257,7 @@ const OffersPage = () => {
                   <DrawerFooter>
                     {boostedOffers.map((offer) => (
                       <ul className="w-full">
-                        <li key={offer.offerid}>
+                        <li>
                           <a
                             href={`${offer.link}&aff_sub4=${cid}`}
                             className=""
