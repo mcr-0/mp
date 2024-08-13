@@ -10,5 +10,5 @@ export default function SessionProviderWrapper({
   children: ReactNode;
   session: any;
 }) {
-  return <SessionProvider session={session}>{children}</SessionProvider>;
+  return <SessionProvider>{children}</SessionProvider>;
 }
