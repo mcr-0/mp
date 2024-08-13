@@ -168,7 +168,7 @@ export default function LandingPage() {
                   {session.user.username}
                 </span>
               </p>
-              <Link href="/get-started">
+              <Link href="/level-up">
                 <Button
                   className="my-4 h-16 w-full rounded-full bg-black text-lg font-bold"
                   variant="default"
