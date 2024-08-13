@@ -34,8 +34,9 @@ model User {
 
 model Event {
   id         String   @id @default(uuid()) // Użycie UUID zamiast autoincrement
-  created_at     DateTime @default(now()) @db.Timestamptz(0)
+  created_at DateTime @default(now()) @db.Timestamptz(0)
   event      String
+  cid        String?
   offer_id   Int?
   payout     Float?   
   user       User     @relation(fields: [userId], references: [id])

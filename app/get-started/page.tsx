@@ -5,6 +5,7 @@ import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import { v4 as uuidv4 } from "uuid";
 
 type Offer = {
   offerid: number;
@@ -29,6 +30,7 @@ type Countdown = {
 };
 
 const OffersPage = () => {
+  const cid = uuidv4();
   const router = useRouter();
   const { data: session } = useSession();
   const [value, setValue] = useState("");
@@ -115,6 +117,7 @@ const OffersPage = () => {
 
   const handleOfferClick = async (
     offerid: number,
+    cid: string,
     href: string,
     event: React.MouseEvent,
   ) => {
@@ -122,39 +125,38 @@ const OffersPage = () => {
       console.error("User is not authenticated or session is missing");
       return;
     }
-    if (!clickedOffers.has(offerid)) {
-      setClickedOffers(new Set(clickedOffers.add(offerid)));
+    // setClickedOffers(new Set(clickedOffers.add(offerid)));
+    // if (!clickedOffers.has(offerid)) {
+    try {
+      const response = await fetch("/api/saveActivity", {
+        method: "POST", // Metoda POST
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          offerid,
+          cid,
+          username: session.user.username,
+        }),
+      });
 
-      try {
-        const response = await fetch("/api/saveActivity", {
-          method: "POST", // Metoda POST
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            offerid,
-            username: session.user.username,
-          }),
-        });
-
-        if (!response.ok) {
-          console.error("Failed to save activity");
-        }
-      } catch (error) {
-        console.error("Error sending activity:", error);
+      if (!response.ok) {
+        console.error("Failed to save activity");
       }
-
-      let countdownTime = 60;
-      if (offerid === 48204) {
-        countdownTime = 15;
-      } else if (offerid === 10002) {
-        countdownTime = 60;
-      }
-      setCountdowns((prev) => ({
-        ...prev,
-        [offerid]: { current: countdownTime, initial: countdownTime },
-      }));
+    } catch (error) {
+      console.error("Error sending activity:", error);
     }
+    // let countdownTime = 60;
+    // if (offerid === 48204) {
+    //   countdownTime = 15;
+    // } else if (offerid === 10002) {
+    //   countdownTime = 60;
+    // }
+    // setCountdowns((prev) => ({
+    //   ...prev,
+    //   [offerid]: { current: countdownTime, initial: countdownTime },
+    // }));
+    // }
   };
 
   if (loading) {
@@ -182,11 +184,16 @@ const OffersPage = () => {
                   {boostedOffers.map((offer) => (
                     <li key={offer.offerid} className="mb-2">
                       <a
-                        href={offer.link}
+                        href={`${offer.link}&aff_sub4=${cid}`}
                         className="offer flex rounded pb-4"
                         target="_blank"
                         onClick={(event) =>
-                          handleOfferClick(offer.offerid, offer.link, event)
+                          handleOfferClick(
+                            offer.offerid,
+                            cid,
+                            offer.link,
+                            event,
+                          )
                         }
                       >
                         <img
