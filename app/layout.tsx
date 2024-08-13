@@ -37,7 +37,6 @@ export default function RootLayout({
             alt="Background Image"
             className="absolute inset-0 -z-10 h-full w-full object-cover object-center opacity-80"
           ></Image>
-
           <header className="z-50 mx-auto max-w-lg pt-2 text-center sm:px-6 lg:px-8">
             <div className="mb-2 flex items-center justify-center space-x-2 text-center text-xl text-white">
               <Link
@@ -81,13 +80,12 @@ export default function RootLayout({
             </h1>
           </header>
           <div className="relative m-4">
-            <div className="isolate mx-auto w-full max-w-md items-center justify-center rounded-3xl bg-white p-2 shadow-lg ring-1 ring-black/5 backdrop-blur-md">
+            <div className="isolate mx-auto min-h-96 w-full max-w-md items-center justify-center rounded-3xl bg-white p-2 shadow-lg ring-1 ring-black/5 backdrop-blur-md">
               <SessionProviderWrapper session={session}>
                 {children}
               </SessionProviderWrapper>{" "}
             </div>
           </div>
-
           <p className="mx-auto max-w-sm px-4 pb-20 text-center text-xs text-neutral-200">
             Use of any logos or trademarks are for reference purposes only. By
             using the website, you agree to our{" "}

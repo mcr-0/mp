@@ -158,7 +158,9 @@ const OffersPage = () => {
   };
 
   if (loading) {
-    return <div className="p-8 text-center text-xl text-white">Loading...</div>;
+    return (
+      <div className="p-8 text-center text-xl text-neutral-800">Loading...</div>
+    );
   }
 
   if (error) {

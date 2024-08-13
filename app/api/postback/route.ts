@@ -18,7 +18,7 @@ export async function GET(req: NextRequest) {
   const aff_sub3 = searchParams.get("aff_sub3");
   const aff_sub4 = searchParams.get("aff_sub4");
   const aff_sub5 = searchParams.get("aff_sub5");
-  const userid = "user-id-test";
+  const ran = searchParams.get("ran");
 
   // Prosta walidacja
   if (!aff_sub2) {
@@ -29,7 +29,7 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const conversions = await prisma.conversions.create({
+    const conversions = await prisma.event.create({
       data: {
         offer_id: parseInt(offer_id as string, 10) || undefined, // Konwersja na integer
         offer_name: offer_name as string | undefined,
@@ -42,6 +42,7 @@ export async function GET(req: NextRequest) {
         aff_sub3: aff_sub3 as string | undefined,
         aff_sub4: aff_sub4 as string | undefined,
         aff_sub5: aff_sub5 as string | undefined,
+        ran: ran as string | undefined,
       },
     });
 
