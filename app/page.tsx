@@ -20,7 +20,7 @@ export default function LandingPage() {
   const { data: session } = useSession();
   const handleSignOut = async () => {
     await signOut({ redirect: false });
-    router.push("https://mazedpromos.com");
+    // router.push("https://mazedpromos.com");
   };
   const [message, setMessage] = useState("");
   const router = useRouter();
@@ -43,6 +43,7 @@ export default function LandingPage() {
     setUsername(username);
     setIsButtonDisabled(username.length < 4);
   };
+
   useEffect(() => {
     setIsLoading(false);
     setIsButtonDisabled(false);
@@ -60,7 +61,7 @@ export default function LandingPage() {
     const username = formData.get("username") as string; // Możesz bezpiecznie uzyskać wartość
 
     try {
-      const res = await fetch("/api/auth/register-login", {
+      const res = await fetch("/api/register-login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -117,12 +118,11 @@ export default function LandingPage() {
           <MoveRight className="inline h-5 w-5" /> Level Up!
         </p>
       </div>
-
       <div id="hero" className="bg-blue z-0 mx-auto w-full text-center">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ ease: "easeOut", duration: 2 }}
+          transition={{ ease: "easeOut", duration: 1 }}
         >
           <Image
             src="/fortnite_v2.png"
@@ -133,23 +133,23 @@ export default function LandingPage() {
             priority
           ></Image>
         </motion.div>
-      </div>
-      <div className="">
-        {/* <Image
+        {/* <div className="">
+        <Image
           src="/fortnite_v2.png"
           width={400}
           height={300}
           alt="image"
           className="mx-auto px-8 py-2"
           priority
-        ></Image> */}
-        {/* <h1 className="px-2 text-center text-2xl font-bold leading-tight tracking-tight text-neutral-800">
+        ></Image>
+        <h1 className="px-2 text-center text-2xl font-bold leading-tight tracking-tight text-neutral-800">
           Complete Two{" "}
           <span className="bg-gradient-to-b from-gray-500 via-indigo-700 to-gray-800 bg-clip-text text-transparent">
             Quick And Easy Steps
           </span>{" "}
           To Receive Reward Access
-        </h1> */}
+        </h1>
+      </div> */}
       </div>
       <div className="flex w-full flex-col gap-4 p-4 md:flex-nowrap">
         {session ? (
@@ -185,7 +185,6 @@ export default function LandingPage() {
           </div>
         ) : (
           <div>
-            {" "}
             <h1 className="my-2 pb-4 text-center text-2xl font-bold leading-tight tracking-tight text-neutral-800">
               Complete Two Free Steps To Unlock 62,500 V-Bucks Worth Of Reward
               Access

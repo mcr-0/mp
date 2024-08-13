@@ -12,9 +12,9 @@ export async function POST(request: NextRequest) {
     });
 
     if (user) {
-      await prisma.activity.create({
+      await prisma.event.create({
         data: {
-          action: `clickedOffer: ${offerid}`,
+          event: `clickedOffer`,
           offer_id: offerid,
           user: { connect: { id: user.id } },
         },

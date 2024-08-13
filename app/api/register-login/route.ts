@@ -25,6 +25,22 @@ export async function POST(req: Request) {
         username,
       },
     });
+    const userId: string = user.id;
+
+    await prisma.event.create({
+      data: {
+        event: `registered`,
+        user: { connect: { id: userId } },
+      },
+    });
+  } else {
+    const userId: string = user.id;
+    await prisma.event.create({
+      data: {
+        event: `logged_in`,
+        user: { connect: { id: userId } },
+      },
+    });
   }
 
   return NextResponse.json({ user }, { status: 200 });
