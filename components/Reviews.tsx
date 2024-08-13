@@ -2,6 +2,237 @@ import Link from "next/link";
 export default function Reviews() {
   return (
     <div className="bg-white">
+      <div className="mx-4 mx-auto max-w-md items-center rounded-lg bg-zinc-300 bg-opacity-50 p-6 shadow-lg">
+        <h2 className="mb-4 text-xl font-bold">Must-Have</h2>
+        <div className="mb-4 flex items-center">
+          <svg
+            className="h-8 w-8 text-yellow-400"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 .587l3.668 7.57 8.332 1.151-6.064 5.84 1.516 8.266-7.452-4.088-7.452 4.088 1.516-8.266-6.064-5.84 8.332-1.151z" />
+          </svg>
+          <svg
+            className="h-8 w-8 text-yellow-400"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 .587l3.668 7.57 8.332 1.151-6.064 5.84 1.516 8.266-7.452-4.088-7.452 4.088 1.516-8.266-6.064-5.84 8.332-1.151z" />
+          </svg>
+          <svg
+            className="h-8 w-8 text-yellow-400"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 .587l3.668 7.57 8.332 1.151-6.064 5.84 1.516 8.266-7.452-4.088-7.452 4.088 1.516-8.266-6.064-5.84 8.332-1.151z" />
+          </svg>
+          <svg
+            className="h-8 w-8 text-yellow-400"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 .587l3.668 7.57 8.332 1.151-6.064 5.84 1.516 8.266-7.452-4.088-7.452 4.088 1.516-8.266-6.064-5.84 8.332-1.151z" />
+          </svg>
+          <svg
+            className="h-8 w-8 text-yellow-400"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 .587l3.668 7.57 8.332 1.151-6.064 5.84 1.516 8.266-7.452-4.088-7.452 4.088 1.516-8.266-6.064-5.84 8.332-1.151z" />
+          </svg>
+        </div>
+        <p className="text-lg leading-6">
+          This is an absolute must-have for anyone playing Fortnite. Playing on
+          default skin isnt fun at all.
+        </p>
+      </div>
+
+      <div className="m-4 mx-auto max-w-md rounded-lg bg-zinc-300 bg-opacity-50 p-6 shadow-lg">
+        <h2 className="mb-4 text-xl font-bold">Finally something real</h2>
+        <div className="mb-4 flex items-center">
+          <svg
+            className="h-8 w-8 text-yellow-400"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 .587l3.668 7.57 8.332 1.151-6.064 5.84 1.516 8.266-7.452-4.088-7.452 4.088 1.516-8.266-6.064-5.84 8.332-1.151z" />
+          </svg>
+          <svg
+            className="h-8 w-8 text-yellow-400"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 .587l3.668 7.57 8.332 1.151-6.064 5.84 1.516 8.266-7.452-4.088-7.452 4.088 1.516-8.266-6.064-5.84 8.332-1.151z" />
+          </svg>
+          <svg
+            className="h-8 w-8 text-yellow-400"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 .587l3.668 7.57 8.332 1.151-6.064 5.84 1.516 8.266-7.452-4.088-7.452 4.088 1.516-8.266-6.064-5.84 8.332-1.151z" />
+          </svg>
+          <svg
+            className="h-8 w-8 text-yellow-400"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 .587l3.668 7.57 8.332 1.151-6.064 5.84 1.516 8.266-7.452-4.088-7.452 4.088 1.516-8.266-6.064-5.84 8.332-1.151z" />
+          </svg>
+          <svg
+            className="h-8 w-8 text-yellow-400"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 .587l3.668 7.57 8.332 1.151-6.064 5.84 1.516 8.266-7.452-4.088-7.452 4.088 1.516-8.266-6.064-5.84 8.332-1.151z" />
+          </svg>
+        </div>
+        <p className="text-lg leading-6">
+          I have finally found something that works. Ive probably tried every
+          other generator or site before. Thank You
+        </p>
+      </div>
+
+      <div className="m-4 mx-auto max-w-md rounded-lg bg-zinc-300 bg-opacity-50 p-6 shadow-lg">
+        <h2 className="mb-4 text-xl font-bold">No Human Verification</h2>
+        <div className="mb-4 flex items-center">
+          <svg
+            className="h-8 w-8 text-yellow-400"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 .587l3.668 7.57 8.332 1.151-6.064 5.84 1.516 8.266-7.452-4.088-7.452 4.088 1.516-8.266-6.064-5.84 8.332-1.151z" />
+          </svg>
+          <svg
+            className="h-8 w-8 text-yellow-400"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 .587l3.668 7.57 8.332 1.151-6.064 5.84 1.516 8.266-7.452-4.088-7.452 4.088 1.516-8.266-6.064-5.84 8.332-1.151z" />
+          </svg>
+          <svg
+            className="h-8 w-8 text-yellow-400"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 .587l3.668 7.57 8.332 1.151-6.064 5.84 1.516 8.266-7.452-4.088-7.452 4.088 1.516-8.266-6.064-5.84 8.332-1.151z" />
+          </svg>
+          <svg
+            className="h-8 w-8 text-yellow-400"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 .587l3.668 7.57 8.332 1.151-6.064 5.84 1.516 8.266-7.452-4.088-7.452 4.088 1.516-8.266-6.064-5.84 8.332-1.151z" />
+          </svg>
+          <svg
+            className="h-8 w-8 text-yellow-400"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 .587l3.668 7.57 8.332 1.151-6.064 5.84 1.516 8.266-7.452-4.088-7.452 4.088 1.516-8.266-6.064-5.84 8.332-1.151z" />
+          </svg>
+        </div>
+        <p className="text-lg leading-6">
+          I saw an ad on YouTube and was skeptical at first, but then I read all
+          the reviews and decided to try it myself. Wow, I got exactly what I
+          dreamed of.
+        </p>
+      </div>
+
+      <div className="m-4 mx-auto max-w-md rounded-lg bg-zinc-300 bg-opacity-50 p-6 shadow-lg">
+        <h2 className="mb-4 text-xl font-bold">Great Performance</h2>
+        <div className="mb-4 flex items-center">
+          <svg
+            className="h-8 w-8 text-yellow-400"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 .587l3.668 7.57 8.332 1.151-6.064 5.84 1.516 8.266-7.452-4.088-7.452 4.088 1.516-8.266-6.064-5.84 8.332-1.151z" />
+          </svg>
+          <svg
+            className="h-8 w-8 text-yellow-400"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 .587l3.668 7.57 8.332 1.151-6.064 5.84 1.516 8.266-7.452-4.088-7.452 4.088 1.516-8.266-6.064-5.84 8.332-1.151z" />
+          </svg>
+          <svg
+            className="h-8 w-8 text-yellow-400"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 .587l3.668 7.57 8.332 1.151-6.064 5.84 1.516 8.266-7.452-4.088-7.452 4.088 1.516-8.266-6.064-5.84 8.332-1.151z" />
+          </svg>
+          <svg
+            className="h-8 w-8 text-yellow-400"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 .587l3.668 7.57 8.332 1.151-6.064 5.84 1.516 8.266-7.452-4.088-7.452 4.088 1.516-8.266-6.064-5.84 8.332-1.151z" />
+          </svg>
+          <svg
+            className="h-8 w-8 text-yellow-400"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 .587l3.668 7.57 8.332 1.151-6.064 5.84 1.516 8.266-7.452-4.088-7.452 4.088 1.516-8.266-6.064-5.84 8.332-1.151z" />
+          </svg>
+        </div>
+        <p className="text-lg leading-6">
+          It works surprisingly fast and doesnt require much time. I completed
+          the entire process in less than an hour.
+        </p>
+      </div>
+
+      <div className="m-4 mx-auto max-w-md rounded-lg bg-zinc-300 bg-opacity-50 p-6 shadow-lg">
+        <h2 className="mb-4 text-xl font-bold">Play Free Games</h2>
+        <div className="mb-4 flex items-center">
+          <svg
+            className="h-8 w-8 text-yellow-400"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 .587l3.668 7.57 8.332 1.151-6.064 5.84 1.516 8.266-7.452-4.088-7.452 4.088 1.516-8.266-6.064-5.84 8.332-1.151z" />
+          </svg>
+          <svg
+            className="h-8 w-8 text-yellow-400"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 .587l3.668 7.57 8.332 1.151-6.064 5.84 1.516 8.266-7.452-4.088-7.452 4.088 1.516-8.266-6.064-5.84 8.332-1.151z" />
+          </svg>
+          <svg
+            className="h-8 w-8 text-yellow-400"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 .587l3.668 7.57 8.332 1.151-6.064 5.84 1.516 8.266-7.452-4.088-7.452 4.088 1.516-8.266-6.064-5.84 8.332-1.151z" />
+          </svg>
+          <svg
+            className="h-8 w-8 text-yellow-400"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 .587l3.668 7.57 8.332 1.151-6.064 5.84 1.516 8.266-7.452-4.088-7.452 4.088 1.516-8.266-6.064-5.84 8.332-1.151z" />
+          </svg>
+          <svg
+            className="h-8 w-8 text-yellow-400"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 .587l3.668 7.57 8.332 1.151-6.064 5.84 1.516 8.266-7.452-4.088-7.452 4.088 1.516-8.266-6.064-5.84 8.332-1.151z" />
+          </svg>
+        </div>
+        <p className="text-lg leading-6">
+          My younger brother had no problems. He just played Coin Master and
+          Travel Town a bit. Thanks!
+        </p>
+      </div>
+      <h3 className="mx-4 my-12 text-center text-2xl font-semibold">
+        Join Over 100,000+
+        <br />
+        Rewarded Players
+        <br />
+      </h3>
       <section className="reviews bg-gray-200 py-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
