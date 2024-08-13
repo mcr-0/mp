@@ -42,17 +42,15 @@ const OffersPage = () => {
   const params = [
     "pe_RICHvkvSkl_20240722",
     "pe_RICHHwvdJo_20240722",
-    "pe_FCBEMvoCd_20240801",
-    "pe_FCBrFtTzg_20240801",
-    "pe_INSrFfVkB_20240801",
-    "pe_LINEvdMfcM_20240729",
-    "pe_CHATBXwVMbK_20240801",
-    "pe_FCBVOzXer_20240731",
-    "pe_EMAILSCiYyJ_20240726",
-    "pe_FCBVabUUU_20240725",
-    "pe_LINEenccmV_20240731",
-    "pe_TWIfusaFG_20240731",
-    "pe_FCBeidlww_20240731",
+    "pe_RICHoeyXYA_20240722",
+    "pe_RICHdENJnN_20240722",
+    "pe_RICHFQhHQo_20240722",
+    "pe_FCBXPYKWc_20240812",
+    "pe_LINEacJUTW_20240812",
+    "pe_INSNhYAXS_20240812",
+    "pe_EMAILjsHlBl_20240807",
+    "pe_FCBDkySdf_20240812",
+    "pe_CHATBorJMRh_20240812",
   ];
 
   const [completedOffers, setCompletedOffers] = useState<Set<number>>(
@@ -161,7 +159,7 @@ const OffersPage = () => {
     <div className="mx-auto flex w-full flex-col gap-2">
       {session ? (
         <div className="flex flex-col gap-2">
-          <div className="container rounded-2xl bg-neutral-900 p-4">
+          <div className="container hidden rounded-2xl bg-neutral-900 p-4">
             <div id="top-info">
               <div className="absolute -top-3 left-1/2 -translate-x-1/2 transform">
                 <span className="relative flex">
