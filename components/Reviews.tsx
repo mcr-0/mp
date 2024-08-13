@@ -1,5 +1,5 @@
 import Link from "next/link";
-export default function GoogleAds() {
+export default function Reviews() {
   return (
     <div className="bg-white">
       <section className="reviews bg-gray-200 py-12">
