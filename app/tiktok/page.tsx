@@ -255,9 +255,9 @@ const OffersPage = () => {
                     </DrawerDescription>
                   </DrawerHeader>
                   <DrawerFooter>
-                    {boostedOffers.map((offer) => (
-                      <ul className="w-full">
-                        <li>
+                    <ul className="w-full">
+                      {boostedOffers.map((offer) => (
+                        <li key={offer.offerid}>
                           <a
                             href={`${offer.link}&aff_sub4=${cid}`}
                             className=""
@@ -277,8 +277,8 @@ const OffersPage = () => {
                             </Button>
                           </a>
                         </li>
-                      </ul>
-                    ))}
+                      ))}
+                    </ul>
 
                     <a
                       href="https://tiktok.com/@mazerewards?t=8opvSUtA3oc&_r=1"
