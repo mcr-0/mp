@@ -43,7 +43,7 @@ export default function Reviews() {
         </div>
         <p className="text-lg leading-6">
           This is an absolute must-have for anyone playing Fortnite. Playing on
-          default skin isn't fun at all.
+          default skin isnt fun at all.
         </p>
       </div>
 
@@ -87,7 +87,7 @@ export default function Reviews() {
           </svg>
         </div>
         <p className="text-lg leading-6">
-          I have finally found something that works. I've probably tried every
+          I have finally found something that works. Ive probably tried every
           other generator or site before. Thank You
         </p>
       </div>
@@ -178,7 +178,7 @@ export default function Reviews() {
           </svg>
         </div>
         <p className="text-lg leading-6">
-          It works surprisingly fast and doesn't require much time. I completed
+          It works surprisingly fast and doesnt require much time. I completed
           the entire process in less than an hour.
         </p>
       </div>
