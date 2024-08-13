@@ -13,7 +13,6 @@ export const metadata: Metadata = {
 };
 import SessionProviderWrapper from "./SessionProviderWrapper"; // Zakładając, że jest w tym samym katalogu
 import GoogleAds from "@/components/GoogleAds";
-import Reviews from "@/components/Reviews";
 
 export default function RootLayout({
   children,
@@ -107,7 +106,6 @@ export default function RootLayout({
             .
           </p>
         </div>
-        {/* <Reviews /> */}
       </body>
 
       <Script src="https://scripts.simpleanalyticscdn.com/latest.js" />
