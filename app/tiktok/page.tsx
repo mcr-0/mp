@@ -334,7 +334,7 @@ const OffersPage = () => {
               {/* <div className="mt-2 text-xs">
                 <p>We post free v-bucks codes on our TikTok!</p>
               </div> */}
-              {/* <div className="items-center justify-center space-y-4 sm:flex sm:space-x-4 sm:space-y-0 rtl:space-x-reverse">
+              <div className="items-center justify-center space-y-4 sm:flex sm:space-x-4 sm:space-y-0 rtl:space-x-reverse">
                 <p className="completed-instruction mb-2 text-xs text-neutral-800">
                   95% of users complete this in less than 5 minutes
                 </p>
@@ -394,7 +394,7 @@ const OffersPage = () => {
                     </div>
                   </div>
                 </div>
-              </div> */}
+              </div>
             </div>
           </div>
           <div className="container rounded-2xl bg-neutral-100 p-4">
