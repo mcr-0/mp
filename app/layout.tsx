@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Image from "next/image";
-import * as React from "react";
+
+import React, { ReactNode } from "react";
+
 import Link from "next/link";
 import Script from "next/script";
 import { Button } from "@/components/ui/button";
@@ -16,9 +18,11 @@ import GoogleAds from "@/components/GoogleAds";
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+  session,
+}: {
+  children: ReactNode;
+  session: any;
+}) {
   return (
     <html lang="en">
       <head>
@@ -78,7 +82,7 @@ export default function RootLayout({
           </header>
           <div className="relative m-4">
             <div className="isolate mx-auto min-h-96 w-full max-w-md items-center justify-center rounded-3xl bg-white p-2 shadow-lg ring-1 ring-black/5 backdrop-blur-md">
-              <SessionProviderWrapper session={SessionProviderWrapper}>
+              <SessionProviderWrapper session={session}>
                 {children}
               </SessionProviderWrapper>
             </div>
