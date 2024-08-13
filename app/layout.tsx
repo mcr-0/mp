@@ -2,9 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Image from "next/image";
-
-import React, { ReactNode } from "react";
-
+import * as React from "react";
 import Link from "next/link";
 import Script from "next/script";
 import { Button } from "@/components/ui/button";
@@ -15,14 +13,15 @@ export const metadata: Metadata = {
 };
 import SessionProviderWrapper from "./SessionProviderWrapper"; // Zakładając, że jest w tym samym katalogu
 import GoogleAds from "@/components/GoogleAds";
+import Reviews from "@/components/Reviews";
 
 export default function RootLayout({
   children,
   session,
-}: {
-  children: ReactNode;
+}: Readonly<{
+  children: React.ReactNode;
   session: any;
-}) {
+}>) {
   return (
     <html lang="en">
       <head>
@@ -84,7 +83,7 @@ export default function RootLayout({
             <div className="isolate mx-auto min-h-96 w-full max-w-md items-center justify-center rounded-3xl bg-white p-2 shadow-lg ring-1 ring-black/5 backdrop-blur-md">
               <SessionProviderWrapper session={session}>
                 {children}
-              </SessionProviderWrapper>
+              </SessionProviderWrapper>{" "}
             </div>
           </div>
           <p className="mx-auto max-w-sm px-4 pb-20 text-center text-xs text-neutral-200">
@@ -108,6 +107,7 @@ export default function RootLayout({
             .
           </p>
         </div>
+        <Reviews />
       </body>
 
       <Script src="https://scripts.simpleanalyticscdn.com/latest.js" />
