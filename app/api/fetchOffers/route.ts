@@ -36,7 +36,7 @@ type Data = {
 export async function GET(request: NextRequest) {
   const session = await getServerSession(authOptions);
   const userId = session?.user?.id || "defaultUsername"; // Fallback to a default value if username is not available
-  const clickId = "test";
+
   console.log("Session:", session);
 
   const userAgent = request.headers.get("user-agent");
@@ -52,7 +52,6 @@ export async function GET(request: NextRequest) {
     ip: ip.toString(), // Dynamic IP address
     user_agent: userAgent,
     aff_sub: "v1",
-    aff_sub4: clickId.toString(),
     aff_sub5: userId,
     max: 5,
   };
