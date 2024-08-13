@@ -107,7 +107,7 @@ export default function RootLayout({
             .
           </p>
         </div>
-        <Reviews />
+        {/* <Reviews /> */}
       </body>
 
       <Script src="https://scripts.simpleanalyticscdn.com/latest.js" />
