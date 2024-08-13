@@ -155,38 +155,38 @@ const OffersPage = () => {
       console.error("User is not authenticated or session is missing");
       return;
     }
-    // setClickedOffers(new Set(clickedOffers.add(offerid)));
-    // if (!clickedOffers.has(offerid)) {
-    try {
-      const response = await fetch("/api/saveActivity", {
-        method: "POST", // Metoda POST
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          offerid,
-          cid,
-          username: session.user.username,
-        }),
-      });
+    setClickedOffers(new Set(clickedOffers.add(offerid)));
+    if (!clickedOffers.has(offerid)) {
+      try {
+        const response = await fetch("/api/saveActivity", {
+          method: "POST", // Metoda POST
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            offerid,
+            cid,
+            username: session.user.username,
+          }),
+        });
 
-      if (!response.ok) {
-        console.error("Failed to save activity");
+        if (!response.ok) {
+          console.error("Failed to save activity");
+        }
+      } catch (error) {
+        console.error("Error sending activity:", error);
       }
-    } catch (error) {
-      console.error("Error sending activity:", error);
+      let countdownTime = 60;
+      if (offerid === 48204) {
+        countdownTime = 15;
+      } else if (offerid === 10002) {
+        countdownTime = 60;
+      }
+      setCountdowns((prev) => ({
+        ...prev,
+        [offerid]: { current: countdownTime, initial: countdownTime },
+      }));
     }
-    // let countdownTime = 60;
-    // if (offerid === 48204) {
-    //   countdownTime = 15;
-    // } else if (offerid === 10002) {
-    //   countdownTime = 60;
-    // }
-    // setCountdowns((prev) => ({
-    //   ...prev,
-    //   [offerid]: { current: countdownTime, initial: countdownTime },
-    // }));
-    // }
   };
 
   if (loading) {
