@@ -7,6 +7,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 const apiKey = process.env.API_KEY; // Ensure you set this in your environment variables
 const endpoint = process.env.ENDPOINT; // Ensure you set this in your environment variables
+
 type Offer = {
   offerid: string;
   name: string;
@@ -23,11 +24,13 @@ type Offer = {
   ctype: string;
   cvr: string;
 };
+
 type ApiResponse = {
   success: boolean;
   offers?: Offer[];
   error?: string;
 };
+
 type Data = {
   offers?: Offer[];
   error?: string;
@@ -40,7 +43,13 @@ export async function GET(request: NextRequest) {
   console.log("Session:", session);
 
   const userAgent = request.headers.get("user-agent");
-  const ip = "23.83.132.153";
+
+  // Pobranie adresu IP z nagłówków, które są dostępne w NextRequest
+  const ip =
+    request.headers.get("x-forwarded-for") ||
+    request.headers.get("x-real-ip") ||
+    request.ip;
+
   if (!userAgent) {
     return NextResponse.json({ error: "Missing User Agent" }, { status: 400 });
   }
@@ -53,7 +62,6 @@ export async function GET(request: NextRequest) {
     user_agent: userAgent,
     aff_sub: "v1",
     aff_sub5: userId,
-    // max: 5,
   };
 
   const url = `${endpoint}?${new URLSearchParams(data as any).toString()}`;
