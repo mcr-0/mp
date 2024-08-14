@@ -264,7 +264,7 @@ const OffersPage = () => {
                               Follow our TikTok
                             </h3>
                             <p className="block max-h-12 text-[14px] leading-tight text-gray-900">
-                              Sign up if you don't have an account!
+                              Sign up if you don&quot;t have an account!
                             </p>
                           </div>
                           <div>
