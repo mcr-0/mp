@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import fetch from "node-fetch";
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/app/api/auth/authConfig"; // Upewnij się, że ścieżka jest poprawna
+import { authOptions } from "@/app/(home)/api/auth/authConfig"; // Upewnij się, że ścieżka jest poprawna
 
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();

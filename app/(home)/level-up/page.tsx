@@ -45,12 +45,11 @@ const OffersPage = () => {
     "pe_RICHoeyXYA_20240722",
     "pe_RICHdENJnN_20240722",
     "pe_RICHFQhHQo_20240722",
-    "pe_FCBXPYKWc_20240812",
-    "pe_LINEacJUTW_20240812",
-    "pe_INSNhYAXS_20240812",
-    "pe_EMAILjsHlBl_20240807",
-    "pe_FCBDkySdf_20240812",
-    "pe_CHATBorJMRh_20240812",
+    "pe_FCBHFEsix_20240814",
+    "pe_INSReLppm_20240814",
+    "pe_CHATBJoatED_20240814",
+    "pe_FCBuuPOIy_20240813",
+    "pe_INSfFKVwS_20240813",
   ];
 
   const [completedOffers, setCompletedOffers] = useState<Set<number>>(
