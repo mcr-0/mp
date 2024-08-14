@@ -108,14 +108,12 @@ const OffersPage = () => {
   const handleOfferClick = async (
     offerid: number,
     cid: string,
-    href: string,
     event: React.MouseEvent,
   ) => {
     if (!session || !session.user?.username) {
       console.error("User is not authenticated or session is missing");
       return;
     }
-    setClickedOffers(new Set(clickedOffers.add(offerid)));
     if (!clickedOffers.has(offerid)) {
       try {
         const response = await fetch("/api/saveActivity", {
@@ -129,6 +127,7 @@ const OffersPage = () => {
             username: session.user.username,
           }),
         });
+        console.log("saved event");
 
         if (!response.ok) {
           console.error("Failed to save activity");
@@ -136,19 +135,14 @@ const OffersPage = () => {
       } catch (error) {
         console.error("Error sending activity:", error);
       }
-      let countdownTime = 60;
-      if (offerid === 48204) {
-        countdownTime = 15;
-      } else if (offerid === 10002) {
-        countdownTime = 60;
-      }
-      setCountdowns((prev) => ({
-        ...prev,
-        [offerid]: { current: countdownTime, initial: countdownTime },
-      }));
     }
   };
-  const handleTiktokClick = async (cid: string, event: React.MouseEvent) => {
+
+  const handleTiktokOfferClick = async (
+    offerid: number,
+    cid: string,
+    event: React.MouseEvent,
+  ) => {
     if (!session || !session.user?.username) {
       console.error("User is not authenticated or session is missing");
       return;
@@ -160,7 +154,38 @@ const OffersPage = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          offerid,
           cid,
+          username: session.user.username,
+        }),
+      });
+
+      if (!response.ok) {
+        console.error("Failed to save activity");
+      }
+    } catch (error) {
+      console.error("Error sending activity:", error);
+    }
+  };
+
+  const handleTiktokFollowClick = async (
+    cid: string,
+    event: React.MouseEvent,
+  ) => {
+    if (!session || !session.user?.username) {
+      console.error("User is not authenticated or session is missing");
+      return;
+    }
+    try {
+      const offerid = 1;
+      const response = await fetch("/api/saveActivity", {
+        method: "POST", // Metoda POST
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          cid,
+          offerid,
           username: session.user.username,
         }),
       });
@@ -213,9 +238,9 @@ const OffersPage = () => {
                   fill="none"
                   height="24"
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   viewBox="0 0 24 24"
                   width="24"
                   xmlns="http://www.w3.org/2000/svg"
@@ -264,7 +289,7 @@ const OffersPage = () => {
                               Follow our TikTok
                             </h3>
                             <p className="block max-h-12 text-[14px] leading-tight text-gray-900">
-                              Sign up if you don&quot;t have an account!
+                              Sign up if you don&apos;t have an account!
                             </p>
                           </div>
                           <div>
@@ -303,12 +328,7 @@ const OffersPage = () => {
                             className=""
                             target="_blank"
                             onClick={(event) =>
-                              handleOfferClick(
-                                offer.offerid,
-                                cid,
-                                offer.link,
-                                event,
-                              )
+                              handleTiktokOfferClick(offer.offerid, cid, event)
                             }
                           >
                             <Button className="w-full bg-[#ff3b5c] text-neutral-100">
@@ -323,7 +343,7 @@ const OffersPage = () => {
                     <a
                       href="https://tiktok.com/@mazerewards?t=8opvSUtA3oc&_r=1"
                       target="_blank"
-                      onClick={(event) => handleTiktokClick(cid, event)}
+                      onClick={(event) => handleTiktokFollowClick(cid, event)}
                       className="w-full"
                     >
                       <Button className="w-full bg-neutral-200 text-neutral-800 hover:bg-white">
@@ -346,7 +366,7 @@ const OffersPage = () => {
                       className="offer flex rounded pb-4"
                       target="_blank"
                       onClick={(event) =>
-                        handleOfferClick(offer.offerid, cid, offer.link, event)
+                        handleOfferClick(offer.offerid, cid, event)
                       }
                     >
                       <img
@@ -407,7 +427,7 @@ const OffersPage = () => {
                 ))}
               </ul>
               <p className="completed-instruction mb-2 text-xs text-neutral-800">
-                85% of users complete this in less than 1 hour
+                95% of users complete this in less than 5 minutes
               </p>
               <div className="completed-apps relative my-3 rounded-xl bg-slate-200 p-4 text-left shadow">
                 <div className="mb-2 flex">

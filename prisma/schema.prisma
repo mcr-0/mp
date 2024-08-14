@@ -7,6 +7,29 @@ datasource db {
   url      = env("DATABASE_URL") 
 }
 
+model User {
+  id        String     @id @default(cuid())
+  created_at     DateTime @default(now()) @db.Timestamptz(0)
+  username  String     @unique
+  accounts  Account[]
+  sessions  Session[]
+  events    Event[]
+  
+}
+
+model Event {
+  id         String   @id @default(uuid()) // Użycie UUID zamiast autoincrement
+  created_at DateTime @default(now()) @db.Timestamptz(0)
+  event      String?
+  cid        String? @unique
+  offer_id   Int?
+  payout     Float?   
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
+  converted  Postback[]
+
+}
+
 model Postback {
   id             Int      @id @default(autoincrement())
   created_at     DateTime @default(now()) @db.Timestamptz(0)
@@ -15,34 +38,18 @@ model Postback {
   affiliate_id   Int
   session_ip     String
   payout         Float   
+  event          Event     @relation(fields: [aff_sub4], references: [cid])
   aff_sub        String
   aff_sub2       String
   aff_sub3       String
-  aff_sub4       String?
+  aff_sub4       String
   aff_sub5       String?
   source         String?
   ran            String?
+  
+
 }
 
-model User {
-  id        String     @id @default(cuid())
-  created_at     DateTime @default(now()) @db.Timestamptz(0)
-  username  String     @unique
-  accounts  Account[]
-  sessions  Session[]
-  events    Event[]
-}
-
-model Event {
-  id         String   @id @default(uuid()) // Użycie UUID zamiast autoincrement
-  created_at DateTime @default(now()) @db.Timestamptz(0)
-  event      String
-  cid        String?
-  offer_id   Int?
-  payout     Float?   
-  user       User     @relation(fields: [userId], references: [id])
-  userId     String
-}
 model Account {
   id                 String  @id @default(cuid())
   userId             String
