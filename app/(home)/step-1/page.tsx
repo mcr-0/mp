@@ -175,6 +175,7 @@ const OffersPage = () => {
           username: session.user.username,
         }),
       });
+      window.location.reload();
 
       if (!response.ok) {
         console.error("Failed to save activity");
@@ -210,6 +211,7 @@ const OffersPage = () => {
           username: session.user.username,
         }),
       });
+      window.location.reload();
 
       if (!response.ok) {
         console.error("Failed to save activity");
