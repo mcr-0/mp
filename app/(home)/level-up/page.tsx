@@ -78,7 +78,8 @@ const OffersPage = () => {
           //   (offer: Offer) => offer.boosted,
           // );
           const filteredBoostedOffers = data.offers.filter(
-            (offer: Offer) => offer.offerid === 57813,
+            (offer: Offer) =>
+              offer.offerid === 57813 || offer.offerid === 48853,
           );
           setBoostedOffers(filteredBoostedOffers);
         }
@@ -199,7 +200,7 @@ const OffersPage = () => {
                 Final Step (Step 2)
               </h5>
               <h3 className="mb-4 mt-4 text-left text-2xl font-semibold text-zinc-900">
-                Play Coin Master & Complete Village Level 3!
+                Play & Level Up
               </h3>
               <div className="items-center justify-center space-y-4 sm:flex sm:space-x-4 sm:space-y-0 rtl:space-x-reverse">
                 <ul>
@@ -226,10 +227,10 @@ const OffersPage = () => {
                               {offer.name_short}
                             </h3>
                             <p className="block max-h-10 overflow-hidden text-[12px] text-gray-900">
-                              {offer.offerid === 48204
-                                ? "Follow us @mazerewards"
-                                : offer.adcopy && offer.offerid === 43096
-                                  ? "Download, Install and play for 30 seconds."
+                              {offer.offerid === 48853
+                                ? "Complete Level 9"
+                                : offer.adcopy && offer.offerid === 57813
+                                  ? "Complete Village 3"
                                   : offer.adcopy}
                             </p>
                           </div>
@@ -263,7 +264,7 @@ const OffersPage = () => {
                 <div className="completed-apps relative my-3 rounded-xl bg-slate-200 p-4 text-left shadow">
                   <div className="flex">
                     <h1 className="mb-2 text-left text-2xl font-bold text-gray-700">
-                      Would you like to speed up the process?
+                      Free Spins for Coin Master:
                     </h1>
                   </div>
                   <p>
