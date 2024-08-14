@@ -53,7 +53,7 @@ export async function GET(request: NextRequest) {
     user_agent: userAgent,
     aff_sub: "v1",
     aff_sub5: userId,
-    max: 5,
+    // max: 5,
   };
 
   const url = `${endpoint}?${new URLSearchParams(data as any).toString()}`;
