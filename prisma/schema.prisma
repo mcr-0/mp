@@ -14,7 +14,6 @@ model User {
   accounts  Account[]
   sessions  Session[]
   events    Event[]
-  
 }
 
 model Event {

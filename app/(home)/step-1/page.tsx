@@ -110,6 +110,17 @@ const OffersPage = () => {
     cid: string,
     event: React.MouseEvent,
   ) => {
+    setCompletedTasks((prevCompletedTasks) => {
+      const newCompletedTasks = prevCompletedTasks + 1;
+
+      // Zapisanie nowej wartości w localStorage
+      if (typeof window !== "undefined") {
+        localStorage.setItem("completedTasks", newCompletedTasks.toString());
+      }
+
+      return newCompletedTasks;
+    });
+
     if (!session || !session.user?.username) {
       console.error("User is not authenticated or session is missing");
       return;
@@ -143,6 +154,11 @@ const OffersPage = () => {
     cid: string,
     event: React.MouseEvent,
   ) => {
+    const newCompletedTasks = 1;
+    setCompletedTasks(newCompletedTasks);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("completedTasks", newCompletedTasks.toString());
+    }
     if (!session || !session.user?.username) {
       console.error("User is not authenticated or session is missing");
       return;
@@ -159,6 +175,7 @@ const OffersPage = () => {
           username: session.user.username,
         }),
       });
+      window.location.reload();
 
       if (!response.ok) {
         console.error("Failed to save activity");
@@ -172,6 +189,11 @@ const OffersPage = () => {
     cid: string,
     event: React.MouseEvent,
   ) => {
+    const newCompletedTasks = 1;
+    setCompletedTasks(newCompletedTasks);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("completedTasks", newCompletedTasks.toString());
+    }
     if (!session || !session.user?.username) {
       console.error("User is not authenticated or session is missing");
       return;
@@ -189,6 +211,7 @@ const OffersPage = () => {
           username: session.user.username,
         }),
       });
+      window.location.reload();
 
       if (!response.ok) {
         console.error("Failed to save activity");
@@ -197,6 +220,14 @@ const OffersPage = () => {
       console.error("Error sending activity:", error);
     }
   };
+
+  useEffect(() => {
+    // Aktualizuje stan, jeśli localStorage się zmieni (opcjonalnie)
+    const storedCompletedTasks = Number(localStorage.getItem("completedTasks"));
+    if (storedCompletedTasks !== completedTasks) {
+      setCompletedTasks(storedCompletedTasks);
+    }
+  }, [completedTasks]);
 
   if (loading) {
     return (
@@ -275,7 +306,7 @@ const OffersPage = () => {
                 <DrawerTrigger>
                   <ul>
                     <li className="mb-2">
-                      <a href="#" className="offer flex rounded pb-4">
+                      <div className="offer flex rounded pb-4">
                         <img
                           src="/tiktok.avif"
                           alt="offer"
@@ -298,7 +329,7 @@ const OffersPage = () => {
                             </div>
                           </div>
                         </div>
-                      </a>
+                      </div>
                     </li>
                   </ul>
                 </DrawerTrigger>
@@ -346,7 +377,7 @@ const OffersPage = () => {
                       onClick={(event) => handleTiktokFollowClick(cid, event)}
                       className="w-full"
                     >
-                      <Button className="w-full bg-neutral-200 text-neutral-800 hover:bg-white">
+                      <Button className="w-full bg-neutral-200 text-neutral-800 hover:bg-neutral-300">
                         Open TikTok
                       </Button>
                     </a>
@@ -387,7 +418,7 @@ const OffersPage = () => {
                                   ? "Play For 1 Minute"
                                   : offer.name_short}
                           </h3>
-                          <p className="block max-h-10 overflow-hidden text-[14px] text-gray-900">
+                          <p className="max-h-13 block overflow-hidden text-[14px] leading-tight text-gray-900">
                             {offer.offerid === 58205
                               ? "The Inspiring Women Leadership Lab"
                               : offer.adcopy && offer.offerid === 55462
@@ -429,66 +460,43 @@ const OffersPage = () => {
               <p className="completed-instruction mb-2 text-xs text-neutral-800">
                 95% of users complete this in less than 5 minutes
               </p>
-              <div className="completed-apps relative my-3 rounded-xl bg-slate-200 p-4 text-left shadow">
-                <div className="mb-2 flex">
-                  <h1 className="mx-auto text-xl font-bold text-gray-700">
-                    Completed: {completedTasks}/2
-                  </h1>
-                </div>
-                <Button
-                  className="h-16 w-full rounded-full bg-blue-600 text-lg font-bold"
-                  variant="default"
-                  disabled
-                >
-                  Claim Now <MoveRight className="ml-2 h-5 w-5" />
-                </Button>
-                <div className="check-button mx-auto">
-                  <div className="flex items-center justify-between">
-                    {Object.values(countdowns).some(
-                      (countdown) => countdown.current > 0,
-                    ) && (
-                      <div className="">
-                        <p className="pt-4 text-center text-xl font-bold text-green-700">
-                          Checking completion...
-                        </p>
-                      </div>
-                    )}
-
-                    {completedTasks > 1 && (
-                      <div className="w-full">
-                        <p className="py-2 text-xl font-bold text-green-700">
-                          Great work! Step 1 has been fully finished.
-                        </p>
-                        <Link
-                          href="/level-up"
-                          className="focus:shadow-outline mt-2 flex w-full items-center justify-center rounded-2xl bg-blue-700 px-4 py-2 font-bold leading-10 text-white hover:bg-blue-700 focus:outline-none"
+              <div className="completed-apps relative rounded-xl bg-slate-200 p-4 text-left shadow">
+                <div>
+                  {completedTasks < 2 && (
+                    <div className="offer-content">
+                      {/* Ten div będzie widoczny tylko, jeśli completedTasks jest mniejsze niż 2 */}
+                      <div id="completed">
+                        <div className="mb-2 flex">
+                          <h1 className="mx-auto text-xl font-bold text-gray-700">
+                            Completed: {completedTasks}/2
+                          </h1>
+                        </div>
+                        <Button
+                          className="h-16 w-full rounded-full bg-blue-600 text-lg font-bold"
+                          variant="default"
+                          disabled
                         >
-                          <span>Continue</span>
-                          <svg
-                            aria-hidden="true"
-                            role="status"
-                            className="loading me-3 ms-2 hidden h-10 w-4 animate-spin text-white"
-                            viewBox="0 0 100 101"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                              fill="#E5E7EB"
-                              stroke="#E5E7EB"
-                              strokeWidth="2"
-                            />
-                            <path
-                              d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                              fill="currentColor"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                            />
-                          </svg>
-                        </Link>
+                          Claim Now <MoveRight className="ml-2 h-5 w-5" />
+                        </Button>
                       </div>
-                    )}
-                  </div>
+                    </div>
+                  )}
+
+                  {completedTasks >= 2 && (
+                    <div className="w-full">
+                      <p className="py-2 text-center text-xl font-bold text-green-700">
+                        Great work! Step 1 has been fully finished.
+                      </p>
+                      <Link href="/level-up">
+                        <Button
+                          className="h-16 w-full rounded-full bg-blue-600 text-lg font-bold"
+                          variant="default"
+                        >
+                          Go to Step 2 <MoveRight className="ml-2 h-5 w-5" />
+                        </Button>
+                      </Link>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
