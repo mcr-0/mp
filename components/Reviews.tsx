@@ -2,7 +2,7 @@ import Link from "next/link";
 export default function Reviews() {
   return (
     <div className="bg-white">
-      <div className="mx-4 mx-auto max-w-md items-center rounded-lg bg-zinc-300 bg-opacity-50 p-6 shadow-lg">
+      <div className="mx-auto max-w-md items-center rounded-lg bg-zinc-300 bg-opacity-50 p-6 shadow-lg">
         <h2 className="mb-4 text-xl font-bold">Must-Have</h2>
         <div className="mb-4 flex items-center">
           <svg

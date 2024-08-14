@@ -78,7 +78,7 @@ export default function LandingPage() {
           username: username,
         });
         setMessage("User authenticated successfully!");
-        router.push("/tiktok"); // Replace '/success' with your desired route
+        router.push("/step-1"); // Replace '/success' with your desired route
         setIsLoading(false);
       } else {
         setMessage(`Error: ${data.error}`);
