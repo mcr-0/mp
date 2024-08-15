@@ -25,7 +25,7 @@ model Event {
   payout     Float?   
   user       User     @relation(fields: [userId], references: [id])
   userId     String
-  converted  Postback[]
+
 
 }
 
@@ -37,11 +37,10 @@ model Postback {
   affiliate_id   Int
   session_ip     String
   payout         Float   
-  event          Event     @relation(fields: [aff_sub4], references: [cid])
   aff_sub        String
   aff_sub2       String
   aff_sub3       String
-  aff_sub4       String
+  aff_sub4       String?
   aff_sub5       String?
   source         String?
   ran            String?
