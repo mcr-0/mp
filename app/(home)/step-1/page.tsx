@@ -488,7 +488,7 @@ const OffersPage = () => {
                       <p className="py-2 text-center text-xl font-bold text-green-700">
                         Great work! Step 1 has been fully finished.
                       </p>
-                      <Link href="/level-up">
+                      <Link href="/step-2">
                         <Button
                           className="h-16 w-full rounded-full bg-blue-600 text-lg font-bold"
                           variant="default"
