@@ -30,6 +30,7 @@
     "posthog-js": "^1.154.2",
     "react": "^18",
     "react-dom": "^18",
+    "request-ip": "^3.3.0",
     "tailwind-merge": "^2.4.0",
     "uuid": "^10.0.0",
     "vaul": "^0.9.1"
@@ -40,6 +41,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/request-ip": "^0.0.41",
     "@types/uuid": "^10.0.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
