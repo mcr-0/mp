@@ -45,6 +45,19 @@ type Countdown = {
   current: number;
   initial: number;
 };
+const baseUrl = "https://rewards.coinmaster.com/rewards/rewards.html?c=";
+const params = [
+  "pe_RICHvkvSkl_20240722",
+  "pe_RICHHwvdJo_20240722",
+  "pe_RICHoeyXYA_20240722",
+  "pe_RICHdENJnN_20240722",
+  "pe_RICHFQhHQo_20240722",
+  "pe_FCBHFEsix_20240814",
+  "pe_INSReLppm_20240814",
+  "pe_CHATBJoatED_20240814",
+  "pe_FCBuuPOIy_20240813",
+  "pe_INSfFKVwS_20240813",
+];
 const OffersPage = () => {
   const cid = uuidv4();
   const router = useRouter();
@@ -85,9 +98,7 @@ const OffersPage = () => {
           setBoostedOffers(filteredBoostedOffers);
           const filteredSelectedOffers = data.offers.filter(
             (offer: Offer) =>
-              offer.offerid === 55462 || // A Book with Legs Podcast
-              offer.offerid === 58205 || // The Inspiring Women Leadership Lab
-              offer.offerid === 43096, // Evertale
+              offer.offerid === 57813 || offer.offerid === 48853,
           );
           setSelectedOffers(filteredSelectedOffers);
         }
@@ -297,99 +308,12 @@ const OffersPage = () => {
           <div className="container rounded-2xl bg-neutral-100 p-4">
             <div className="w-full text-center dark:border-gray-700 dark:bg-gray-800 sm:p-8">
               <Badge className="absolute left-1/2 top-11 -translate-x-1/2 transform">
-                Start now!
+                Step 2
               </Badge>
               <h5 className="mb-4 mt-2 text-2xl font-bold text-gray-900 dark:text-white">
-                Complete Any Task
+                Play & Level Up!
               </h5>
-              <Drawer>
-                <DrawerTrigger>
-                  <ul>
-                    <li className="mb-2">
-                      <div className="offer flex rounded pb-4">
-                        <img
-                          src="/tiktok.avif"
-                          alt="offer"
-                          height={64}
-                          width={64}
-                          className="h-16 w-16 rounded-xl"
-                        />
-                        <div className="-mb-2 ml-2 flex w-full items-center gap-2 border-b-[1px] border-gray-300 pb-2">
-                          <div className="w-full text-left">
-                            <h3 className="text-[14px] font-medium leading-relaxed">
-                              Follow our TikTok
-                            </h3>
-                            <p className="block max-h-12 text-[14px] leading-tight text-gray-900">
-                              Sign up if you don&apos;t have an account!
-                            </p>
-                          </div>
-                          <div>
-                            <div className="block w-20 rounded-3xl bg-[#ff3b5c] p-1 text-center text-xs font-bold leading-5 text-white">
-                              Follow
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                </DrawerTrigger>
-                <DrawerContent>
-                  <DrawerHeader>
-                    <div className="mb-2 flex flex-col gap-2">
-                      <Image
-                        src="/Artboard.png"
-                        width={2000}
-                        height={2000}
-                        className="mx-auto w-24 rounded-full"
-                        alt="avatar"
-                        priority
-                      ></Image>
-                      <h2 className="text-xl">@mazerewards</h2>
-                      <p className="text-xs">10,000+ Followers</p>
-                      {/* <Button className="mx-auto h-12 w-full bg-[#ff3b5c]">
-                        Follow
-                      </Button> */}
-                    </div>
-                  </DrawerHeader>
-                  <DrawerFooter>
-                    <ul className="w-full">
-                      {boostedOffers.map((offer) => (
-                        <li key={offer.offerid}>
-                          <a
-                            href={`${offer.link}&aff_sub4=${cid}`}
-                            className=""
-                            target="_blank"
-                            onClick={(event) =>
-                              handleTiktokOfferClick(offer.offerid, cid, event)
-                            }
-                          >
-                            <Button className="w-full bg-[#ff3b5c] text-neutral-100">
-                              {" "}
-                              Sign up for TikTok
-                            </Button>
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
 
-                    <a
-                      href="https://tiktok.com/@mazerewards?t=8opvSUtA3oc&_r=1"
-                      target="_blank"
-                      onClick={(event) => handleTiktokFollowClick(cid, event)}
-                      className="w-full"
-                    >
-                      <Button className="w-full bg-neutral-200 text-neutral-800 hover:bg-neutral-300">
-                        Open TikTok
-                      </Button>
-                    </a>
-                    <DrawerClose>
-                      <Button variant="link" className="w-full">
-                        Not now
-                      </Button>
-                    </DrawerClose>
-                  </DrawerFooter>
-                </DrawerContent>
-              </Drawer>
               <ul>
                 {selectedOffers.map((offer) => (
                   <li key={offer.offerid} className="mb-2">
@@ -458,11 +382,9 @@ const OffersPage = () => {
                   </li>
                 ))}
               </ul>
-              <p className="completed-instruction mb-2 text-xs text-neutral-800">
-                95% of users complete this in less than 5 minutes
-              </p>
+
               <div className="completed-apps relative rounded-xl bg-slate-200 p-4 text-left shadow">
-                <div>
+                <div className="hidden">
                   {completedTasks < 2 && (
                     <div className="offer-content">
                       {/* Ten div będzie widoczny tylko, jeśli completedTasks jest mniejsze niż 2 */}
@@ -488,7 +410,7 @@ const OffersPage = () => {
                       <p className="py-2 text-center text-xl font-bold text-green-700">
                         Great work! Step 1 has been fully finished.
                       </p>
-                      <Link href="/step-2">
+                      <Link href="/level-up">
                         <Button
                           className="h-16 w-full rounded-full bg-blue-600 text-lg font-bold"
                           variant="default"
@@ -499,7 +421,34 @@ const OffersPage = () => {
                     </div>
                   )}
                 </div>
+                <div className="flex">
+                  <h1 className="mb-2 text-left text-2xl font-bold text-gray-700">
+                    Free Spins for Coin Master:
+                  </h1>
+                </div>
+                <p>
+                  Come back any time to use Extra Free Spins. Click links below
+                  to receive 15, 25 or even 50 extra spins.
+                </p>
+                <div className="free-spins flex items-center justify-center">
+                  <div className="grid w-full grid-cols-2 gap-2 p-4">
+                    {params.map((param, index) => (
+                      <a
+                        key={index}
+                        href={`${baseUrl}${param}`}
+                        className="rounded bg-white py-2 text-center text-blue-600 hover:text-zinc-900"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Free Spins #{index + 1}
+                      </a>
+                    ))}
+                  </div>
+                </div>
               </div>
+              <p className="completed-instruction my-2 text-xs text-neutral-800">
+                80% of users complete this in less than 2 hours
+              </p>
             </div>
           </div>
         </div>
