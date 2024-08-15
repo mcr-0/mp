@@ -1,18 +1,11 @@
-"use client";
-import { useEffect, useState } from "react";
-import { NextApiRequest, NextApiResponse } from "next/types";
+// page.tsx
 
-import requestIp from "request-ip";
+import { headers } from "next/headers";
 
-export default async function myRoute(
-  req: NextApiRequest,
-  res: NextApiResponse,
-) {
-  const detectedIp = requestIp.getClientIp(req);
+export default function Home() {
+  const header = headers();
+  const ip = (header.get("x-forwarded-for") ?? "127.0.0.1").split(",")[0];
+  // ...
 
-  return (
-    <div>
-      <h1>Your IP: {detectedIp}</h1>
-    </div>
-  );
+  return <body>{ip}</body>;
 }
