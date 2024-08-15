@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
 import fetch from "node-fetch";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/(home)/api/auth/authConfig"; // Upewnij się, że ścieżka jest poprawna
+import { NextRequest, NextResponse } from "next/server";
 
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
@@ -33,14 +33,15 @@ type Data = {
   error?: string;
 };
 
-export async function GET(request: NextRequest) {
+export async function GET(req: NextRequest) {
+  const ip = (req.headers.get("x-forwarded-for") ?? "127.0.0.1").split(",")[0];
+
   const session = await getServerSession(authOptions);
   const userId = session?.user?.id || "defaultUsername"; // Fallback to a default value if username is not available
 
   console.log("Session:", session);
 
-  const userAgent = request.headers.get("user-agent");
-  const ip = "23.83.132.153";
+  const userAgent = req.headers.get("user-agent");
   if (!userAgent) {
     return NextResponse.json({ error: "Missing User Agent" }, { status: 400 });
   }
