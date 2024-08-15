@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import fetch from "node-fetch";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/(home)/api/auth/authConfig"; // Upewnij się, że ścieżka jest poprawna
-import type { NextApiRequest, NextApiResponse } from "next";
 
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
