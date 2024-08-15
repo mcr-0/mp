@@ -342,6 +342,7 @@ const OffersPage = () => {
                         height={2000}
                         className="mx-auto w-24 rounded-full"
                         alt="avatar"
+                        priority
                       ></Image>
                       <h2 className="text-xl">@mazerewards</h2>
                       <p className="text-xs">10,000+ Followers</p>
