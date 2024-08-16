@@ -15,7 +15,7 @@ import {
   RefreshCw,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import PreloaderTwo from "@/components/Preloader";
+
 import CardTwo from "@/components/CardTwo";
 import {
   InputOTP,
@@ -97,7 +97,6 @@ const OffersPage = () => {
   };
 
   if (loading) {
-    return <PreloaderTwo />;
   }
 
   if (error) {
