@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useState } from "react";
+
+import React, { useCallback, useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -9,6 +10,21 @@ import { v4 as uuidv4 } from "uuid";
 import Image from "next/image";
 import { ChevronRight, MoveRight, Loader2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import PreloaderTwo from "@/components/Preloader";
+import { motion } from "framer-motion";
+import ReactCanvasConfetti from "react-canvas-confetti";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+
 import {
   InputOTP,
   InputOTPGroup,
@@ -45,8 +61,75 @@ type Countdown = {
   current: number;
   initial: number;
 };
+
 const OffersPage = () => {
+  // Styles for the canvas used by ReactCanvasConfetti
+  const canvasStyles: any = {
+    position: "absolute",
+    pointerEvents: "none",
+    width: "100%",
+    height: "100%",
+    zIndex: 1,
+    overflow: "hidden",
+    top: 0,
+    left: 0,
+  };
+
+  // Animation variants for the container
+  const containerVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0 },
+  };
+
+  // Reference to hold the confetti animation instance
+  const refAnimationInstance = useRef<any>(null);
+
+  // Callback to get the instance of the confetti animation
+  const getInstance = useCallback((instance: any) => {
+    refAnimationInstance.current = instance;
+  }, []);
+
+  // Function to create a confetti shot with specified options
+  const makeShot = useCallback(
+    (opts: any, originX: any, originY: any, angle: any) => {
+      if (refAnimationInstance.current) {
+        refAnimationInstance.current({
+          ...opts,
+          origin: { x: originX, y: originY },
+          angle: angle,
+          particleCount: 500,
+          colors: [
+            "#FFA500",
+            "#FF4500",
+            "#FFD700",
+            "#FF0000",
+            "#800000",
+            "#000000",
+            "#808080",
+          ],
+        });
+      }
+    },
+    [],
+  );
+
+  // Trigger confetti shots when component mounts
+  useEffect(() => {
+    fire();
+  }, []);
+
+  // Function to trigger confetti shots from different positions
+  const fire = useCallback(() => {
+    // Create multiple confetti shots with different positions and angles
+    makeShot({ spread: 100, startVelocity: 60 }, 0.2, 1.2, 90);
+    makeShot({ spread: 100, startVelocity: 60 }, 0.8, 1.2, 90);
+    makeShot({ spread: 300, startVelocity: 50 }, 0.3, -0.2, 270);
+    makeShot({ spread: 300, startVelocity: 50 }, 0.6, -0.2, 270);
+  }, [makeShot]);
   const cid = uuidv4();
+  const [isOpen, setIsOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(true);
+
   const router = useRouter();
   const { data: session } = useSession();
   const [value, setValue] = useState("");
@@ -69,6 +152,19 @@ const OffersPage = () => {
     {},
   );
 
+  const handleNo = () => {
+    setIsOpen(false);
+  };
+  const handleYes = () => {
+    setIsOpen(false);
+    fire();
+
+    const newCompletedTasks = 1;
+    setCompletedTasks(newCompletedTasks);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("completedTasks", newCompletedTasks.toString());
+    }
+  };
   useEffect(() => {
     const fetchOffers = async () => {
       try {
@@ -93,7 +189,9 @@ const OffersPage = () => {
         console.error("Frontend Fetch Error:", err);
         setError("Failed to fetch offers");
       } finally {
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 2700); // Minimalny czas wyświetlania 2 sekundy
       }
     };
     fetchOffers();
@@ -148,11 +246,8 @@ const OffersPage = () => {
     aff_sub4_value: any,
     event: React.MouseEvent,
   ) => {
-    const newCompletedTasks = 1;
-    setCompletedTasks(newCompletedTasks);
-    if (typeof window !== "undefined") {
-      localStorage.setItem("completedTasks", newCompletedTasks.toString());
-    }
+    setIsOpen(true);
+    setIsDrawerOpen(false);
     if (!session || !session.user?.username) {
       console.error("User is not authenticated or session is missing");
       return;
@@ -169,7 +264,6 @@ const OffersPage = () => {
           username: session.user.username,
         }),
       });
-      window.location.reload();
 
       if (!response.ok) {
         console.error("Failed to save activity");
@@ -182,11 +276,8 @@ const OffersPage = () => {
     cid: string,
     event: React.MouseEvent,
   ) => {
-    const newCompletedTasks = 1;
-    setCompletedTasks(newCompletedTasks);
-    if (typeof window !== "undefined") {
-      localStorage.setItem("completedTasks", newCompletedTasks.toString());
-    }
+    setIsOpen(true);
+    setIsDrawerOpen(false);
     if (!session || !session.user?.username) {
       console.error("User is not authenticated or session is missing");
       return;
@@ -204,7 +295,6 @@ const OffersPage = () => {
           username: session.user.username,
         }),
       });
-      window.location.reload();
 
       if (!response.ok) {
         console.error("Failed to save activity");
@@ -220,10 +310,9 @@ const OffersPage = () => {
       setCompletedTasks(storedCompletedTasks);
     }
   }, [completedTasks]);
+
   if (loading) {
-    return (
-      <div className="p-8 text-center text-xl text-neutral-800">Loading...</div>
-    );
+    return <PreloaderTwo />;
   }
   if (error) {
     return <div className="text-red-500">Error: {error}</div>;
@@ -232,12 +321,13 @@ const OffersPage = () => {
     <div className="mx-auto flex w-full flex-col gap-2">
       {session ? (
         <div className="flex flex-col gap-2">
-          <div className="container flex justify-center rounded-2xl">
+          {" "}
+          <div className="flex justify-center rounded-2xl pl-4">
             <div id="top-info" className="w-full">
               <div className="absolute -top-3 left-1/2 -translate-x-1/2 transform">
                 <span className="relative flex">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75"></span>
-                  <span className="relative inline-flex h-7 w-7 items-center justify-center rounded-full bg-green-500">
+                  <span className="relative inline-flex h-6 w-6 items-center justify-center rounded-full bg-green-500">
                     <svg
                       width="9"
                       height="15"
@@ -280,20 +370,20 @@ const OffersPage = () => {
                 className="text-xs text-neutral-800 underline"
                 onClick={handleSignOut}
               >
-                Log Out
+                Change username
               </Button>
             </div>
           </div>
           <div className="container rounded-2xl bg-neutral-100 p-4">
             <div className="w-full text-center dark:border-gray-700 dark:bg-gray-800 sm:p-8">
               <Badge className="absolute left-1/2 top-11 -translate-x-1/2 transform">
-                Start now!
+                Step I
               </Badge>
-              <h5 className="mb-4 mt-2 text-2xl font-bold text-gray-900 dark:text-white">
-                Complete Any Task
+              <h5 className="mb-4 mt-2 text-left text-2xl font-bold text-gray-900 dark:text-white">
+                Follow us on TikTok!
               </h5>
-              <Drawer>
-                <DrawerTrigger>
+              <Drawer open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
+                <DrawerTrigger asChild>
                   <ul>
                     <li className="mb-2">
                       <div className="offer flex rounded pb-4">
@@ -307,14 +397,14 @@ const OffersPage = () => {
                         <div className="-mb-2 ml-2 flex w-full items-center gap-2 border-b-[1px] border-gray-300 pb-2">
                           <div className="w-full text-left">
                             <h3 className="text-[14px] font-medium leading-relaxed">
-                              Follow our TikTok
+                              TikTok
                             </h3>
                             <p className="block max-h-12 text-[14px] leading-tight text-gray-900">
                               Sign up if you don&apos;t have an account!
                             </p>
                           </div>
                           <div>
-                            <div className="block w-20 rounded-3xl bg-[#ff3b5c] p-1 text-center text-xs font-bold leading-5 text-white">
+                            <div className="block w-20 rounded-3xl bg-black p-1 text-center text-xs font-bold leading-5 text-white">
                               Follow
                             </div>
                           </div>
@@ -325,7 +415,7 @@ const OffersPage = () => {
                 </DrawerTrigger>
                 <DrawerContent>
                   <DrawerHeader>
-                    <div className="mb-2 flex flex-col gap-2">
+                    <div className="mb-2 flex flex-col gap-2 text-center">
                       <Image
                         src="/Artboard.png"
                         width={2000}
@@ -335,7 +425,7 @@ const OffersPage = () => {
                         priority
                       ></Image>
                       <h2 className="text-xl">@mazerewards</h2>
-                      <p className="text-xs">10,000+ Followers</p>
+                      <p className="text-xs">10K+ Followers</p>
                       {/* <Button className="mx-auto h-12 w-full bg-[#ff3b5c]">
                         Follow
                       </Button> */}
@@ -364,7 +454,7 @@ const OffersPage = () => {
                           >
                             <Button className="w-full bg-[#ff3b5c]">
                               {" "}
-                              Sign up for TikTok
+                              Create A New TikTok Account
                             </Button>
                           </a>
                         </li>
@@ -383,13 +473,40 @@ const OffersPage = () => {
                     </a>
                     <DrawerClose>
                       <Button variant="link" className="w-full">
-                        Change task
+                        Not now
                       </Button>
                     </DrawerClose>
                   </DrawerFooter>
                 </DrawerContent>
               </Drawer>
-              <ul>
+              <AlertDialog open={isOpen}>
+                <AlertDialogContent className="w-8/12 rounded-xl">
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>
+                      Did you follow us on TikTok?{" "}
+                    </AlertDialogTitle>
+                    <AlertDialogDescription>
+                      Please confirm that you have followed our profile on
+                      TikTok. This action is necessary to proceed.
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel onClick={handleNo}>
+                      No, I haven&apos;t
+                    </AlertDialogCancel>
+                    <AlertDialogAction onClick={handleYes}>
+                      Yes, I did
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+
+              <ReactCanvasConfetti
+                refConfetti={getInstance}
+                style={canvasStyles}
+              />
+
+              <ul className="hidden">
                 {selectedOffers.map((offer) => (
                   <li key={offer.offerid} className="mb-2">
                     <Link
@@ -461,39 +578,40 @@ const OffersPage = () => {
                   </li>
                 ))}
               </ul>
-              <p className="completed-instruction mb-2 text-xs text-neutral-800">
+              {/* <p className="completed-instruction mb-2 text-xs text-neutral-800">
                 95% of users complete this in less than 5 minutes
-              </p>
+              </p> */}
               <div className="completed-apps relative rounded-xl bg-slate-200 p-4 text-left shadow">
                 <div>
-                  {completedTasks < 2 && (
+                  {completedTasks < 1 && (
                     <div className="offer-content">
                       {/* Ten div będzie widoczny tylko, jeśli completedTasks jest mniejsze niż 2 */}
                       <div id="completed">
-                        <div className="mb-2 flex">
-                          <h1 className="mx-auto text-xl font-bold text-gray-700">
-                            Completed: {completedTasks}/2
-                          </h1>
+                        <div className="flex">
+                          {/* <h1 className="mx-auto text-xl font-bold text-gray-700">
+                            Status: {completedTasks}/1
+                          </h1> */}
                         </div>
                         <Button
-                          className="h-16 w-full rounded-full bg-blue-600 text-lg font-bold"
+                          className="h-16 w-full rounded-full bg-blue-800 text-lg font-bold"
                           variant="default"
                           disabled
                         >
-                          Claim Now <MoveRight className="ml-2 h-5 w-5" />
+                          Continue <MoveRight className="ml-2 h-5 w-5" />
                         </Button>
                       </div>
                     </div>
                   )}
 
-                  {completedTasks >= 2 && (
+                  {completedTasks >= 1 && (
                     <div className="w-full">
-                      <p className="py-2 text-center text-xl font-bold text-green-700">
-                        Great work! Step 1 has been fully finished.
+                      <p className="mb-4 text-center text-lg font-semibold leading-tight text-neutral-900">
+                        Thank you! <br />
+                        Please continue to receive your Reward access!
                       </p>
-                      <Link href="/step-2">
+                      <Link href="/step-2-play">
                         <Button
-                          className="h-16 w-full rounded-full bg-blue-600 text-lg font-bold"
+                          className="h-16 w-full rounded-full bg-blue-800 text-lg font-bold"
                           variant="default"
                         >
                           Go to Step 2 <MoveRight className="ml-2 h-5 w-5" />
