@@ -62,7 +62,7 @@ export default function PreloaderTwo() {
               initial="visible"
               animate={progress === 100 ? "end" : "visible"}
               variants={loaderVariants}
-              className="absolute z-50 flex h-full w-full items-center justify-center bg-white"
+              className="absolute z-50 flex h-full w-full items-center justify-center rounded-2xl bg-neutral-100"
             >
               <div className="text-center text-xl font-bold text-neutral-400">
                 {progress}%

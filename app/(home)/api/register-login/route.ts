@@ -1,7 +1,5 @@
-import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
-
-const prisma = new PrismaClient();
+import prisma from "@/lib/prisma"; // Zakładając, że używasz pliku `prisma.ts` w `lib` jako klienta Prisma
 
 export async function POST(req: Request) {
   const { username } = await req.json();
@@ -18,30 +16,31 @@ export async function POST(req: Request) {
     where: { username },
   });
 
-  if (!user) {
-    // Jeśli użytkownik nie istnieje, utwórz nowego
-    user = await prisma.user.create({
-      data: {
-        username,
-      },
-    });
-    const userId: string = user.id;
+  let accountExists = !!user; // Zmienna określająca, czy konto już istnieje
 
-    await prisma.event.create({
-      data: {
-        event: `registered`,
-        user: { connect: { id: userId } },
-      },
-    });
-  } else {
-    const userId: string = user.id;
-    await prisma.event.create({
-      data: {
-        event: `logged_in`,
-        user: { connect: { id: userId } },
-      },
-    });
-  }
+  const userId: string =
+    user?.id ||
+    (
+      await prisma.user.create({
+        data: { username },
+      })
+    ).id;
 
-  return NextResponse.json({ user }, { status: 200 });
+  const eventType = user ? "logged_in" : "registered";
+
+  await prisma.event.create({
+    data: {
+      event: eventType,
+      user: { connect: { id: userId } },
+    },
+  });
+
+  // Zwrot odpowiedzi, która zawiera informację, czy konto już istniało
+  return NextResponse.json(
+    {
+      user: { id: userId, username },
+      accountExists, // True jeśli konto już istniało, false jeśli zostało właśnie utworzone
+    },
+    { status: 200 },
+  );
 }

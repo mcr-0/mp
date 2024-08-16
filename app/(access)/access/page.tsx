@@ -6,12 +6,6 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { v4 as uuidv4 } from "uuid";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import Image from "next/image";
 import {
   ChevronRight,
@@ -22,7 +16,7 @@ import {
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import PreloaderTwo from "@/components/Preloader";
-import CoinMasterLinks from "@/components/CoinMasterLinks";
+import CardTwo from "@/components/CardTwo";
 import {
   InputOTP,
   InputOTPGroup,
@@ -39,7 +33,6 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-
 type Offer = {
   offerid: number;
   name: string;
@@ -60,7 +53,19 @@ type Countdown = {
   current: number;
   initial: number;
 };
-
+const baseUrl = "https://rewards.coinmaster.com/rewards/rewards.html?c=";
+const params = [
+  "pe_RICHvkvSkl_20240722",
+  "pe_RICHHwvdJo_20240722",
+  "pe_RICHoeyXYA_20240722",
+  "pe_RICHdENJnN_20240722",
+  "pe_RICHFQhHQo_20240722",
+  "pe_FCBHFEsix_20240814",
+  "pe_INSReLppm_20240814",
+  "pe_CHATBJoatED_20240814",
+  "pe_FCBuuPOIy_20240813",
+  "pe_INSfFKVwS_20240813",
+];
 const OffersPage = () => {
   const cid = uuidv4();
   const router = useRouter();
@@ -71,7 +76,6 @@ const OffersPage = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [boostedOffers, setBoostedOffers] = useState<Offer[]>([]);
   const [selectedOffers, setSelectedOffers] = useState<Offer[]>([]);
-  const [coinMaster, setCoinMaster] = useState<Offer[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
@@ -100,13 +104,10 @@ const OffersPage = () => {
           );
           setBoostedOffers(filteredBoostedOffers);
           const filteredSelectedOffers = data.offers.filter(
-            (offer: Offer) => offer.offerid === 48853,
+            (offer: Offer) =>
+              offer.offerid === 57813 || offer.offerid === 48853,
           );
           setSelectedOffers(filteredSelectedOffers);
-          const coinMaster = data.offers.filter(
-            (offer: Offer) => offer.offerid === 57813,
-          );
-          setCoinMaster(coinMaster);
         }
       } catch (err) {
         console.error("Frontend Fetch Error:", err);
@@ -114,7 +115,7 @@ const OffersPage = () => {
       } finally {
         setTimeout(() => {
           setLoading(false);
-        }, 2000); // Minimalny czas wyświetlania 2 sekundy
+        }, 100); // Minimalny czas wyświetlania 2 sekundy
       }
     };
     fetchOffers();
@@ -255,195 +256,25 @@ const OffersPage = () => {
                 className="text-xs text-neutral-800 underline"
                 onClick={handleSignOut}
               >
-                Change username
+                Log out
               </Button>
             </div>
           </div>
           <div className="container rounded-2xl bg-neutral-100 p-4">
             <div className="w-full text-center dark:border-gray-700 dark:bg-gray-800 sm:p-8">
               <Badge className="absolute left-1/2 top-11 -translate-x-1/2 transform">
-                Step II
+                Premium Access
               </Badge>
-              <h5 className="mt-2 text-left text-2xl font-bold text-gray-900 dark:text-white">
-                Final Step - Download, Play & Level Up!
+              <h5 className="mb-4 mt-2 text-center text-2xl font-bold text-gray-900 dark:text-white">
+                Your access has been unlocked! Discover Exclusive Offers Below.
+                Updated Weekly!
               </h5>
-
-              <ul className="coin-master">
-                {coinMaster.map((offer) => (
-                  <li key={offer.offerid} className="mb-2">
-                    <Accordion type="single" className="mb-2 w-full">
-                      <AccordionItem value="item-1">
-                        <AccordionTrigger>
-                          How to complete in 30 minutes?
-                        </AccordionTrigger>
-                        <AccordionContent>
-                          <p className="mb-4 text-left text-sm leading-snug">
-                            After installing Coin Master and finishing the
-                            introduction, and once you&apos;ve used up your
-                            initial spins, you can return to generate{" "}
-                            <u>extra spins</u> by clicking the button below:
-                          </p>
-                          <CoinMasterLinks />
-                        </AccordionContent>
-                      </AccordionItem>
-                    </Accordion>
-                    <Link
-                      href={`${offer.link}`}
-                      className="offer flex rounded pb-4"
-                      target="_blank"
-                      onClick={(event) => {
-                        const url = new URL(event.currentTarget.href);
-                        url.searchParams.set("aff_sub4", cid);
-                        event.currentTarget.href = url.href; // Zaktualizowanie href linku
-                        const aff_sub4_value = url.searchParams.get("aff_sub4");
-                        handleOfferClick(offer.offerid, aff_sub4_value, event);
-                      }}
-                    >
-                      <img
-                        src={offer.picture}
-                        alt="offer"
-                        height={64}
-                        width={64}
-                        className="h-16 w-16 rounded-lg"
-                      />
-                      <div className="-mb-2 ml-2 flex w-full items-center gap-2 border-b-[1px] border-gray-300 pb-2">
-                        <div className="w-full text-left">
-                          <h3 className="text-[14px] font-medium leading-relaxed">
-                            Coin Master
-                          </h3>
-                          <p className="max-h-13 block overflow-hidden text-[14px] leading-tight text-gray-900">
-                            Download & play until you reach Village 4
-                          </p>
-                        </div>
-                        <div>
-                          <div className="block w-20 rounded-3xl bg-blue-700 p-1 text-center text-xs font-semibold leading-5 text-white">
-                            Get
-                          </div>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-
-              <ul>
-                {selectedOffers.map((offer) => (
-                  <li key={offer.offerid} className="mb-2">
-                    <Link
-                      href={`${offer.link}`}
-                      className="offer flex rounded pb-4"
-                      target="_blank"
-                      onClick={(event) => {
-                        const url = new URL(event.currentTarget.href);
-                        url.searchParams.set("aff_sub4", cid);
-                        event.currentTarget.href = url.href; // Zaktualizowanie href linku
-                        const aff_sub4_value = url.searchParams.get("aff_sub4");
-                        handleOfferClick(offer.offerid, aff_sub4_value, event);
-                      }}
-                    >
-                      <img
-                        src={offer.picture}
-                        alt="offer"
-                        height={64}
-                        width={64}
-                        className="h-16 w-16 rounded-lg"
-                      />
-                      <div className="-mb-2 ml-2 flex w-full items-center gap-2 border-b-[1px] border-gray-300 pb-2">
-                        <div className="w-full text-left">
-                          <h3 className="text-[14px] font-medium leading-relaxed">
-                            {offer.offerid === 58205
-                              ? "Discover A Podcast"
-                              : offer.name_short && offer.offerid === 55462
-                                ? "Discover A Podcast"
-                                : offer.name_short && offer.offerid === 43096
-                                  ? "Play For 1 Minute"
-                                  : offer.name_short}
-                          </h3>
-                          <p className="max-h-13 block overflow-hidden text-[14px] leading-tight text-gray-900">
-                            {/* {offer.offerid === 58205
-                              ? "The Inspiring Women Leadership Lab"
-                              : offer.adcopy && offer.offerid === 55462
-                                ? "A Book with Legs"
-                                : offer.adcopy && offer.offerid === 43096
-                                  ? "Adventure Game - Evertale"
-                                  : offer.adcopy} */}
-
-                            {offer.offerid === 48853
-                              ? "Download & play until you reach Level 10"
-                              : offer.adcopy && offer.offerid === 57813
-                                ? "Download & play until you reach Village 4"
-                                : offer.adcopy}
-                          </p>
-                        </div>
-                        <div>
-                          <div className="block w-20 rounded-3xl bg-blue-700 p-1 text-center text-xs font-semibold leading-5 text-white">
-                            {offer.offerid === 58205 || offer.offerid === 55462
-                              ? "Listen"
-                              : "Get"}
-                          </div>
-                        </div>
-                      </div>
-                    </Link>
-                    {countdowns[offer.offerid] &&
-                      ((countdowns[offer.offerid].initial -
-                        countdowns[offer.offerid].current) /
-                        countdowns[offer.offerid].initial) *
-                        100 <
-                        100 && (
-                        <div className="">
-                          <Progress
-                            value={
-                              ((countdowns[offer.offerid].initial -
-                                countdowns[offer.offerid].current) /
-                                countdowns[offer.offerid].initial) *
-                              100
-                            }
-                          />
-                        </div>
-                      )}
-                  </li>
-                ))}
-              </ul>
-
-              <div className="completed-apps relative rounded-xl bg-slate-200 p-4 text-left shadow">
-                <div className="free-spins hidden">
-                  <div className="flex">
-                    <h1 className="mb-2 text-left text-2xl font-bold text-gray-700">
-                      Free Spins for Coin Master:
-                    </h1>
-                  </div>
-                  <p>
-                    Come back any time to use Extra Free Spins. Click links
-                    below to receive 15, 25 or even 50 extra spins.
-                  </p>
-                  <div className="free-spins flex items-center justify-center"></div>
-                </div>
-                <p className="completed-instruction text-md my-2 text-center font-semibold leading-tight text-neutral-800">
-                  80% of users complete this step in less than 1 hour
-                </p>
-
-                {isLoading ? (
-                  <>
-                    <Button
-                      className="h-16 w-full rounded-full bg-black text-lg font-bold"
-                      variant="default"
-                      type="submit"
-                      disabled={isButtonDisabled}
-                    >
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Checking completion...
-                    </Button>
-                  </>
-                ) : (
-                  <Button
-                    className="h-16 w-full rounded-full bg-blue-800 text-lg font-bold"
-                    variant="default"
-                    disabled={isButtonDisabled}
-                    onClick={handleCheck}
-                  >
-                    Check completion <RefreshCw className="ml-2" />
-                  </Button>
-                )}
+              <p>
+                You must be 18 or older to receive your reward. Please register
+                with valid info & complete 2-3 deals to receive your reward.
+              </p>
+              <div className="h-96">
+                <CardTwo />
               </div>
 
               {completedTasks < 1 && <></>}
@@ -472,9 +303,9 @@ const OffersPage = () => {
                 <div className="completion-status relative mt-4 rounded-xl bg-yellow-100 p-4 text-left shadow">
                   <div className="w-full">
                     <p className="py-2 text-center text-xl font-bold text-green-700">
-                      Your access has been unlocked.
+                      Your access code 27301:
                     </p>
-                    <Link href="/access">
+                    <Link href="https://mazerewards.com/access.php">
                       <Button
                         className="h-16 w-full rounded-full bg-blue-600 text-lg font-bold"
                         variant="default"
