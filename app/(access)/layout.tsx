@@ -5,16 +5,12 @@ import Image from "next/image";
 import * as React from "react";
 import Link from "next/link";
 import Script from "next/script";
-import { Button } from "@/components/ui/button";
 const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
-  title: "MazedPromos - Get Access To Deals And Promos",
+  title: "MazedPromos - Exclusive Content",
   description: "Play Games And Get Access to Over 30+ Deals And Promos",
 };
 import SessionProviderWrapper from "../(home)/SessionProviderWrapper"; // Zakładając, że jest w tym samym katalogu
-import GoogleAds from "@/components/GoogleAds";
-import Reviews from "@/components/Reviews";
-import PreloaderTwo from "@/components/Preloader";
 
 export default function RootLayout({
   children,
@@ -25,9 +21,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <GoogleAds />
-      </head>
       <body className={`${inter.className} bg-black`}>
         <div className="relative isolate min-h-screen overflow-hidden bg-gradient-to-b from-cyan-500 via-blue-600 to-indigo-500">
           <div className="absolute left-0 right-0 top-0 -z-20 h-full min-h-screen w-full"></div>
@@ -85,9 +78,7 @@ export default function RootLayout({
           </header>
           <div className="relative m-4">
             <div className="isolate mx-auto w-full max-w-md items-center justify-center rounded-3xl bg-white p-2 shadow-lg ring-1 ring-black/5 backdrop-blur-md">
-              <SessionProviderWrapper session={session}>
-                {children}
-              </SessionProviderWrapper>{" "}
+              {children}
             </div>
           </div>
           <p className="mx-auto max-w-sm px-4 pb-20 text-center text-xs text-neutral-200">
