@@ -14,13 +14,14 @@ export const metadata: Metadata = {
 import SessionProviderWrapper from "../(home)/SessionProviderWrapper"; // Zakładając, że jest w tym samym katalogu
 import GoogleAds from "@/components/GoogleAds";
 import Reviews from "@/components/Reviews";
+import { Session } from "next-auth"; // Import odpowiedniego typu
 
 export default function RootLayout({
   children,
   session,
 }: Readonly<{
   children: React.ReactNode;
-  session: any;
+  session: Session | null; // Zamiast `any` użyjemy dokładnego typu `Session` lub `null`
 }>) {
   return (
     <html lang="en">
