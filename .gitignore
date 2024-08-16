@@ -29,7 +29,7 @@ yarn-error.log*
 .env*.local
 .env
 (dashboard2)
-(access2)
+
 # vercel
 .vercel
 
