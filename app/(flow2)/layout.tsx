@@ -14,7 +14,6 @@ export const metadata: Metadata = {
 import SessionProviderWrapper from "../(home)/SessionProviderWrapper"; // Zakładając, że jest w tym samym katalogu
 import GoogleAds from "@/components/GoogleAds";
 import Reviews from "@/components/Reviews";
-import { Session } from "next-auth";
 
 export default function RootLayout({
   children,
