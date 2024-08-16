@@ -55,7 +55,6 @@ const OffersPage = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [boostedOffers, setBoostedOffers] = useState<Offer[]>([]);
   const [selectedOffers, setSelectedOffers] = useState<Offer[]>([]);
-
   const [clickedOffers, setClickedOffers] = useState<Set<number>>(new Set());
   const [completedOffers, setCompletedOffers] = useState<Set<number>>(
     new Set(),
@@ -66,7 +65,6 @@ const OffersPage = () => {
     }
     return 0;
   });
-
   const [countdowns, setCountdowns] = useState<{ [key: number]: Countdown }>(
     {},
   );
@@ -100,24 +98,21 @@ const OffersPage = () => {
     };
     fetchOffers();
   }, []);
-
   const handleSignOut = async () => {
     await signOut({ redirect: false });
     router.push("/");
   };
   const handleOfferClick = async (
     offerid: number,
-    cid: string,
+    aff_sub4_value: any,
     event: React.MouseEvent,
   ) => {
     setCompletedTasks((prevCompletedTasks) => {
       const newCompletedTasks = prevCompletedTasks + 1;
-
       // Zapisanie nowej wartości w localStorage
       if (typeof window !== "undefined") {
         localStorage.setItem("completedTasks", newCompletedTasks.toString());
       }
-
       return newCompletedTasks;
     });
 
@@ -134,11 +129,11 @@ const OffersPage = () => {
           },
           body: JSON.stringify({
             offerid,
-            cid,
+            aff_sub4_value,
             username: session.user.username,
           }),
         });
-        console.log("saved event");
+        console.log(aff_sub4_value);
 
         if (!response.ok) {
           console.error("Failed to save activity");
@@ -148,10 +143,9 @@ const OffersPage = () => {
       }
     }
   };
-
   const handleTiktokOfferClick = async (
     offerid: number,
-    cid: string,
+    aff_sub4_value: any,
     event: React.MouseEvent,
   ) => {
     const newCompletedTasks = 1;
@@ -171,7 +165,7 @@ const OffersPage = () => {
         },
         body: JSON.stringify({
           offerid,
-          cid,
+          aff_sub4_value,
           username: session.user.username,
         }),
       });
@@ -184,7 +178,6 @@ const OffersPage = () => {
       console.error("Error sending activity:", error);
     }
   };
-
   const handleTiktokFollowClick = async (
     cid: string,
     event: React.MouseEvent,
@@ -220,7 +213,6 @@ const OffersPage = () => {
       console.error("Error sending activity:", error);
     }
   };
-
   useEffect(() => {
     // Aktualizuje stan, jeśli localStorage się zmieni (opcjonalnie)
     const storedCompletedTasks = Number(localStorage.getItem("completedTasks"));
@@ -228,13 +220,11 @@ const OffersPage = () => {
       setCompletedTasks(storedCompletedTasks);
     }
   }, [completedTasks]);
-
   if (loading) {
     return (
       <div className="p-8 text-center text-xl text-neutral-800">Loading...</div>
     );
   }
-
   if (error) {
     return <div className="text-red-500">Error: {error}</div>;
   }
@@ -356,12 +346,21 @@ const OffersPage = () => {
                       {boostedOffers.map((offer) => (
                         <li key={offer.offerid}>
                           <a
-                            href={`${offer.link}&aff_sub4=${cid}`}
+                            href={offer.link}
                             className=""
                             target="_blank"
-                            onClick={(event) =>
-                              handleTiktokOfferClick(offer.offerid, cid, event)
-                            }
+                            onClick={(event) => {
+                              const url = new URL(event.currentTarget.href);
+                              url.searchParams.set("aff_sub4", cid);
+                              event.currentTarget.href = url.href; // Zaktualizowanie href linku
+                              const aff_sub4_value =
+                                url.searchParams.get("aff_sub4");
+                              handleTiktokOfferClick(
+                                offer.offerid,
+                                aff_sub4_value,
+                                event,
+                              );
+                            }}
                           >
                             <Button className="w-full bg-[#ff3b5c] text-neutral-100">
                               {" "}
@@ -393,13 +392,17 @@ const OffersPage = () => {
               <ul>
                 {selectedOffers.map((offer) => (
                   <li key={offer.offerid} className="mb-2">
-                    <a
-                      href={`${offer.link}&aff_sub4=${cid}`}
+                    <Link
+                      href={offer.link}
                       className="offer flex rounded pb-4"
                       target="_blank"
-                      onClick={(event) =>
-                        handleOfferClick(offer.offerid, cid, event)
-                      }
+                      onClick={(event) => {
+                        const url = new URL(event.currentTarget.href);
+                        url.searchParams.set("aff_sub4", cid);
+                        event.currentTarget.href = url.href; // Zaktualizowanie href linku
+                        const aff_sub4_value = url.searchParams.get("aff_sub4");
+                        handleOfferClick(offer.offerid, aff_sub4_value, event);
+                      }}
                     >
                       <img
                         src={offer.picture}
@@ -437,7 +440,7 @@ const OffersPage = () => {
                           </div>
                         </div>
                       </div>
-                    </a>
+                    </Link>
                     {countdowns[offer.offerid] &&
                       ((countdowns[offer.offerid].initial -
                         countdowns[offer.offerid].current) /

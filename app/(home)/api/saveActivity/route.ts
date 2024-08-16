@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 export async function POST(request: NextRequest) {
   try {
-    const { offerid, username, cid } = await request.json();
+    const { offerid, username, aff_sub4_value } = await request.json();
 
     const user = await prisma.user.findUnique({
       where: { username },
@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
         data: {
           event: `clickedOffer`,
           offer_id: offerid,
-          cid: cid,
+          cid: aff_sub4_value,
           user: { connect: { id: user.id } },
         },
       });
