@@ -11,10 +11,9 @@ export const metadata: Metadata = {
   title: "MazedPromos - Get Access To Deals And Promos",
   description: "Play Games And Get Access to Over 30+ Deals And Promos",
 };
-import SessionProviderWrapper from "./SessionProviderWrapper"; // Zakładając, że jest w tym samym katalogu
+import SessionProviderWrapper from "../(home)/SessionProviderWrapper"; // Zakładając, że jest w tym samym katalogu
 import GoogleAds from "@/components/GoogleAds";
 import Reviews from "@/components/Reviews";
-import PreloaderTwo from "@/components/Preloader";
 
 export default function RootLayout({
   children,
@@ -29,7 +28,7 @@ export default function RootLayout({
         <GoogleAds />
       </head>
       <body className={`${inter.className} bg-black`}>
-        <div className="relative isolate min-h-screen overflow-hidden bg-gradient-to-b from-cyan-500 via-blue-600 to-indigo-500">
+        <div className="relative isolate min-h-screen overflow-hidden bg-gradient-to-t from-cyan-500 via-blue-600 to-indigo-500">
           <div className="absolute left-0 right-0 top-0 -z-20 h-full min-h-screen w-full"></div>
           {/* <Image
             src="/blue-bg.png"
@@ -54,11 +53,11 @@ export default function RootLayout({
                   priority
                 ></Image>
               </Link>
-              <div className="">
+              <div className="hidden">
                 <span className="animate-pulse">Status: </span>
                 <span className="animate-pulse text-green-300">Available</span>
               </div>
-              <svg
+              {/* <svg
                 width="24"
                 height="24"
                 viewBox="0 0 20 20"
@@ -71,15 +70,16 @@ export default function RootLayout({
                   stroke="#1E1E1E"
                   strokeWidth="1.5"
                 />
-              </svg>
+              </svg> */}
             </div>
 
             <h1 className="text-4xl font-black tracking-tighter text-neutral-100">
-              Complete Two Steps <br />& Gain Access
+              Complete (2) Steps
+              <br /> & Get Access!
             </h1>
-            <h1 className="text-lg leading-8 tracking-tighter text-neutral-200">
+            {/* <h1 className="text-lg leading-8 tracking-tighter text-neutral-200">
               <span className="">To Deals And Promos* Now!</span>
-            </h1>
+            </h1> */}
           </header>
           <div className="relative m-4">
             <div className="isolate mx-auto w-full max-w-md items-center justify-center rounded-3xl bg-white p-2 shadow-lg ring-1 ring-black/5 backdrop-blur-md">
@@ -109,7 +109,6 @@ export default function RootLayout({
             .
           </p>
         </div>
-        <Reviews />
       </body>
 
       <Script src="https://scripts.simpleanalyticscdn.com/latest.js" />

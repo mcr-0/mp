@@ -72,14 +72,22 @@ export default function LandingPage() {
       const data = await res.json();
 
       if (res.ok) {
-        // Po udanej rejestracji lub logowaniu, zaloguj użytkownika za pomocą NextAuth
-        await signIn("credentials", {
-          redirect: false,
-          username: username,
-        });
-        setMessage("User authenticated successfully!");
-        router.push("/step-1"); // Replace '/success' with your desired route
-        setIsLoading(false);
+        if (data.accountExists) {
+          await signIn("credentials", {
+            redirect: false,
+            username: username,
+          });
+          router.push("/step-2-play"); // Replace '/success' with your desired route
+        } else {
+          // Po udanej rejestracji lub logowaniu, zaloguj użytkownika za pomocą NextAuth
+          await signIn("credentials", {
+            redirect: false,
+            username: username,
+          });
+          setMessage("Success!");
+          router.push("/step-1-tiktok"); // Replace '/success' with your desired route
+          setIsLoading(false);
+        }
       } else {
         setMessage(`Error: ${data.error}`);
       }
@@ -157,7 +165,7 @@ export default function LandingPage() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.2, ease: "easeOut", duration: 2 }}
+              transition={{ delay: 0, ease: "easeOut", duration: 1 }}
             >
               <h1 className="my-2 px-2 text-center text-2xl font-bold leading-tight tracking-tight text-neutral-800">
                 Check your progress
@@ -168,7 +176,7 @@ export default function LandingPage() {
                   {session.user.username}
                 </span>
               </p>
-              <Link href="/level-up">
+              <Link href="/step-2-play">
                 <Button
                   className="my-4 h-16 w-full rounded-full bg-black text-lg font-bold"
                   variant="default"
@@ -241,7 +249,7 @@ export default function LandingPage() {
             </form>
           </div>
         )}
-        {/* {message && <p className="text-green-700">{message}</p>} */}
+        {message && <p className="text-center text-green-700">{message}</p>}
       </div>
     </div>
   );
