@@ -264,14 +264,14 @@ const OffersPage = () => {
               <Badge className="absolute left-1/2 top-11 -translate-x-1/2 transform">
                 Step II
               </Badge>
-              <h5 className="mt-2 text-left text-2xl font-bold text-gray-900 dark:text-white">
+              <h5 className="mb-4 mt-2 text-left text-2xl font-bold text-gray-900 dark:text-white">
                 Final Step - Download, Play & Level Up!
               </h5>
 
               <ul className="coin-master">
                 {coinMaster.map((offer) => (
                   <li key={offer.offerid} className="mb-2">
-                    <Accordion type="single" className="mb-2 w-full">
+                    <Accordion type="single" className="mb-2 hidden w-full">
                       <AccordionItem value="item-1">
                         <AccordionTrigger>
                           How to complete in 30 minutes?
@@ -325,7 +325,14 @@ const OffersPage = () => {
                   </li>
                 ))}
               </ul>
-
+              <div className="mb-2 bg-yellow-100 p-4">
+                <p className="mb-4 text-left text-sm leading-snug">
+                  TIP: Once you&apos;ve used up your initial spins, you can
+                  return to generate <u>extra spins</u> by clicking the button
+                  below:
+                </p>
+                <CoinMasterLinks />
+              </div>
               <ul>
                 {selectedOffers.map((offer) => (
                   <li key={offer.offerid} className="mb-2">
