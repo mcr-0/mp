@@ -452,9 +452,11 @@ const OffersPage = () => {
                               );
                             }}
                           >
-                            <Button className="w-full bg-[#ff3b5c]">
+                            <Button className="mt-2 w-full bg-[#ff3b5c]">
                               {" "}
-                              Create A New TikTok Account
+                              {offer.offerid === 48204
+                                ? "Create a new account"
+                                : "I already have an account"}
                             </Button>
                           </a>
                         </li>
@@ -468,7 +470,7 @@ const OffersPage = () => {
                       className="w-full"
                     >
                       <Button className="w-full bg-neutral-200 text-neutral-800 hover:bg-neutral-300">
-                        I already have an account!
+                        Open TikTok
                       </Button>
                     </a>
                     <DrawerClose>
