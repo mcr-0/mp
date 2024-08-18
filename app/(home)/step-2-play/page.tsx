@@ -425,7 +425,7 @@ const OffersPage = () => {
                 {isLoading ? (
                   <>
                     <Button
-                      className="h-16 w-full rounded-full bg-black text-lg font-bold"
+                      className="h-16 w-full rounded-full bg-blue-800 text-lg font-bold"
                       variant="default"
                       type="submit"
                       disabled={isButtonDisabled}
