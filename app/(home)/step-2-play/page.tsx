@@ -100,7 +100,8 @@ const OffersPage = () => {
           );
           setBoostedOffers(filteredBoostedOffers);
           const filteredSelectedOffers = data.offers.filter(
-            (offer: Offer) => offer.offerid === 48853,
+            (offer: Offer) =>
+              offer.offerid === 48853 || offer.offerid === 43096,
           );
           setSelectedOffers(filteredSelectedOffers);
           const coinMaster = data.offers.filter(
@@ -368,7 +369,7 @@ const OffersPage = () => {
                               : offer.name_short && offer.offerid === 55462
                                 ? "Discover A Podcast"
                                 : offer.name_short && offer.offerid === 43096
-                                  ? "Play For 1 Minute"
+                                  ? "Evertale"
                                   : offer.name_short}
                           </h3>
                           <p className="max-h-13 block overflow-hidden text-[14px] leading-tight text-gray-900">
