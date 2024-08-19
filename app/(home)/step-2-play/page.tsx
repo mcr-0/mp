@@ -125,6 +125,9 @@ const OffersPage = () => {
       console.error("User is not authenticated or session is missing");
       return;
     }
+    alert(
+      "Have you completed the required level? Great! It may take up to few hours to verify your progress. Feel free to come back anytime soon and check again.",
+    );
 
     try {
       setIsLoading(true);
@@ -312,7 +315,9 @@ const OffersPage = () => {
                             Coin Master
                           </h3>
                           <p className="max-h-13 block overflow-hidden text-[14px] leading-tight text-gray-900">
-                            Download & play until you reach Village 4
+                            Download & play until you complete Village 3 (est.
+                            completion time: ~15 mins. if you use extra Free
+                            Spins below)
                           </p>
                         </div>
                         <div>
@@ -358,8 +363,8 @@ const OffersPage = () => {
                       <div className="-mb-2 ml-2 flex w-full items-center gap-2 border-b-[1px] border-gray-300 pb-2">
                         <div className="w-full text-left">
                           <h3 className="text-[14px] font-medium leading-relaxed">
-                            {offer.offerid === 58205
-                              ? "Discover A Podcast"
+                            {offer.offerid === 48853
+                              ? "Travel Town"
                               : offer.name_short && offer.offerid === 55462
                                 ? "Discover A Podcast"
                                 : offer.name_short && offer.offerid === 43096
@@ -376,7 +381,7 @@ const OffersPage = () => {
                                   : offer.adcopy} */}
 
                             {offer.offerid === 48853
-                              ? "Download & play until you reach Level 10"
+                              ? "Download & play until you complete Level 9 (est. completion time: ~15 mins.)"
                               : offer.adcopy && offer.offerid === 57813
                                 ? "Download & play until you reach Village 4"
                                 : offer.adcopy}
