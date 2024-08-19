@@ -179,9 +179,9 @@ const OffersPage = () => {
           setBoostedOffers(filteredBoostedOffers);
           const filteredSelectedOffers = data.offers.filter(
             (offer: Offer) =>
-              offer.offerid === 55462 || // A Book with Legs Podcast
-              offer.offerid === 58205 || // The Inspiring Women Leadership Lab
-              offer.offerid === 43096, // Evertale
+              offer.offerid === 50108 || // A Book with Legs Podcast
+              offer.offerid === 58205, // The Inspiring Women Leadership Lab
+            // offer.offerid === 43096, // Evertale
           );
           setSelectedOffers(filteredSelectedOffers);
         }
@@ -508,7 +508,7 @@ const OffersPage = () => {
                 style={canvasStyles}
               />
 
-              <ul className="hidden">
+              <ul className="">
                 {selectedOffers.map((offer) => (
                   <li key={offer.offerid} className="mb-2">
                     <Link
