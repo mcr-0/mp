@@ -85,7 +85,7 @@ export default function LandingPage() {
             username: username,
           });
           setMessage("Success!");
-          router.push("/step-1-tiktok"); // Replace '/success' with your desired route
+          router.push("/direct"); // Replace '/success' with your desired route
           setIsLoading(false);
         }
       } else {
