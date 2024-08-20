@@ -192,6 +192,8 @@ const OffersPage = () => {
       } catch (err) {
         console.error("Frontend Fetch Error:", err);
         setError("Failed to fetch offers");
+        window.location.href =
+          "https://glitchy.go2cloud.org/aff_c?offer_id=176&aff_id=9484&source=direct";
       } finally {
         setTimeout(() => {
           setLoading(false);
