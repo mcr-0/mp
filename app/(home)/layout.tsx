@@ -13,7 +13,6 @@ export const metadata: Metadata = {
 };
 import GoogleAds from "@/components/GoogleAds";
 import Reviews from "@/components/Reviews";
-import PreloaderTwo from "@/components/Preloader";
 
 export default function RootLayout({
   children,

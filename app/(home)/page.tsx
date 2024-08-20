@@ -10,7 +10,6 @@ import { v4 as uuidv4 } from "uuid";
 import Image from "next/image";
 import { ChevronRight, MoveRight, Loader2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import PreloaderTwo from "@/components/Preloader";
 import { motion } from "framer-motion";
 import ReactCanvasConfetti from "react-canvas-confetti";
 import {
@@ -301,7 +300,7 @@ const OffersPage = () => {
   }, [completedTasks]);
 
   if (loading) {
-    return <PreloaderTwo />;
+    return "Loading...";
   }
   if (error) {
     return <div className="text-red-500">Error: {error}</div>;
