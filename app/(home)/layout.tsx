@@ -11,20 +11,24 @@ export const metadata: Metadata = {
   title: "MazedPromos - Get Access To Deals And Promos",
   description: "Play Games And Get Access to Over 30+ Deals And Promos",
 };
+import SessionProviderWrapper from "./SessionProviderWrapper"; // Zakładając, że jest w tym samym katalogu
 import GoogleAds from "@/components/GoogleAds";
 import Reviews from "@/components/Reviews";
+import PreloaderTwo from "@/components/Preloader";
 
 export default function RootLayout({
   children,
+  session,
 }: Readonly<{
   children: React.ReactNode;
+  session: any;
 }>) {
   return (
     <html lang="en">
       <head>
         <GoogleAds />
       </head>
-      <body className={`${inter.className} bg-black`}>
+      <body className={`${inter.className} bg-neutral-950`}>
         <div className="relative isolate min-h-screen overflow-hidden bg-gradient-to-b from-cyan-500 via-blue-600 to-indigo-500">
           <div className="absolute left-0 right-0 top-0 -z-20 h-full min-h-screen w-full"></div>
           {/* <Image
@@ -71,16 +75,18 @@ export default function RootLayout({
             </div>
 
             <h1 className="text-4xl font-black tracking-tighter text-neutral-100">
-              {/* Complete Two Steps <br />& Gain Access */}
-              Complete 2-3 Deals To Receive Your Reward
+              Complete Two Steps <br />& Gain Access
+              {/* Complete 2-3 Deals To Receive Your Reward */}
             </h1>
             <h1 className="text-lg leading-8 tracking-tighter text-neutral-200">
-              <span className="">*You must be 18 or older to receive</span>
+              <span className="">*Upon completion 2 steps</span>
             </h1>
           </header>
           <div className="relative m-4">
             <div className="isolate mx-auto w-full max-w-md items-center justify-center rounded-3xl bg-white p-2 shadow-lg ring-1 ring-black/5 backdrop-blur-md">
-              {children}
+              <SessionProviderWrapper session={session}>
+                {children}
+              </SessionProviderWrapper>{" "}
             </div>
           </div>
           <p className="mx-auto max-w-sm px-4 pb-20 text-center text-xs text-neutral-200">
