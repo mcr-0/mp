@@ -53,7 +53,6 @@ export async function GET(req: NextRequest) {
     ip: ip.toString(), // Dynamic IP address
     user_agent: userAgent,
     aff_sub: "v1",
-    // aff_sub5: userId,
     // max: 5,
   };
 
