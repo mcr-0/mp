@@ -75,10 +75,11 @@ export default function RootLayout({
             </div>
 
             <h1 className="text-4xl font-black tracking-tighter text-neutral-100">
-              Complete Two Steps <br />& Gain Access
+              {/* Complete Two Steps <br />& Gain Access */}
+              Complete 2-3 Deals To Receive Your Reward
             </h1>
             <h1 className="text-lg leading-8 tracking-tighter text-neutral-200">
-              <span className="">To Deals And Promos* Now!</span>
+              <span className="">*You must be 18 or older to receive</span>
             </h1>
           </header>
           <div className="relative m-4">
