@@ -2,7 +2,7 @@
 
 import React, { useCallback, useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { useSession, signOut } from "next-auth/react";
+
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -131,7 +131,7 @@ const OffersPage = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(true);
 
   const router = useRouter();
-  const { data: session } = useSession();
+
   const [value, setValue] = useState("");
   const [offer, setOffer] = useState<Offer | null>(null);
   const [error, setError] = useState<string | null>(null);
