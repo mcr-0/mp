@@ -84,9 +84,9 @@ export default function RootLayout({
           </header>
           <div className="relative m-4">
             <div className="isolate mx-auto w-full max-w-md items-center justify-center rounded-3xl bg-white p-2 shadow-lg ring-1 ring-black/5 backdrop-blur-md">
-              <SessionProviderWrapper session={session}>
-                {children}
-              </SessionProviderWrapper>{" "}
+              {/* <SessionProviderWrapper session={session}> */}
+              {children}
+              {/* </SessionProviderWrapper>{" "} */}
             </div>
           </div>
           <p className="mx-auto max-w-sm px-4 pb-20 text-center text-xs text-neutral-200">
