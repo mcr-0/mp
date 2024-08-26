@@ -13,17 +13,16 @@ import {
 } from "lucide-react";
 const baseUrl = "https://rewards.coinmaster.com/rewards/rewards.html?c=";
 const params = [
-  "pe_RICHvkvSkl_20240722",
-  "pe_RICHHwvdJo_20240722",
-  "pe_RICHoeyXYA_20240722",
-  "pe_RICHdENJnN_20240722",
-  "pe_RICHFQhHQo_20240722",
-  "pe_RICHBOIZjl_20240722",
-  "pe_CHATBHwBcmF_20240819",
-  "pe_FCBRmoAIX_20240818",
-  "pe_LINEgcJlxl_20240818",
-  "pe_FCBYnLzuV_20240818",
-  "pe_CHATBZdIGbg_20240818",
+  "pe_RICHBSDaKm_20240819",
+  "pe_RICHkhMbjG_20240819",
+  "pe_CHATBuReSLW_20240825",
+  "pe_EMAILgtnKRA_20240820",
+  "pe_FCBuWyuSi_20240825",
+  "pe_LINEgKcIUv_20240825",
+  "pe_INSZkPQNM_20240825",
+  "pe_INSRGtdGF_20240824",
+  "pe_RICHbYIAtH_20240819",
+  "pe_CHATBuReSLW_20240825",
 ];
 
 const GenerateLinkButton = () => {
