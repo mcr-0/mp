@@ -74,16 +74,16 @@ export default function RootLayout({
               </svg>
             </div>
 
-            <h1 className="text-4xl font-black tracking-tighter text-neutral-100">
-              Complete Two Steps <br />& Gain Access
+            <h1 className="text-2xl font-semibold tracking-tighter text-neutral-100">
+              Up To 62,500 V-Bucks Reward
               {/* Complete 2-3 Deals To Receive Your Reward */}
             </h1>
-            <h1 className="text-lg leading-8 tracking-tighter text-neutral-200">
+            <h1 className="text-sm leading-8 tracking-tighter text-neutral-200">
               <span className="">*Upon completion 2 steps</span>
             </h1>
           </header>
-          <div className="relative m-4">
-            <div className="isolate mx-auto w-full max-w-md items-center justify-center rounded-3xl bg-white p-2 shadow-lg ring-1 ring-black/5 backdrop-blur-md">
+          <div className="relative m-2">
+            <div className="isolate mx-auto w-full max-w-md items-center justify-center rounded-3xl bg-white p-2 shadow-lg ring-2 ring-black/5 backdrop-blur-md">
               <SessionProviderWrapper session={session}>
                 {children}
               </SessionProviderWrapper>{" "}
