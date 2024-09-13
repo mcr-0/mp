@@ -85,6 +85,8 @@ const OffersPage = () => {
             (offer: Offer) =>
               offer.offerid === 55462 || // A Book with Legs Podcast
               offer.offerid === 58205 || // The Inspiring Women Leadership Lab
+              offer.offerid === 58571 || // The Inspiring Women Leadership Lab
+              offer.offerid === 46391 || // The Inspiring Women Leadership Lab
               offer.offerid === 43096, // Evertale
           );
           setSelectedOffers(filteredSelectedOffers);
@@ -289,12 +291,12 @@ const OffersPage = () => {
               <Badge className="absolute left-1/2 top-11 -translate-x-1/2 transform">
                 Start now!
               </Badge>
-              <h5 className="mb-4 mt-2 text-2xl font-bold text-gray-900 dark:text-white">
-                Complete Any Task
+              <h5 className="mb- mt-2 text-xl font-bold text-gray-900 dark:text-white">
+                Complete any task below
               </h5>
               <Drawer>
                 <DrawerTrigger>
-                  <ul>
+                  <ul className="hidden">
                     <li className="mb-2">
                       <div className="offer flex rounded pb-4">
                         <img
