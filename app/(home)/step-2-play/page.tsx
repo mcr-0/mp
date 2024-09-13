@@ -339,7 +339,7 @@ const OffersPage = () => {
                 </p>
                 <CoinMasterLinks />
               </div>
-              <ul>
+              <ul className="hidden">
                 {selectedOffers.map((offer) => (
                   <li key={offer.offerid} className="mb-2">
                     <Link

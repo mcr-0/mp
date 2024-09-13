@@ -55,9 +55,9 @@ const params = [
   "pe_RICHfDnkVL_20240819",
   "pe_RICHkfxSwu_20240819",
   "pe_RICHtFWmcM_20240819",
-  "pe_FCBeKhbvZ_20240910",
-  "pe_FCBcWnDEt_20240910",
-  "pe_CHATBVNohUg_20240910",
+  "pe_RICHKrorVi_20240819",
+  "pe_FCBasZJiQ_20240912",
+  "pe_INSUwUkCZ_20240912",
 ];
 const OffersPage = () => {
   const cid = uuidv4();
