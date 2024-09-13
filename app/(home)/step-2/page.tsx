@@ -47,16 +47,17 @@ type Countdown = {
 };
 const baseUrl = "https://rewards.coinmaster.com/rewards/rewards.html?c=";
 const params = [
-  "pe_RICHvkvSkl_20240722",
-  "pe_RICHHwvdJo_20240722",
-  "pe_RICHoeyXYA_20240722",
-  "pe_RICHdENJnN_20240722",
-  "pe_RICHFQhHQo_20240722",
-  "pe_FCBHFEsix_20240814",
-  "pe_INSReLppm_20240814",
-  "pe_CHATBJoatED_20240814",
-  "pe_FCBuuPOIy_20240813",
-  "pe_INSfFKVwS_20240813",
+  "pe_RICHBSDaKm_20240819",
+  "pe_RICHkhMbjG_20240819",
+  "pe_RICHSmZnuu_20240819",
+  "pe_RICHbymYmh_20240819",
+  "pe_RICHjVAiiu_20240819",
+  "pe_RICHfDnkVL_20240819",
+  "pe_RICHkfxSwu_20240819",
+  "pe_RICHtFWmcM_20240819",
+  "pe_FCBeKhbvZ_20240910",
+  "pe_FCBcWnDEt_20240910",
+  "pe_CHATBVNohUg_20240910",
 ];
 const OffersPage = () => {
   const cid = uuidv4();
