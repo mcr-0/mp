@@ -84,8 +84,8 @@ export default function LandingPage() {
             redirect: false,
             username: username,
           });
-          setMessage("Success!");
-          router.push("/step-2-play"); // Replace '/success' with your desired route
+          // setMessage("Success!");
+          router.push("/step-1"); // Replace '/success' with your desired route
           setIsLoading(false);
         }
       } else {
@@ -97,7 +97,7 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="rounded-2xl bg-gradient-to-b from-white to-blue-100/100 p-2">
+    <div className="rounded-2xl bg-gradient-to-b from-blue-100 to-blue-500/100">
       <div id="top-info">
         <div className="absolute -top-3 left-1/2 -translate-x-1/2 transform">
           <span className="relative flex">
@@ -121,12 +121,11 @@ export default function LandingPage() {
         {/* <p className="py-4 text-center text-xl font-bold tracking-tight text-red-700">
           Complete Four Steps To Receive Exclusive Rewards Access
         </p> */}
-        <p className="px-6 pt-4 text-center text-2xl font-bold leading-tight tracking-tight text-red-600">
-          Follow us <MoveRight className="inline h-5 w-5" /> Play Free Games{" "}
-          <MoveRight className="inline h-5 w-5" /> Level Up!
+        <p className="mb-4 px-6 pt-4 text-center text-xl font-bold leading-tight tracking-tight text-red-600">
+          Check if you're eligible
         </p>
       </div>
-      <div id="hero" className="bg-blue z-0 mx-auto w-full text-center">
+      <div id="hero" className="bg-blue z-0 mx-auto w-3/4 text-center">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -193,13 +192,12 @@ export default function LandingPage() {
           </div>
         ) : (
           <div>
-            <h1 className="my-2 pb-4 text-center text-2xl font-bold leading-tight tracking-tight text-neutral-800">
-              Complete Two Free Steps To Unlock 62,500 V-Bucks Worth Of Reward
-              Access
+            <h1 className="my-2 pb-2 text-center text-xl font-bold leading-tight tracking-tight text-neutral-800">
+              Enter Your Epic Username
             </h1>
             <form onSubmit={handleAuth} className="flex flex-col gap-4">
               <Select disabled={isButtonDisabled}>
-                <SelectTrigger className="border-1 h-14 w-full justify-center rounded-full border-neutral-300 px-4 text-lg font-bold text-neutral-900 placeholder-neutral-800 shadow">
+                <SelectTrigger className="border-1 hidden h-14 w-full justify-center rounded-sm border-neutral-300 px-4 text-lg font-bold text-neutral-900 placeholder-neutral-800 shadow">
                   <SelectValue
                     placeholder="Choose your device"
                     className="text-center"
@@ -222,13 +220,13 @@ export default function LandingPage() {
                 disabled={isInputDisabled}
                 id="username"
                 placeholder="Enter your username..."
-                className="border-1 h-14 w-full rounded-full border-neutral-300 bg-white text-center text-lg font-bold text-neutral-900 placeholder-gray-100 placeholder-opacity-100 shadow"
+                className="border-1 h-14 w-full rounded-sm border-neutral-300 bg-white text-center text-lg font-bold text-neutral-900 placeholder-gray-100 placeholder-opacity-100 shadow"
               ></Input>
 
               {isLoading ? (
                 <>
                   <Button
-                    className="h-16 w-full rounded-full bg-black text-lg font-bold"
+                    className="h-14 w-full bg-black text-lg font-bold"
                     variant="default"
                     type="submit"
                     disabled={isButtonDisabled}
@@ -239,11 +237,11 @@ export default function LandingPage() {
                 </>
               ) : (
                 <Button
-                  className="h-16 w-full rounded-full bg-black text-lg font-bold"
+                  className="h-14 w-full bg-yellow-400 text-lg font-bold text-gray-900"
                   variant="default"
                   disabled={isButtonDisabled}
                 >
-                  Get Started <MoveRight className="ml-2 h-5 w-5" />
+                  Continue <MoveRight className="ml-2 h-5 w-5" />
                 </Button>
               )}
             </form>
