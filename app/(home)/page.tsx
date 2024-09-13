@@ -122,7 +122,7 @@ export default function LandingPage() {
           Complete Four Steps To Receive Exclusive Rewards Access
         </p> */}
         <p className="mb-4 px-6 pt-4 text-center text-xl font-bold leading-tight tracking-tight text-red-600">
-          Check if you're eligible
+          Check if you are eligible
         </p>
       </div>
       <div id="hero" className="bg-blue z-0 mx-auto w-3/4 text-center">
