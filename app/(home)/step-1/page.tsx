@@ -291,7 +291,7 @@ const OffersPage = () => {
               <Badge className="absolute left-1/2 top-11 -translate-x-1/2 transform">
                 Start now!
               </Badge>
-              <h5 className="mb- text-cxl mt-2 font-bold text-gray-900 dark:text-white">
+              <h5 className="mb- mt-2 text-xl font-bold text-gray-900 dark:text-white">
                 Complete any task below
               </h5>
               <Drawer>
@@ -392,7 +392,7 @@ const OffersPage = () => {
                 </DrawerContent>
               </Drawer>
               <ul>
-                {selectedOffers.map((offer) => (
+                {boostedOffers.map((offer) => (
                   <li key={offer.offerid} className="mb-2">
                     <Link
                       href={offer.link}
