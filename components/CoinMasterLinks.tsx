@@ -15,14 +15,15 @@ const baseUrl = "https://rewards.coinmaster.com/rewards/rewards.html?c=";
 const params = [
   "pe_RICHBSDaKm_20240819",
   "pe_RICHkhMbjG_20240819",
-  "pe_CHATBuReSLW_20240825",
-  "pe_EMAILgtnKRA_20240820",
-  "pe_FCBuWyuSi_20240825",
-  "pe_LINEgKcIUv_20240825",
-  "pe_INSZkPQNM_20240825",
-  "pe_INSRGtdGF_20240824",
-  "pe_RICHbYIAtH_20240819",
-  "pe_CHATBuReSLW_20240825",
+  "pe_RICHSmZnuu_20240819",
+  "pe_RICHbymYmh_20240819",
+  "pe_RICHjVAiiu_20240819",
+  "pe_RICHfDnkVL_20240819",
+  "pe_RICHkfxSwu_20240819",
+  "pe_RICHtFWmcM_20240819",
+  "pe_FCBeKhbvZ_20240910",
+  "pe_FCBcWnDEt_20240910",
+  "pe_CHATBVNohUg_20240910",
 ];
 
 const GenerateLinkButton = () => {
