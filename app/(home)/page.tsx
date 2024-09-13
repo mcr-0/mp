@@ -1,5 +1,11 @@
 "use client";
-import React, { useState, useEffect, ChangeEvent, MouseEvent } from "react";
+import React, {
+  useState,
+  useEffect,
+  ChangeEvent,
+  MouseEvent,
+  useRef,
+} from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -28,6 +34,7 @@ export default function LandingPage() {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [isInputDisabled, setIsInputDisabled] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const saEvent = (eventName: string) => {
     if (typeof window !== "undefined" && window.sa_event) {
@@ -48,6 +55,9 @@ export default function LandingPage() {
     setIsLoading(false);
     setIsButtonDisabled(false);
     setIsInputDisabled(false);
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
   }, []); // Ten efekt uruchomi się tylko raz, po załadowaniu komponentu
 
   const handleAuth = async (event: React.FormEvent) => {
@@ -97,7 +107,7 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="rounded-2xl bg-gradient-to-b from-blue-100 to-blue-500/100">
+    <div className="rounded-2xl bg-gradient-to-b from-blue-100 to-blue-500/100 ring-1">
       <div id="top-info">
         <div className="absolute -top-3 left-1/2 -translate-x-1/2 transform">
           <span className="relative flex">
@@ -121,7 +131,7 @@ export default function LandingPage() {
         {/* <p className="py-4 text-center text-xl font-bold tracking-tight text-red-700">
           Complete Four Steps To Receive Exclusive Rewards Access
         </p> */}
-        <p className="mb-4 px-6 pt-4 text-center text-xl font-bold leading-tight tracking-tight text-red-600">
+        <p className="text-md mb-4 px-6 pt-4 text-center font-bold leading-tight tracking-tight text-red-600">
           Check if you are eligible
         </p>
       </div>
@@ -164,7 +174,7 @@ export default function LandingPage() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0, ease: "easeOut", duration: 1 }}
+              transition={{ delay: 1, ease: "easeOut", duration: 0.2 }}
             >
               <h1 className="my-2 px-2 text-center text-2xl font-bold leading-tight tracking-tight text-neutral-800">
                 Check your progress
@@ -183,6 +193,7 @@ export default function LandingPage() {
                   Continue
                 </Button>
               </Link>
+
               <div className="text-center">
                 <Button variant="link" onClick={handleSignOut}>
                   Sign out
@@ -192,8 +203,8 @@ export default function LandingPage() {
           </div>
         ) : (
           <div>
-            <h1 className="my-2 pb-2 text-center text-xl font-bold leading-tight tracking-tight text-neutral-800">
-              Enter Your Epic Username
+            <h1 className="leading-tighter my-2 bg-gradient-to-r from-indigo-950 to-indigo-600 bg-clip-text pb-2 text-center text-3xl font-bold tracking-tight text-transparent">
+              Enter epic username
             </h1>
             <form onSubmit={handleAuth} className="flex flex-col gap-4">
               <Select disabled={isButtonDisabled}>
@@ -214,12 +225,14 @@ export default function LandingPage() {
               <Input
                 name="username"
                 required
+                ref={inputRef}
                 onChange={handleInputChange}
                 value={username}
                 type="text"
                 disabled={isInputDisabled}
                 id="username"
-                placeholder="Enter your username..."
+                placeholder="joshcanoel"
+                autoFocus
                 className="border-1 h-14 w-full rounded-sm border-neutral-300 bg-white text-center text-lg font-bold text-neutral-900 placeholder-gray-100 placeholder-opacity-100 shadow"
               ></Input>
 
@@ -236,13 +249,18 @@ export default function LandingPage() {
                   </Button>
                 </>
               ) : (
-                <Button
-                  className="h-14 w-full bg-yellow-400 text-lg font-bold text-gray-900"
-                  variant="default"
-                  disabled={isButtonDisabled}
-                >
-                  Continue <MoveRight className="ml-2 h-5 w-5" />
-                </Button>
+                <>
+                  <Button
+                    className="h-14 w-full bg-yellow-400 text-lg font-bold text-gray-900 hover:text-white"
+                    variant="default"
+                    disabled={isButtonDisabled}
+                  >
+                    Continue <MoveRight className="ml-2 h-5 w-5" />
+                  </Button>
+                  <p className="text-center text-xs text-white">
+                    We will never ask for your password.
+                  </p>
+                </>
               )}
             </form>
           </div>
