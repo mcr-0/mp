@@ -31,9 +31,9 @@ const GoogleAds = () => {
               }
             };
             gtag('event', 'conversion', {
-              'send_to': '${process.env.NEXT_PUBLIC_MEASUREMENT_ID}/YbCyCJappMkZEN23hPcp',
+              'send_to': '${process.env.NEXT_PUBLIC_MEASUREMENT_ID}/xA1mCLij9NUZELvW4KE',
               'value': 1.0,
-              'currency': 'PLN',
+              'currency': 'EUR',
               'event_callback': callback
             });
             return false;
