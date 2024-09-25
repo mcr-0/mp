@@ -203,7 +203,7 @@ export default function LandingPage() {
           </div>
         ) : (
           <div>
-            <h1 className="leading-tighter my-2 bg-gradient-to-r from-indigo-950 to-indigo-600 bg-clip-text pb-2 text-center text-3xl font-bold tracking-tight text-transparent">
+            <h1 className="leading-tighter my-2 bg-gradient-to-r from-indigo-950 to-indigo-600 bg-clip-text pb-2 text-center text-2xl font-bold tracking-tight text-transparent">
               Enter epic username
             </h1>
             <form onSubmit={handleAuth} className="flex flex-col gap-4">
