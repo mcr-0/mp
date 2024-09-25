@@ -24,21 +24,26 @@ export default function RootLayout({
   session: any;
 }>) {
   return (
-    <>
-      {/* Google Tag Manager Script */}
-      <Script
-        strategy="afterInteractive"
-        src="https://www.googletagmanager.com/gtag/js?id=AW-16713788219"
-      />
-      <Script id="google-analytics" strategy="afterInteractive">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'AW-16713788219');
-        `}
-      </Script>
+    <html lang="en">
+      <head>
+        {/* Google Tag Manager (gtag.js) */}
+        <Script
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=AW-16713788219"
+        />
+        <Script
+          id="gtag-init"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'AW-16713788219');
+            `,
+          }}
+        />
+      </head>
 
       <body className={`${inter.className} bg-neutral-950`}>
         <div className="relative isolate min-h-screen overflow-hidden bg-gradient-to-b from-blue-950 via-blue-700 to-indigo-700">
@@ -126,6 +131,6 @@ export default function RootLayout({
       </body>
 
       <Script src="https://scripts.simpleanalyticscdn.com/latest.js" />
-    </>
+    </html>
   );
 }
