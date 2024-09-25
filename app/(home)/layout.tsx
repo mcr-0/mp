@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description: "Play Games And Get Access to Over 30+ Deals And Promos",
 };
 import SessionProviderWrapper from "./SessionProviderWrapper"; // Zakładając, że jest w tym samym katalogu
-import GoogleAds from "@/components/GoogleAds";
+
 import Reviews from "@/components/Reviews";
 import PreloaderTwo from "@/components/Preloader";
 
@@ -24,7 +24,22 @@ export default function RootLayout({
   session: any;
 }>) {
   return (
-    <html lang="en">
+    <>
+      {/* Google Tag Manager Script */}
+      <Script
+        strategy="afterInteractive"
+        src="https://www.googletagmanager.com/gtag/js?id=AW-16713788219"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'AW-16713788219');
+        `}
+      </Script>
+
       <body className={`${inter.className} bg-neutral-950`}>
         <div className="relative isolate min-h-screen overflow-hidden bg-gradient-to-b from-blue-950 via-blue-700 to-indigo-700">
           <div className="absolute left-0 right-0 top-0 -z-20 h-full min-h-screen w-full"></div>
@@ -109,8 +124,8 @@ export default function RootLayout({
         </div>
         <Reviews />
       </body>
-      <GoogleAds />
+
       <Script src="https://scripts.simpleanalyticscdn.com/latest.js" />
-    </html>
+    </>
   );
 }
