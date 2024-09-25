@@ -15,6 +15,7 @@ import SessionProviderWrapper from "./SessionProviderWrapper"; // Zakładając, 
 
 import Reviews from "@/components/Reviews";
 import PreloaderTwo from "@/components/Preloader";
+import GoogleAds from "@/components/GoogleAds";
 
 export default function RootLayout({
   children,
@@ -27,22 +28,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         {/* Google Tag Manager (gtag.js) */}
-        <Script
-          strategy="afterInteractive"
-          src="https://www.googletagmanager.com/gtag/js?id=AW-16713788219"
-        />
-        <Script
-          id="gtag-init"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'AW-16713788219');
-            `,
-          }}
-        />
+        <GoogleAds></GoogleAds>
       </head>
 
       <body className={`${inter.className} bg-neutral-950`}>
