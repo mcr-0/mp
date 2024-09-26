@@ -175,111 +175,78 @@ export default function LandingPage() {
       </div> */}
       </div>
       <div className="flex w-full flex-col gap-4 p-4 md:flex-nowrap">
-        {session ? (
-          <div className="text-center">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1, ease: "easeOut", duration: 0.2 }}
-            >
-              <h1 className="my-2 px-2 text-center text-2xl font-bold leading-tight tracking-tight text-neutral-800">
-                Complete tasks to receive
-              </h1>
-              <p>
-                Your epic username:{" "}
-                <span className="font-semibold text-blue-700">
-                  {session.user.username}
-                </span>
-              </p>
-              <Link href="/step-2-play">
+        <div>
+          <h1 className="leading-tighter my-2 pb-2 text-center text-2xl font-bold tracking-tight text-black text-transparent">
+            How to receive?
+          </h1>
+          <h2 className="mb-4 text-center font-semibold">
+            Tap below to receive your reward.
+          </h2>
+          <ul className="mb-4 text-center">
+            <li>
+              <b>1.</b> Click the button below
+            </li>
+            <li>
+              <b>2. </b>Complete (2) easy & free tasks
+            </li>
+            <li>
+              <b>3. </b>Play games and level up!
+            </li>
+            <li>
+              <b>4. </b>Your reward will be unlocked automatically
+            </li>
+            <li className="font-bold">
+              5: Claim your reward & repeat anytime! 😍{" "}
+            </li>
+          </ul>
+          <form onSubmit={handleAuth} className="flex flex-col gap-4">
+            <Select disabled={isButtonDisabled}>
+              <SelectTrigger className="border-1 hidden h-14 w-full justify-center rounded-sm border-neutral-300 px-4 text-lg font-bold text-neutral-900 placeholder-neutral-800 shadow">
+                <SelectValue
+                  placeholder="Choose your device"
+                  className="text-center"
+                />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="mo">Mobile</SelectItem>
+                <SelectItem value="pc">PC/Mac</SelectItem>
+                <SelectItem value="ps">Playstation</SelectItem>
+                <SelectItem value="ns">Nintendo Switch</SelectItem>
+                <SelectItem value="xb">Xbox</SelectItem>
+              </SelectContent>
+            </Select>
+
+            {isLoading ? (
+              <>
                 <Button
-                  className="my-4 h-16 w-full rounded-full bg-black text-lg font-bold"
+                  className="h-14 w-full bg-black text-lg font-bold"
                   variant="default"
+                  type="submit"
+                  disabled={isButtonDisabled}
                 >
-                  Continue
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Veryfing...
                 </Button>
-              </Link>
-
-              <div className="text-center">
-                <Button variant="link" onClick={handleSignOut}>
-                  Change username
-                </Button>
-              </div>
-            </motion.div>
-          </div>
-        ) : (
-          <div>
-            <h1 className="leading-tighter my-2 pb-2 text-center text-2xl font-bold tracking-tight text-black text-transparent">
-              How to receive?
-            </h1>
-            <h2 className="mb-4 text-center font-semibold">
-              Tap below to receive your reward.
-            </h2>
-            <ul className="mb-4 text-center">
-              <li>
-                <b>1.</b> Click the button below
-              </li>
-              <li>
-                <b>2. </b>Complete (2) easy & free tasks
-              </li>
-              <li>
-                <b>3. </b>Play games and level up!
-              </li>
-              <li>
-                <b>4. </b>Your reward will be unlocked automatically
-              </li>
-              <li className="font-bold">
-                5: Claim your reward & repeat anytime! 😍{" "}
-              </li>
-            </ul>
-            <form onSubmit={handleAuth} className="flex flex-col gap-4">
-              <Select disabled={isButtonDisabled}>
-                <SelectTrigger className="border-1 hidden h-14 w-full justify-center rounded-sm border-neutral-300 px-4 text-lg font-bold text-neutral-900 placeholder-neutral-800 shadow">
-                  <SelectValue
-                    placeholder="Choose your device"
-                    className="text-center"
-                  />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="mo">Mobile</SelectItem>
-                  <SelectItem value="pc">PC/Mac</SelectItem>
-                  <SelectItem value="ps">Playstation</SelectItem>
-                  <SelectItem value="ns">Nintendo Switch</SelectItem>
-                  <SelectItem value="xb">Xbox</SelectItem>
-                </SelectContent>
-              </Select>
-
-              {isLoading ? (
-                <>
+              </>
+            ) : (
+              <>
+                <Link href="step-1">
                   <Button
-                    className="h-14 w-full bg-black text-lg font-bold"
+                    className="h-14 w-full bg-yellow-400 text-lg font-bold text-gray-900 hover:text-white"
                     variant="default"
-                    type="submit"
                     disabled={isButtonDisabled}
                   >
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Veryfing...
+                    Start now!
                   </Button>
-                </>
-              ) : (
-                <>
-                  <Link href="step-1">
-                    <Button
-                      className="h-14 w-full bg-yellow-400 text-lg font-bold text-gray-900 hover:text-white"
-                      variant="default"
-                      disabled={isButtonDisabled}
-                    >
-                      Start now!
-                    </Button>
-                  </Link>
-                  <p className="text-center text-xs text-neutral-700">
-                    We will never ask for your password.
-                  </p>
-                </>
-              )}
-            </form>
-          </div>
-        )}
+                </Link>
+                <p className="text-center text-xs text-neutral-700">
+                  We will never ask for your password.
+                </p>
+              </>
+            )}
+          </form>
+        </div>
+
         {message && <p className="text-center text-green-700">{message}</p>}
       </div>
     </div>
