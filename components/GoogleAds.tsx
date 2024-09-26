@@ -22,6 +22,7 @@ const GoogleAds = () => {
               });
           `}
       </Script>
+
       <Script id="" strategy="lazyOnload">
         {`
           function gtag_report_conversion(url) {
@@ -31,8 +32,8 @@ const GoogleAds = () => {
               }
             };
             gtag('event', 'conversion', {
-              'send_to': '${process.env.NEXT_PUBLIC_MEASUREMENT_ID}/xA1mCLij9NUZELvW4KE',
-              'value': 1.0,
+              'send_to': '${process.env.NEXT_PUBLIC_MEASUREMENT_ID}/rIvCCKjns9YZELvW4KE-',
+              'value': 0.1,
               'currency': 'EUR',
               'event_callback': callback
             });
