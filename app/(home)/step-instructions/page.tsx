@@ -142,8 +142,8 @@ export default function LandingPage() {
         >
           <svg
             className="mx-auto mt-8 text-center"
-            width="64"
-            height="64"
+            width="86"
+            height="86"
             viewBox="0 0 20 20"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -176,7 +176,7 @@ export default function LandingPage() {
       </div>
       <div className="flex w-full flex-col gap-4 p-4 md:flex-nowrap">
         <div>
-          <h1 className="leading-tighter my-2 pb-2 text-center text-2xl font-bold tracking-tight text-black text-transparent">
+          <h1 className="leading-tighter my-2 pb-2 text-center text-2xl font-bold tracking-tight text-black">
             How to receive?
           </h1>
           <h2 className="mb-4 text-center font-semibold">
