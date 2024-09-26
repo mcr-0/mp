@@ -94,7 +94,7 @@ export default function LandingPage() {
             username: username,
           });
           // setMessage("Success!");
-          router.push("/step-1"); // Replace '/success' with your desired route
+          router.push("/step-instructions"); // Replace '/success' with your desired route
           setIsLoading(false);
         }
       } else {
