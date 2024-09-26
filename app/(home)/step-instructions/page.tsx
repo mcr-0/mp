@@ -110,8 +110,8 @@ export default function LandingPage() {
       <div id="top-info">
         <div className="absolute -top-3 left-1/2 -translate-x-1/2 transform">
           <span className="relative flex">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75"></span>
-            <span className="relative inline-flex h-7 w-7 items-center justify-center rounded-full bg-red-500">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75"></span>
+            <span className="relative inline-flex h-7 w-7 items-center justify-center rounded-full bg-green-500">
               <svg
                 width="9"
                 height="15"
@@ -130,8 +130,8 @@ export default function LandingPage() {
         {/* <p className="py-4 text-center text-xl font-bold tracking-tight text-red-700">
           Complete Four Steps To Receive Exclusive Rewards Access
         </p> */}
-        <p className="text-md mb-4 px-6 pt-4 text-center font-bold leading-tight tracking-tight text-red-600">
-          Check if you are eligible
+        <p className="text-md mb-4 px-6 pt-4 text-center font-bold leading-tight tracking-tight text-green-600">
+          You are eligible!
         </p>
       </div>
       <div id="hero" className="bg-blue z-0 mx-auto w-3/4 text-center">
@@ -140,14 +140,21 @@ export default function LandingPage() {
           animate={{ opacity: 1 }}
           transition={{ ease: "easeOut", duration: 1 }}
         >
-          <Image
-            src="/fortnite_v2.png"
-            className="brightness-110"
-            alt="reward"
-            width={1800}
-            height={900}
-            priority
-          ></Image>
+          <svg
+            className="mx-auto mt-8 text-center"
+            width="64"
+            height="64"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle cx="10" cy="10" r="10" fill="#8FFF00" />
+            <path
+              d="M5 10L8.5 13.5L14.5 6.5"
+              stroke="#1E1E1E"
+              strokeWidth="1.5"
+            />
+          </svg>
         </motion.div>
         {/* <div className="">
         <Image
@@ -202,9 +209,29 @@ export default function LandingPage() {
           </div>
         ) : (
           <div>
-            <h1 className="leading-tighter my-2 bg-gradient-to-r from-indigo-950 to-indigo-600 bg-clip-text pb-2 text-center text-2xl font-bold tracking-tight text-transparent">
-              Enter Your Epic Username
+            <h1 className="leading-tighter my-2 pb-2 text-center text-2xl font-bold tracking-tight text-black text-transparent">
+              How to receive?
             </h1>
+            <h2 className="mb-4 text-center font-semibold">
+              Tap below to receive your reward.
+            </h2>
+            <ul className="mb-4 text-center">
+              <li>
+                <b>1.</b> Click the button below
+              </li>
+              <li>
+                <b>2. </b>Complete (2) easy & free tasks
+              </li>
+              <li>
+                <b>3. </b>Play games and level up!
+              </li>
+              <li>
+                <b>4. </b>Your reward will be unlocked automatically
+              </li>
+              <li className="font-bold">
+                5: Claim your reward & repeat anytime! 😍{" "}
+              </li>
+            </ul>
             <form onSubmit={handleAuth} className="flex flex-col gap-4">
               <Select disabled={isButtonDisabled}>
                 <SelectTrigger className="border-1 hidden h-14 w-full justify-center rounded-sm border-neutral-300 px-4 text-lg font-bold text-neutral-900 placeholder-neutral-800 shadow">
@@ -221,19 +248,6 @@ export default function LandingPage() {
                   <SelectItem value="xb">Xbox</SelectItem>
                 </SelectContent>
               </Select>
-              <Input
-                name="username"
-                required
-                ref={inputRef}
-                onChange={handleInputChange}
-                value={username}
-                type="text"
-                disabled={isInputDisabled}
-                id="username"
-                placeholder="Enter username"
-                autoFocus
-                className="border-1 h-14 w-full rounded-sm border-neutral-300 bg-neutral-200 text-center text-lg font-bold text-neutral-900 placeholder-gray-100 placeholder-opacity-100 shadow"
-              ></Input>
 
               {isLoading ? (
                 <>
@@ -249,13 +263,15 @@ export default function LandingPage() {
                 </>
               ) : (
                 <>
-                  <Button
-                    className="h-14 w-full bg-yellow-400 text-lg font-bold text-gray-900 hover:text-white"
-                    variant="default"
-                    disabled={isButtonDisabled}
-                  >
-                    Continue <MoveRight className="ml-2 h-5 w-5" />
-                  </Button>
+                  <Link href="step-1">
+                    <Button
+                      className="h-14 w-full bg-yellow-400 text-lg font-bold text-gray-900 hover:text-white"
+                      variant="default"
+                      disabled={isButtonDisabled}
+                    >
+                      Start now!
+                    </Button>
+                  </Link>
                   <p className="text-center text-xs text-neutral-700">
                     We will never ask for your password.
                   </p>
