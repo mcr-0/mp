@@ -109,6 +109,8 @@ const OffersPage = () => {
     aff_sub4_value: any,
     event: React.MouseEvent,
   ) => {
+    window.gtag_report_conversion();
+    console.log("offer clicked");
     setCompletedTasks((prevCompletedTasks) => {
       const newCompletedTasks = prevCompletedTasks + 1;
       // Zapisanie nowej wartości w localStorage

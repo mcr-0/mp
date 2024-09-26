@@ -64,7 +64,6 @@ export default function LandingPage() {
     event.preventDefault();
     setIsLoading(true);
     saEvent("registered");
-    window.gtag_report_conversion();
     const form = event.target as HTMLFormElement; // Asercja typu
 
     const formData = new FormData(form); // Teraz TypeScript wie, że `form` to `HTMLFormElement`
