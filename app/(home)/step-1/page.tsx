@@ -284,7 +284,7 @@ const OffersPage = () => {
                 className="text-xs text-neutral-800 underline"
                 onClick={handleSignOut}
               >
-                Log Out
+                Change username
               </Button>
             </div>
           </div>
