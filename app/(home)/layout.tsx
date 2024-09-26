@@ -77,8 +77,8 @@ export default function RootLayout({
               </svg>
             </div>
 
-            <h1 className="text-2xl font-semibold tracking-tighter text-neutral-100">
-              Up To 62,500 V-Bucks Reward
+            <h1 className="text-3xl font-semibold tracking-tighter text-neutral-100">
+              Receive Promo Access
               {/* Complete 2-3 Deals To Receive Your Reward */}
             </h1>
             <h1 className="text-sm leading-8 tracking-tighter text-neutral-200">
@@ -92,7 +92,7 @@ export default function RootLayout({
               </SessionProviderWrapper>{" "}
             </div>
           </div>
-          <p className="mx-auto max-w-sm px-4 pb-20 text-center text-xs text-neutral-200">
+          <p className="mx-auto max-w-sm px-4 pb-20 pt-4 text-center text-xs text-neutral-200">
             Use of any logos or trademarks are for reference purposes only. By
             using the website, you agree to our{" "}
             <Link
