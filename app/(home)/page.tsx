@@ -249,10 +249,10 @@ export default function LandingPage() {
                     variant="default"
                     disabled={isButtonDisabled}
                   >
-                    Continue <MoveRight className="ml-2 h-5 w-5" />
+                    Receive <MoveRight className="ml-2 h-5 w-5" />
                   </Button>
                   <p className="text-center text-xs text-neutral-700">
-                    We will never ask for your password.
+                    We never ask for your password.
                   </p>
                 </>
               )}
