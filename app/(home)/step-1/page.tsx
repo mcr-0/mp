@@ -294,7 +294,7 @@ const OffersPage = () => {
                 Start now!
               </Badge>
               <h5 className="mb- mt-2 text-xl font-bold text-gray-900 dark:text-white">
-                Complete any task below
+                Complete (2) tasks below
               </h5>
               <Drawer>
                 <DrawerTrigger>
@@ -419,21 +419,29 @@ const OffersPage = () => {
                         <div className="w-full text-left">
                           <h3 className="text-[14px] font-medium leading-relaxed">
                             {offer.offerid === 58205
-                              ? "Discover A Podcast"
+                              ? "A Book with Legs"
                               : offer.name_short && offer.offerid === 55462
-                                ? "Discover A Podcast"
+                                ? "A Book with Legs"
                                 : offer.name_short && offer.offerid === 43096
                                   ? "Play For 1 Minute"
-                                  : offer.name_short}
+                                  : offer.name_short && offer.offerid === 48204
+                                    ? "Tiktok"
+                                    : offer.name_short}
                           </h3>
                           <p className="max-h-13 block overflow-hidden text-[14px] leading-tight text-gray-900">
                             {offer.offerid === 58205
                               ? "The Inspiring Women Leadership Lab"
                               : offer.adcopy && offer.offerid === 55462
-                                ? "A Book with Legs"
+                                ? "Listen to a podcast"
                                 : offer.adcopy && offer.offerid === 43096
                                   ? "Adventure Game - Evertale"
-                                  : offer.adcopy}
+                                  : offer.adcopy && offer.offerid === 56631
+                                    ? "Install this free app then use it for 30 sec"
+                                    : offer.adcopy && offer.offerid === 48204
+                                      ? "Follow us @mazerewards (10K+ followers)"
+                                      : offer.adcopy && offer.offerid === 58752
+                                        ? "Follow the instructions on the next page"
+                                        : offer.adcopy}
                           </p>
                         </div>
                         <div>
@@ -465,10 +473,8 @@ const OffersPage = () => {
                   </li>
                 ))}
               </ul>
-              <p className="completed-instruction mb-2 text-xs text-neutral-800">
-                95% of users complete this in less than 5 minutes
-              </p>
-              <div className="completed-apps relative rounded-xl bg-slate-200 p-4 text-left shadow">
+
+              <div className="completed-apps relative rounded-xl text-left">
                 <div>
                   {completedTasks < 2 && (
                     <div className="offer-content">
@@ -479,6 +485,9 @@ const OffersPage = () => {
                             Completed: {completedTasks}/2
                           </h1>
                         </div>
+                        <p className="completed-instruction mb-4 text-center text-sm text-neutral-800">
+                          95% of users complete this in less than 5 minutes
+                        </p>
                         <Button
                           className="h-16 w-full rounded-full bg-blue-600 text-lg font-bold"
                           variant="default"
@@ -492,15 +501,16 @@ const OffersPage = () => {
 
                   {completedTasks >= 2 && (
                     <div className="w-full">
-                      <p className="py-2 text-center text-xl font-bold text-green-700">
+                      <p className="text-md py-2 text-center font-semibold text-green-700">
                         Great work! Step 1 has been fully finished.
                       </p>
-                      <Link href="/step-2-play">
+                      <Link href="/step-2">
                         <Button
-                          className="h-16 w-full rounded-full bg-blue-600 text-lg font-bold"
+                          className="h-16 w-full rounded-md bg-green-900 text-lg font-bold"
                           variant="default"
                         >
-                          Go to Step 2 <MoveRight className="ml-2 h-5 w-5" />
+                          Go to the Final Step{" "}
+                          <MoveRight className="ml-2 h-5 w-5" />
                         </Button>
                       </Link>
                     </div>
