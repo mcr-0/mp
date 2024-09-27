@@ -44,22 +44,9 @@ export default function RootLayout({
 
           <header className="z-50 mx-auto max-w-lg pt-2 text-center sm:px-6 lg:px-8">
             <div className="mb-2 flex items-center justify-center space-x-2 text-center text-xl text-white">
-              <Link
-                href="/"
-                className="block w-12 justify-center text-left shadow-xl"
-              >
-                <Image
-                  src="/logo.jpg"
-                  height={400}
-                  width={600}
-                  alt="logo"
-                  className="animate-spin-clockwise h-full w-full rounded-md object-cover"
-                  priority
-                ></Image>
-              </Link>
               <div className="">
-                <span className="animate-pulse">Status: </span>
-                <span className="animate-pulse text-green-300">Available</span>
+                <span className="">Status: </span>
+                <span className="text-green-300">Ready</span>
               </div>
               <svg
                 width="24"
@@ -78,10 +65,10 @@ export default function RootLayout({
             </div>
 
             <h1 className="text-3xl font-semibold tracking-tighter text-neutral-100">
-              Receive Promo Access
+              $750 Fortnite gift card is reserved for you!
               {/* Complete 2-3 Deals To Receive Your Reward */}
             </h1>
-            <h1 className="text-sm leading-8 tracking-tighter text-neutral-200">
+            <h1 className="text-sm uppercase leading-8 tracking-tighter text-neutral-200">
               <span className="">*Upon completion 2 steps</span>
             </h1>
           </header>

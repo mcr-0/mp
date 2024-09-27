@@ -130,25 +130,20 @@ export default function LandingPage() {
         {/* <p className="py-4 text-center text-xl font-bold tracking-tight text-red-700">
           Complete Four Steps To Receive Exclusive Rewards Access
         </p> */}
-        <p className="text-md mb-4 px-6 pt-4 text-center font-bold leading-tight tracking-tight text-red-600">
+        <p className="mb-4 px-6 pt-4 text-center text-lg font-bold leading-tight tracking-tight text-red-600">
           Check if you are eligible
         </p>
       </div>
-      <div id="hero" className="bg-blue z-0 mx-auto w-3/4 text-center">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ ease: "easeOut", duration: 1 }}
-        >
-          <Image
-            src="/fortnite_v2.png"
-            className="brightness-110"
-            alt="reward"
-            width={1800}
-            height={900}
-            priority
-          ></Image>
-        </motion.div>
+      <div id="hero" className="bg-blue z-0 mx-auto w-full text-center">
+        <Image
+          src="/fortnite_v2.png"
+          className="brightness-110"
+          alt="reward"
+          width={1800}
+          height={900}
+          priority
+        ></Image>
+
         {/* <div className="">
         <Image
           src="/fortnite_v2.png"
@@ -250,7 +245,7 @@ export default function LandingPage() {
               ) : (
                 <>
                   <Button
-                    className="h-14 w-full bg-yellow-400 text-lg font-bold text-gray-900 hover:text-white"
+                    className="h-14 w-full bg-blue-600 text-lg font-bold text-white hover:text-white"
                     variant="default"
                     disabled={isButtonDisabled}
                   >

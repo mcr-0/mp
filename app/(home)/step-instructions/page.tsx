@@ -232,7 +232,7 @@ export default function LandingPage() {
               <>
                 <Link href="step-1">
                   <Button
-                    className="h-14 w-full bg-yellow-400 text-lg font-bold text-gray-900 hover:text-white"
+                    className="h-14 w-full bg-blue-600 text-lg font-bold text-white hover:text-white"
                     variant="default"
                     disabled={isButtonDisabled}
                   >
