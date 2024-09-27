@@ -65,7 +65,8 @@ export default function RootLayout({
             </div>
 
             <h1 className="text-3xl font-semibold tracking-tighter text-neutral-100">
-              $750 Fortnite gift card is reserved for you!
+              {/* $750 Fortnite gift card is reserved for you! */}
+              Receive Promo Access
               {/* Complete 2-3 Deals To Receive Your Reward */}
             </h1>
             <h1 className="text-sm uppercase leading-8 tracking-tighter text-neutral-200">
