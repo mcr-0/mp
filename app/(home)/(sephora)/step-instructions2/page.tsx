@@ -230,7 +230,7 @@ export default function LandingPage() {
               </>
             ) : (
               <>
-                <Link href="step-1">
+                <Link href="https://rewarduplevel.com/aff_c?offer_id=110&aff_id=9484&source=mp-seph">
                   <Button
                     className="h-14 w-full bg-blue-600 text-lg font-bold text-white hover:text-white"
                     variant="default"
