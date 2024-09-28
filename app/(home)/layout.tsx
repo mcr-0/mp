@@ -32,7 +32,7 @@ export default function RootLayout({
       </head>
 
       <body className={`${inter.className} bg-neutral-950`}>
-        <div className="relative isolate min-h-screen overflow-hidden bg-gradient-to-b from-blue-950 via-blue-700 to-indigo-700">
+        <div className="relative isolate min-h-screen overflow-hidden bg-[#d690b9]">
           <div className="absolute left-0 right-0 top-0 -z-20 h-full min-h-screen w-full"></div>
           {/* <Image
             src="/blue-bg.png"
