@@ -177,7 +177,7 @@ export default function LandingPage() {
       <div className="flex w-full flex-col gap-4 p-4 md:flex-nowrap">
         <div>
           <h1 className="leading-tighter my-2 pb-2 text-center text-2xl font-bold tracking-tight text-black">
-            Hey there! It's easy...
+            Hey there! Its easy...
           </h1>
           <h2 className="mb-4 text-center font-semibold">
             Tap below to receive your reward.
