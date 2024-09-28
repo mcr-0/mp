@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: "MazedPromos - Get Access To Deals And Promos",
   description: "Play Games And Get Access to Over 30+ Deals And Promos",
 };
-import SessionProviderWrapper from "../(home)/SessionProviderWrapper"; // Zakładając, że jest w tym samym katalogu
+import SessionProviderWrapper from "../SessionProviderWrapper"; // Zakładając, że jest w tym samym katalogu
 
 import Reviews from "@/components/Reviews";
 import PreloaderTwo from "@/components/Preloader";
